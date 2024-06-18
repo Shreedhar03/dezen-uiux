@@ -1,0 +1,134 @@
+'use client';
+
+import React, { use, useEffect, useState } from 'react';
+import { Loader2 } from "lucide-react";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator"
+import { useRouter, usePathname } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
+import { set } from 'mongoose';
+
+interface Memecoin {
+  memecoin_address: string;
+  creator_address: string;
+  logo: string;
+  name: string;
+  ticker: string;
+  description: string;
+  twitter?: string;
+  telegram?: string;
+  website?: string;
+  timestamp: Date;
+}
+
+interface User {
+  address: string;
+  username: string;
+  profilePicture?: string;
+  bio?: string;
+}
+
+export default function UserProfilePage({ params }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [memecoins, setMemecoins] = useState<Memecoin[]>([]);
+  const [loading, setLoading] = useState(true);
+  const address = params.address;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!address) return;
+
+    const fetchProfile = async () => {
+      try {
+        setLoading(true);
+  
+        const userResponse = await fetch(`/api/user/${address}`);
+        const userData = await userResponse.json();
+        setUser(userData);
+  
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [address]);
+
+  useEffect(() => {
+    if (!address) return;
+
+    const fetchMemecoins = async () => {
+      try {
+        setLoading(true);
+
+        const response = await fetch(`/api/memecoin/user/${address}`);
+        const data = await response.json();
+        console.log("Memecoins: ", data);
+        setMemecoins(data);
+      } catch (error) {
+        console.error("Failed to fetch memecoins: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMemecoins();
+  }, [address]);
+
+  return (
+    <div className="sm:border-t sm:border-r sm:border-b rounded-tr rounded-br flex flex-1 pb-1">
+      {user && (
+      <div className="w-full relative">
+        <div className="bg-gradient-to-r from-purple-950 to-black h-40 flex items-center justify-between px-12">
+          <div className="flex items-center pt-40">
+            <Avatar className="rounded-xl overflow-hidden w-40 h-40 border-4 border-black">
+              <AvatarImage
+                className="object-cover w-full h-full"
+                src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${user.profilePicture}`}
+              />
+            </Avatar>
+            <h2 className="text-2xl font-bold ml-6 pt-16">{user.username}</h2>
+          </div>
+        </div>
+        {(memecoins.length > 0 || loading) && <Separator className='mt-28'/>}
+
+        <div className="flex flex-1 flex-wrap p-4">
+          {
+            loading && (
+              <div className="
+                flex flex-1 justify-center items-center
+              ">
+                <Loader2 className="h-12 w-12 animate-spin" />
+              </div>
+            )
+          }
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {memecoins.map(memecoin => (
+              <div key={memecoin.memecoin_address} className="bg-white shadow rounded-lg p-4 cursor-pointer" onClick={() => router.push(`/${memecoin.memecoin_address}`)}>
+                <div className="flex items-start justify-between">
+                  <div className="flex-shrink-0">
+                    <img 
+                      src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`} 
+                      alt={`${memecoin.name} logo`}
+                      className="h-28 w-28 object-cover rounded-md transition-all hover:scale-105"
+                    />
+                  </div>
+                  <div className="ml-4  mt-7 flex-1">
+                    <span className="text-md text-zinc-600 font-bold">
+                      ${memecoin.ticker} <br /> {memecoin.name}
+                    </span>
+                  </div>
+                </div>
+                <p className="mt-2 text-sm text-zinc-600">{memecoin.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+      )}
+    </div>
+  );  
+}
