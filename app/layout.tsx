@@ -1,19 +1,24 @@
-'use client'
+"use client";
 
-import './globals.css';
-import '@rainbow-me/rainbowkit/styles.css';
-import { Inter } from 'next/font/google';
+import "./globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
+import { Lilita_One } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { TronProvider } from '@/components/TronProvider';
+import { TronProvider } from "@/components/TronProvider";
 import Header from "@/components/header";
-import { UserProvider } from '@/components/UserContext';
-import React from 'react';
+import { UserProvider } from "@/components/UserContext";
+import React from "react";
 
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
-const manifestUrl = 'https://raw.githubusercontent.com/ton-community/tutorials/main/03-client/test/public/tonconnect-manifest.json';
+const manifestUrl =
+  "https://raw.githubusercontent.com/ton-community/tutorials/main/03-client/test/public/tonconnect-manifest.json";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Lilita_One({
+  weight: "400",
+  style: "normal",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({ children, session, ...props }) {
   const [mounted, setMounted] = React.useState(false);
@@ -32,7 +37,7 @@ export default function RootLayout({ children, session, ...props }) {
       scrollbar-color: #222 transparent;
     `;
 
-    const styleSheet = document.createElement('style');
+    const styleSheet = document.createElement("style");
     styleSheet.innerText = styles;
     document.head.appendChild(styleSheet);
 
