@@ -54,7 +54,7 @@ export default function RootLayout({ children, session, ...props }) {
           <TonConnectUIProvider manifestUrl={manifestUrl}>
             <TronProvider>
               <UserProvider>
-                <Header />
+                {/* <Header /> */}
                 {mounted && children}
               </UserProvider>
             </TronProvider>

@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter, usePathname } from "next/navigation";
 import { useTronLink } from "@/hooks/TronHooks";
 import Navbar from "@/components/Navbar";
+import Header from "@/components/header";
 
 interface LayoutProps {
   children: ReactNode;
@@ -31,10 +32,24 @@ const Layout = ({ children }: LayoutProps) => {
   const { address } = useTronLink();
 
   return (
-    <main className="flex h-[80vh] items-center p-3 sm:p-12">
-      <Navbar />
-      <div className="shrink-0">{children}</div>
-    </main>
+    <>
+    <Header/>
+    <main className="relative flex h-[80vh] items-center p-3 sm:p-12">
+      
+      
+    <Navbar />
+    <div className="hidden sm:block absolute top-0 right-0 w-3/4 h-full">
+      {children}
+    </div>
+    <div className="sm:hidden flex-1 ml-4">
+      {children}
+    </div>
+  </main>
+
+  </>
+  
+  
+
   );
 };
 

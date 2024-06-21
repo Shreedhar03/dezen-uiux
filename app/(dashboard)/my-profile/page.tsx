@@ -21,6 +21,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useTronLink } from '@/hooks/TronHooks';
 import EditProfile from '@/components/EditProfile';
 import { useUser } from '@/components/UserContext';
+import AnimateOnRouteChange from '@/components/AnimateOnRouteChange';
 
 interface Memecoin {
   memecoin_address: string;
@@ -98,6 +99,7 @@ export default function MyProfilePage() {
   }, [myAddress]);
 
   return (
+    <AnimateOnRouteChange>
     <div className="sm:border-t sm:border-r sm:border-b rounded-tr rounded-br flex flex-1 pb-1">
       {user && (
       <div className="w-full relative">
@@ -169,5 +171,6 @@ export default function MyProfilePage() {
       </div>
       )}
     </div>
+    </AnimateOnRouteChange>
   );  
 }
