@@ -5,8 +5,8 @@ import { ModeToggle } from "@/components/dropdown";
 import { useRouter, usePathname } from "next/navigation";
 import { useWallet } from "@tronweb3/tronwallet-adapter-react-hooks";
 import { WalletActionButton } from "@tronweb3/tronwallet-adapter-react-ui";
-
-import { TonConnectButton } from "@tonconnect/ui-react";
+import btn from "../public/button-bg.png";
+// import { TonConnectButton } from "@tonconnect/ui-react";
 
 export default function Header() {
   const router = useRouter();
@@ -24,9 +24,13 @@ export default function Header() {
         {/* <WalletActionButton>
           {!connected ? "Connect Tron" : null}
         </WalletActionButton> */}
-        {/* <TonConnectButton /> */}
-        <button className="text-2xl bg-primary">Connect Wallet</button>
-        {/* <ModeToggle /> */}
+        <button
+          style={{ backgroundImage: `url(${btn.src})` }}
+          className={`text-lg px-4 py-1 rounded-lg text-white hover:scale-105 transition-transform duration-200 ease-in-out`}
+        >
+          Connect Wallet
+        </button>
+        <ModeToggle />
       </div>
     </nav>
   );
