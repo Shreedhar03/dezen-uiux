@@ -88,7 +88,7 @@ export default function Home() {
               <div className="z-50">
                 <img
                   src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                  className="h-48 w-full object-cover rounded-2xl"
+                  className="h-48 w-full object-cover rounded-2xl hover:scale-105 transition-transform duration-200 ease-in-out"
                 />
                 <h2
                   className={`${theme.className} text-2xl font-bold mt-2 text-white`}
