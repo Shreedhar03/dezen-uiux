@@ -59,3 +59,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+@layer utilities {
+  .text-11xl {
+    font-size: 10rem; /* Adjust as needed */
+  }
+}
