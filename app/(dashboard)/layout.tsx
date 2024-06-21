@@ -33,23 +33,15 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
-    <Header/>
-    <main className="relative flex h-[80vh] items-center p-3 sm:p-12">
-      
-      
-    <Navbar />
-    <div className="hidden sm:block absolute top-0 right-0 w-3/4 h-full">
-      {children}
-    </div>
-    <div className="sm:hidden flex-1 ml-4">
-      {children}
-    </div>
-  </main>
-
-  </>
-  
-  
-
+      <Header />
+      <main className="max-w-[90rem] mx-auto relative flex h-[80vh] items-center p-3 sm:p-12">
+        <Navbar />
+        <div className="hidden sm:block absolute top-0 right-0 w-10/12 h-full">
+          {children}
+        </div>
+        <div className="sm:hidden flex-1">{children}</div>
+      </main>
+    </>
   );
 };
 

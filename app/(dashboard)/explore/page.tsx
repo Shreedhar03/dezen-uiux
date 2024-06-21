@@ -65,22 +65,22 @@ export default function Home() {
     };
 
     fetchMemecoins();
-   }, []);
+  }, []);
 
   return (
     <AnimateOnRouteChange>
-      <div className="grid">
+      <div className="mt-[1500px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch m-3">
         {loading ? (
           <div className="flex justify-center items-center">
             <Loader2 size={32} />
           </div>
         ) : (
           memecoins.map((memecoin) => (
-            <CardContainer className="inter-var">
+            <CardContainer className="h-full mx-8 shadow-md hover:shadow-purple-900 rounded-md">
               <CardBody>
                 <div
                   key={memecoin.memecoin_address}
-                  className={`${kanit.className} relative p-4 rounded-2xl flex flex-col justify-between gap-3 cursor-pointer`}
+                  className={`${kanit.className} h-full relative p-4 rounded-md flex flex-col justify-between gap-3 cursor-pointer`}
                   onClick={() => router.push(`/${memecoin.memecoin_address}`)}
                   style={{
                     backgroundImage: `url(${cardBg.src})`,
@@ -90,13 +90,13 @@ export default function Home() {
                 >
                   {/* black overlay bg */}
 
-                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 rounded-2xl"></div>
+                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 rounded-md"></div>
 
                   <CardItem translateZ={50} className="z-50">
                     <div className="flex gap-4">
                       <img
                         src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                        className="h-32 w-32 object-cover rounded-2xl"
+                        className="h-32 w-32 object-cover rounded-md"
                       />
                       <div>
                         <h2
