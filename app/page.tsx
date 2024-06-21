@@ -5,9 +5,10 @@ import { useRouter, usePathname } from "next/navigation";
 import AnimateOnRouteChange from "@/components/AnimateOnRouteChange";
 import Image from "next/image";
 import pepe from "@/public/pepe.png";
-import background from "@/public/glitch2.webp";
+import background from "@/public/glitch3.webp";
 import { useGlitch, GlitchHandle } from "react-powerglitch";
 import localFont from "next/font/local";
+import TransitionLink from "@/components/TransitionLink";
 
 const myFont = localFont({
   src: "../public/fonts/docallismeonstreet.otf",
@@ -97,16 +98,21 @@ export default function Home() {
           className="absolute top-0 left-0 w-full h-full z-0"
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center" >
-          <h1 className={`${myFont.className} text-white text-6xl md:text-8xl lg:text-11xl font-bold mb-8`} {...glitch.triggerProps}
+          <h1 className={`${myFont.className} text-white text-6xl md:text-8xl lg:text-11xl font-bold mb-8`} 
           ref={glitch.ref}>
             DEZEN
           </h1>
+          
           <button
             className="px-8 py-4 text-xl font-semibold text-white bg-purple-600 rounded-full hover:bg-purple-800 transition-colors"
-            onClick={() => router.push('/explore')}
+            
           >
+            <TransitionLink href="/explore" label="explore" >
             Explore
+            </TransitionLink>
           </button>
+          
+          
         </div>
       </div>
     </AnimateOnRouteChange>
