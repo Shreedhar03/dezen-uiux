@@ -5,7 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import AnimateOnRouteChange from "@/components/AnimateOnRouteChange";
 import Image from "next/image";
 import pepe from "@/public/pepe.png";
-import background from "@/public/glitch3.webp";
+import background from "@/public/bgan2.webp";
 import { useGlitch, GlitchHandle } from "react-powerglitch";
 import localFont from "next/font/local";
 import TransitionLink from "@/components/TransitionLink";

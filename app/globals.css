@@ -46,6 +46,9 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+    --page-background: 0 3.7% 13.1%;
+    --cpurplelight: 295 76.4% 73.5%;
+    --cpurpledark: 276 72.6% 48.1%;
   }
 }
 
@@ -63,4 +66,17 @@
   .text-11xl {
     font-size: 10rem; /* Adjust as needed */
   }
+}
+
+@keyframes hueRotate {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.hue-rotate {
+  @apply animate-[hueRotate_10s_linear_infinite];
 }

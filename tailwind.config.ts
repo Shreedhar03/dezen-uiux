@@ -22,6 +22,9 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        pagebg: "hsl(var(--page-background))",
+        cpurplelight: "hsl(var(--cpurplelight))",
+        cpurpledark: "hsl(var(--cpurpledark))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
