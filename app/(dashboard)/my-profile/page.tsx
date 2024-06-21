@@ -24,11 +24,19 @@ import EditProfile from "@/components/EditProfile";
 import { useUser } from "@/components/UserContext";
 import AnimateOnRouteChange from "@/components/AnimateOnRouteChange";
 import localFont from "next/font/local";
+import MemeCoinCard from "@/components/MemeCoinCard";
 
 const myFont = localFont({
   src: "../../../public/fonts/Kavoon-Regular.ttf",
   display: "swap",
 });
+
+interface User {
+  address: string;
+  username: string;
+  profilePicture?: string;
+  bio?: string;
+}
 
 interface Memecoin {
   memecoin_address: string;
@@ -41,6 +49,7 @@ interface Memecoin {
   telegram?: string;
   website?: string;
   timestamp: Date;
+  creator: User;
 }
 
 export default function MyProfilePage() {
@@ -107,17 +116,17 @@ export default function MyProfilePage() {
   return (
     <AnimateOnRouteChange>
       <div className="flex flex-1 pb-1 rounded-3xl mx-6">
-        {!user && (
-          <div className="w-full relative rounded-3xl">
+        {user && (
+          <div className="w-full rounded-3xl">
             <div
-              className="flex items-center justify-between rounded-[6.5rem] py-8"
+              className="relative flex items-center justify-between rounded-[6.5rem] py-8"
               style={{
                 backgroundImage: `url(${profileBg.src})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
-              <div className="flex items-center gap-6 pt-40 absolute -bottom-12 left-12">
+              <div className="flex items-center gap-6 pt-40 absolute -bottom-24 left-12">
                 <Avatar className="rounded-full overflow-hidden w-56 h-56 border-4 border-black">
                   <AvatarImage
                     className="object-cover w-full h-full"
@@ -125,7 +134,7 @@ export default function MyProfilePage() {
                   />
                 </Avatar>
                 <h2
-                  className={`${myFont.className} text-2xl font-bold ml-6 pt-32`}
+                  className={`${myFont.className} text-2xl font-bold ml-6 pt-24`}
                 >
                   {"user.username"}
                 </h2>
@@ -172,31 +181,22 @@ export default function MyProfilePage() {
                   <Loader2 className="h-12 w-12 animate-spin" />
                 </div>
               )}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {memecoins.map((memecoin) => (
-                  <div
-                    key={memecoin.memecoin_address}
-                    className="bg-white shadow rounded-lg p-4 cursor-pointer"
-                    onClick={() => router.push(`/${memecoin.memecoin_address}`)}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-shrink-0">
-                        <img
-                          src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                          alt={`${memecoin.name} logo`}
-                          className="h-28 w-28 object-cover rounded-md transition-all hover:scale-105"
-                        />
-                      </div>
-                      <div className="ml-4  mt-7 flex-1">
-                        <span className="text-md text-zinc-600 font-bold">
-                          ${"memecoin.ticker"} <br /> {"memecoin.name"}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="mt-2 text-sm text-zinc-600">
-                      {"memecoin.description"}
-                    </p>
-                  </div>
+
+              <div className="flex gap-4 mt-36">
+                <button className="bg-purple-800 text-white -skew-x-3 p-4 rounded-sm">
+                  WORK
+                </button>
+                <button className="bg-purple-800 text-white -skew-x-3 p-4 rounded-sm">
+                  COMMUNITY
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mr-4">
+                {memecoins.map((memecoin, key) => (
+                  <MemeCoinCard
+                    key={memecoin.creator_address}
+                    memecoin={memecoin}
+                  />
                 ))}
               </div>
             </div>
