@@ -60,7 +60,7 @@ export default function Home() {
     };
 
     fetchMemecoins();
-  }, []);
+   }, []);
 
   return (
     <AnimateOnRouteChange>

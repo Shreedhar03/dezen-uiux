@@ -9,6 +9,7 @@ import background from "@/public/glitch3.webp";
 import { useGlitch, GlitchHandle } from "react-powerglitch";
 import localFont from "next/font/local";
 import TransitionLink from "@/components/TransitionLink";
+import GameButton from "@/components/ui/GameButton";
 
 const myFont = localFont({
   src: "../public/fonts/docallismeonstreet.otf",
@@ -103,14 +104,13 @@ export default function Home() {
             DEZEN
           </h1>
           
-          <button
-            className="px-8 py-4 text-xl font-semibold text-white bg-purple-600 rounded-full hover:bg-purple-800 transition-colors"
+          
+          <TransitionLink href="/explore" label="explore" >
+            <GameButton />
+          </TransitionLink>
+
             
-          >
-            <TransitionLink href="/explore" label="explore" >
-            Explore
-            </TransitionLink>
-          </button>
+          
           
           
         </div>
