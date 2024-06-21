@@ -5,7 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import AnimateOnRouteChange from "@/components/AnimateOnRouteChange";
 import Image from "next/image";
 import pepe from "@/public/pepe.png";
-import background from "@/public/glitch.webp";
+import background from "@/public/glitch2.webp";
 import { useGlitch, GlitchHandle } from "react-powerglitch";
 import localFont from "next/font/local";
 
@@ -42,30 +42,31 @@ export default function Home() {
   const router = useRouter();
   const pathname = usePathname();
   const glitch: GlitchHandle = useGlitch({
-    playMode: "always", // Can be 'always', 'hover', 'click', or 'manual'
-    hideOverflow: false,
-    timing: {
-      duration: 1000,
-      iterations: 15,
-      easing: "ease-in-out",
+    "playMode": "always",
+    "createContainers": true,
+    "hideOverflow": false,
+    "timing": {
+      "duration": 2000,
+      "easing": "ease-in-out"
     },
-    glitchTimeSpan: {
-      start: 0.4,
-      end: 0.7,
+    "glitchTimeSpan": {
+      "start": 0.06,
+      "end": 0.7
     },
-    shake: {
-      velocity: 10,
-      amplitudeX: 0.4,
-      amplitudeY: 0.4,
+    "shake": {
+      "velocity": 15,
+      "amplitudeX": 0.2,
+      "amplitudeY": 0.2
     },
-    slice: {
-      count: 4,
-      velocity: 10,
-      minHeight: 0.02,
-      maxHeight: 0.4,
-      hueRotate: true,
+    "slice": {
+      "count": 6,
+      "velocity": 15,
+      "minHeight": 0.02,
+      "maxHeight": 0.15,
+      "hueRotate": true
     },
-  });
+    
+  } );
 
   useEffect(() => {
     const fetchMemecoins = async () => {
@@ -96,7 +97,7 @@ export default function Home() {
           className="absolute top-0 left-0 w-full h-full z-0"
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center" >
-          <h1 className={`${myFont.className} text-white text-6xl md:text-8xl lg:text-9xl font-bold mb-8`} {...glitch.triggerProps}
+          <h1 className={`${myFont.className} text-white text-6xl md:text-8xl lg:text-11xl font-bold mb-8`} {...glitch.triggerProps}
           ref={glitch.ref}>
             DEZEN
           </h1>
