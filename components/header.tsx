@@ -25,7 +25,7 @@ export default function Header() {
           {!connected ? "Connect Tron" : null}
         </WalletActionButton> */}
         {/* <TonConnectButton /> */}
-        <button className="text-2xl">Connect Wallet</button>
+        <button className="text-2xl bg-primary">Connect Wallet</button>
         {/* <ModeToggle /> */}
       </div>
     </nav>

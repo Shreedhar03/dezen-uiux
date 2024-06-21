@@ -1,8 +1,6 @@
-
 import React, { useState, useRef } from "react";
 import gsap from "gsap";
 import Link from "next/link";
-
 
 const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -34,18 +32,22 @@ const Navbar = () => {
   };
 
   const handleMouseOutOption = () => {
-    gsap.to([exploreRef.current, profileRef.current], { rotation: 0, y: 0, duration: 0.3 });
+    gsap.to([exploreRef.current, profileRef.current], {
+      rotation: 0,
+      y: 0,
+      duration: 0.3,
+    });
   };
 
   return (
     <nav
-      className={`navbar fixed left-0 md:left-0 md:top-1/2 md:-translate-y-1/2 bottom-0 w-64 h-16 md:h-auto md:w-64 md:rounded-r-full transform transition-transform duration-300 bg-blue-500 border-4 border-black md:flex md:items-center md:justify-center`}
+      className={`navbar fixed left-0 md:left-0 md:top-1/2 md:-translate-y-1/2 bottom-0 w-64 h-16 md:h-auto md:w-64 md:rounded-r-full transform transition-transform duration-300 bg-primary border-4 border-black md:flex md:items-center md:justify-center`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div className="relative w-full h-full flex items-center justify-center md:flex-col">
         <button
-          className="md:hidden w-16 h-16 rounded-full bg-blue-500 text-white text-lg flex items-center justify-center border-4 border-black"
+          className="md:hidden w-16 h-16 rounded-full bg-primary text-white text-lg flex items-center justify-center border-4 border-black"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           {isExpanded ? "Close" : "Menu"}
@@ -61,7 +63,9 @@ const Navbar = () => {
           <Link
             href="/explore"
             ref={exploreRef}
-            className={`option ${selectedOption === "explore" ? "border-4 border-black" : ""} transform transition-transform duration-300 hover:rotate-0 md:hover:rotate-15`}
+            className={`option ${
+              selectedOption === "explore" ? "border-4 border-black" : ""
+            } transform transition-transform duration-300 hover:rotate-0 md:hover:rotate-15`}
             onClick={() => handleClick("explore")}
             onMouseOver={() => handleMouseOverOption("explore")}
             onMouseOut={handleMouseOutOption}
@@ -71,7 +75,9 @@ const Navbar = () => {
           <Link
             href="/my-profile"
             ref={profileRef}
-            className={`option ${selectedOption === "my-profile" ? "border-4 border-black" : ""} transform transition-transform duration-300 hover:rotate-0 md:hover:-rotate-15`}
+            className={`option ${
+              selectedOption === "my-profile" ? "border-4 border-black" : ""
+            } transform transition-transform duration-300 hover:rotate-0 md:hover:-rotate-15`}
             onClick={() => handleClick("my-profile")}
             onMouseOver={() => handleMouseOverOption("my-profile")}
             onMouseOut={handleMouseOutOption}
@@ -83,7 +89,9 @@ const Navbar = () => {
           <div
             className="highlight"
             style={{
-              transform: `rotate(${selectedOption === "explore" ? 15 : -15}deg)`,
+              transform: `rotate(${
+                selectedOption === "explore" ? 15 : -15
+              }deg)`,
               backgroundColor: "grey",
               width: "100%",
               height: "2px",
