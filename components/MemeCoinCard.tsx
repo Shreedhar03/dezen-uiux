@@ -36,11 +36,11 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
   const router = useRouter();
   return (
     <>
-      <CardContainer className="h-full mx-8 shadow-md hover:shadow-[#f9731656] rounded-md">
+      <CardContainer className="h-full mx-8 shadow-md hover:shadow-cpurplelight rounded-xl">
         <CardBody>
           <div
             key={memecoin.memecoin_address}
-            className={`${kanit.className} bg-[#f97316] text-black border-4 border-foreground h-full relative p-4 rounded-md flex flex-col justify-between gap-3 cursor-pointer`}
+            className={`${kanit.className} bg-cpurpledark text-black h-full relative p-4 rounded-xl flex flex-col justify-between gap-3 cursor-pointer`}
             onClick={() => router.push(`/${memecoin.memecoin_address}`)}
             style={
               {
@@ -58,7 +58,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
               <div className="flex gap-4">
                 <img
                   src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                  className="h-32 w-32 object-cover rounded-md"
+                  className="h-24 w-24 object-cover rounded-full"
                 />
                 <div>
                   <h2
@@ -69,7 +69,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
                   <p className="mt-2 text-black">${memecoin.ticker}</p>
                 </div>
               </div>
-              <p className="leading-5 mt-2 text-black">
+              <p className="leading-5 mt-2 text-slate-900">
                 {memecoin.description}
               </p>
             </CardItem>
