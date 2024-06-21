@@ -11,6 +11,7 @@ import {
   CardContainer,
   CardItem,
 } from "../../../components/ui/3d-card";
+import { GlitchHandle, useGlitch } from "react-powerglitch";
 // import AnimateOnRouteChange from "../components/AnimateOnRouteChange";
 
 interface User {
@@ -50,6 +51,32 @@ export default function Home() {
   const router = useRouter();
   const pathname = usePathname();
 
+  const glitch: GlitchHandle = useGlitch({
+    playMode: "always",
+    createContainers: true,
+    hideOverflow: false,
+    timing: {
+      duration: 2000,
+      easing: "ease-in-out",
+    },
+    glitchTimeSpan: {
+      start: 0.06,
+      end: 0.7,
+    },
+    shake: {
+      velocity: 15,
+      amplitudeX: 0.2,
+      amplitudeY: 0.2,
+    },
+    slice: {
+      count: 6,
+      velocity: 15,
+      minHeight: 0.02,
+      maxHeight: 0.15,
+      hueRotate: true,
+    },
+  });
+
   useEffect(() => {
     const fetchMemecoins = async () => {
       try {
@@ -69,10 +96,12 @@ export default function Home() {
 
   return (
     <AnimateOnRouteChange>
-      <div className="mt-[1500px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch m-3">
+      <div className="mt-[1500px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch m-3 w-full">
         {loading ? (
-          <div className="flex justify-center items-center">
-            <Loader2 size={32} />
+          <div className="text-center col-span-3 h-[75vh] flex items-center justify-center">
+            <p className={`${theme.className} text-2xl`} ref={glitch.ref}>
+              Loading
+            </p>
           </div>
         ) : (
           memecoins.map((memecoin) => (
