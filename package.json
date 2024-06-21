@@ -61,6 +61,7 @@
     "react-hot-toast": "^2.4.1",
     "react-markdown": "^8.0.7",
     "react-modal": "^3.16.1",
+    "react-powerglitch": "^1.0.3",
     "react-qr-code": "^2.0.11",
     "react-spinners": "^0.13.8",
     "siwe": "^2.1.4",
