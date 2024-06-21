@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import AnimateOnRouteChange from "@/components/AnimateOnRouteChange";
-import localFont from "next/dist/compiled/@next/font/dist/local";
 import local from "next/font/local";
 import cardBg from "../../../public/card-bg.png";
 import {
@@ -105,21 +104,23 @@ export default function Home() {
           </div>
         ) : (
           memecoins.map((memecoin) => (
-            <CardContainer className="h-full mx-8 shadow-md hover:shadow-purple-900 rounded-md">
+            <CardContainer className="h-full mx-8 shadow-md hover:shadow-[#f9731656] rounded-md">
               <CardBody>
                 <div
                   key={memecoin.memecoin_address}
-                  className={`${kanit.className} h-full relative p-4 rounded-md flex flex-col justify-between gap-3 cursor-pointer`}
+                  className={`${kanit.className} bg-[#f97316] text-black border-4 border-foreground h-full relative p-4 rounded-md flex flex-col justify-between gap-3 cursor-pointer`}
                   onClick={() => router.push(`/${memecoin.memecoin_address}`)}
-                  style={{
-                    backgroundImage: `url(${cardBg.src})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
+                  style={
+                    {
+                      // backgroundImage: `url(${cardBg.src})`,
+                      // backgroundSize: "cover",
+                      // backgroundPosition: "center",
+                    }
+                  }
                 >
                   {/* black overlay bg */}
 
-                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 rounded-md"></div>
+                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-0 rounded-md"></div>
 
                   <CardItem translateZ={50} className="z-50">
                     <div className="flex gap-4">
@@ -129,14 +130,14 @@ export default function Home() {
                       />
                       <div>
                         <h2
-                          className={`${theme.className} text-2xl font-bold mt-2 text-white`}
+                          className={`${theme.className} text-2xl font-bold mt-2 text-black`}
                         >
                           {memecoin.name}
                         </h2>
-                        <p className="mt-2 text-white">${memecoin.ticker}</p>
+                        <p className="mt-2 text-black">${memecoin.ticker}</p>
                       </div>
                     </div>
-                    <p className="leading-5 mt-2 text-white">
+                    <p className="leading-5 mt-2 text-black">
                       {memecoin.description}
                     </p>
                   </CardItem>
@@ -153,7 +154,7 @@ export default function Home() {
                       alt={`${memecoin.creator.username}'s profile`}
                       className="w-12 h-12 rounded-full"
                     />
-                    <p className="mt-1 underline underline-offset-2 text-white">
+                    <p className="mt-1 underline underline-offset-2 text-black">
                       {memecoin.creator.username}
                     </p>
                   </CardItem>
