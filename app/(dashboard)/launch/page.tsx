@@ -7,6 +7,8 @@ import { z } from "zod";
 import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import launch from "../../../public/launch.png";
+import diano from "../../../public/diano.png";
 import {
   Form,
   FormControl,
@@ -108,11 +110,28 @@ export default function MemecoinForm() {
 
   return (
     <>
-      <div className="h-auto relative w-10/12 overflow-hidden my-14 py-8 bg-secondary flex flex-col items-center justify-center rounded-[100px]">
-        <div className="absolute inset-0 w-full h-full bg-secondary z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+      <div className="h-auto relative w-10/12 overflow-hidden mt-[700px] pb-24 mb-24 sm:mt-0 py-8 bg-secondary flex flex-col items-center justify-center rounded-[100px]">
+        <div className="absolute -bottom-6 right-0 z-30 w-80 h-80">
+          <img
+            src={launch.src}
+            alt="launch"
+            // mirroring the image
+            style={{ transform: "scaleX(-1)" }}
+          />
+        </div>
+        <div className="hidden sm:block absolute top-8 right-12 z-30 w-60 h-60">
+          <img
+            src={diano.src}
+            alt="launch"
+            // mirroring the image
+            style={{ transform: "scaleX(-1)" }}
+          />
+        </div>
 
-        <Boxes />
-        <div className="mt-[600px] sm:mt-0 m-48 z-20 relative w-9/12">
+        <div className="absolute inset-0 w-full h-full bg-secondary z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none">
+          <Boxes />
+        </div>
+        <div className="mx-48 z-20 relative w-9/12">
           <div className="space-y-6 mt-10 mb-10 w-11/12">
             <div>
               <h2
