@@ -13,12 +13,16 @@ import exploreMnky from '@/public/exploreMnky.jpeg'
 
 const CurrentPage = ({ hovered, setHovered }) => {
   const pathname = usePathname();
-  const cleanedPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
-  const routes: string[] = ['explore', 'my-profile'];
+  let cleanedPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
+  let segments = cleanedPathname.split('/');
+  let result = segments[0];
+  console.log("cleanedPathname", cleanedPathname)
+  const routes: string[] = ['explore', 'profile'];
+  
   let otherRoute: string | null = null;
 
-  if (routes.includes(cleanedPathname)) {
-    otherRoute = routes.find(route => route !== cleanedPathname) || null;
+  if (routes.includes(result)) {
+    otherRoute = routes.find(route => route !== result) || null;
   }
 
   const optionref = useRef(null);
@@ -60,10 +64,10 @@ const CurrentPage = ({ hovered, setHovered }) => {
   }, [hovered]);
 
   return (
-    <div onMouseEnter={() => setHovered(true)} ref={optionref} >
+    <div className='fixed' onMouseEnter={() => setHovered(true)} ref={optionref} >
       <Link href='/explore'>
         <div className='fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform -translate-x-3  border-4 border-black origin-left flex items-center justify-center'>
-          <p className='text-3xl font-semibold'>{cleanedPathname}</p>
+          <p className='text-3xl font-semibold'>{result}</p>
         </div>
       </Link>
       <Link href='/my-profile'>
