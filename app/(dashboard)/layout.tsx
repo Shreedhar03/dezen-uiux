@@ -36,14 +36,14 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Header />
-      <main className="max-w-[90rem] mx-auto relative flex h-[80vh] items-center p-3 sm:p-12">
+      <main className="max-w-[95rem] mx-auto relative flex h-[80vh] items-center p-3 sm:p-12">
         <Navbar />
         <div className="hidden sm:block absolute top-0 right-0 w-10/12 h-full">
           {children}
         </div>
         <div className="sm:hidden flex-1">{children}</div>
         <div className="fixed right-10 bottom-5 ">
-              <LaunchButton/>
+          <LaunchButton />
         </div>
       </main>
     </>
