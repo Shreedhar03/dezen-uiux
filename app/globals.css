@@ -24,6 +24,8 @@
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
+    --cpurplelight: 295 76.4% 73.5%;
+    --cpurpledark: 276 72.6% 48.1%;
   }
 
   .dark {
@@ -60,7 +62,6 @@
     @apply bg-background text-foreground;
   }
 }
-
 
 @layer utilities {
   .text-11xl {
