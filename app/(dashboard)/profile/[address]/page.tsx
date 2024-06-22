@@ -1,12 +1,28 @@
-'use client';
+"use client";
 
-import React, { use, useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator"
-import { useRouter, usePathname } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
-import { set } from 'mongoose';
+import { Separator } from "@/components/ui/separator";
+import { useRouter, usePathname } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import { set } from "mongoose";
+import profileBg from "../../../../public/profileBg.svg";
+import MemeCoinCard from "@/components/MemeCoinCard";
+import Loading from "../../launch/loading";
+import localFont from "next/font/local";
+
+const myFont = localFont({
+  src: "../../../../public/fonts/Kavoon-Regular.ttf",
+  display: "swap",
+});
+
+interface User {
+  address: string;
+  username: string;
+  profilePicture?: string;
+  bio?: string;
+}
 
 interface Memecoin {
   memecoin_address: string;
@@ -19,13 +35,7 @@ interface Memecoin {
   telegram?: string;
   website?: string;
   timestamp: Date;
-}
-
-interface User {
-  address: string;
-  username: string;
-  profilePicture?: string;
-  bio?: string;
+  creator: User;
 }
 
 export default function UserProfilePage({ params }) {
@@ -41,11 +51,10 @@ export default function UserProfilePage({ params }) {
     const fetchProfile = async () => {
       try {
         setLoading(true);
-  
+
         const userResponse = await fetch(`/api/user/${address}`);
         const userData = await userResponse.json();
         setUser(userData);
-  
       } catch (error) {
         console.error("Failed to fetch data:", error);
       } finally {
@@ -78,57 +87,53 @@ export default function UserProfilePage({ params }) {
   }, [address]);
 
   return (
-    <div className="sm:border-t sm:border-r sm:border-b rounded-tr rounded-br flex flex-1 pb-1">
+    <div className="flex flex-1 pb-1 rounded-3xl mx-6 mt-[1000px] sm:mt-0 ">
       {user && (
-      <div className="w-full relative">
-        <div className="bg-gradient-to-r from-purple-950 to-black h-40 flex items-center justify-between px-12">
-          <div className="flex items-center pt-40">
-            <Avatar className="rounded-xl overflow-hidden w-40 h-40 border-4 border-black">
-              <AvatarImage
-                className="object-cover w-full h-full"
-                src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${user.profilePicture}`}
-              />
-            </Avatar>
-            <h2 className="text-2xl font-bold ml-6 pt-16">{user.username}</h2>
+        <div className="w-full rounded-3xl">
+          <div
+            className="relative flex items-center justify-between rounded-[6.5rem] py-36"
+            style={{
+              backgroundImage: `url(${profileBg.src})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="flex items-center gap-6 pt-40 absolute -bottom-24 left-12">
+              <Avatar className="rounded-full overflow-hidden w-56 h-56 border-4 border-black">
+                <AvatarImage
+                  className="object-cover w-full h-full"
+                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${user.profilePicture}`}
+                />
+              </Avatar>
+              <h2
+                className={`${myFont.className} text-2xl font-bold ml-6 pt-24`}
+              >
+                {user.username}
+              </h2>
+            </div>
           </div>
-        </div>
-        {(memecoins.length > 0 || loading) && <Separator className='mt-28'/>}
 
-        <div className="flex flex-1 flex-wrap p-4">
-          {
-            loading && (
-              <div className="
+          <div>
+            {loading && (
+              <div
+                className="
                 flex flex-1 justify-center items-center
-              ">
-                <Loader2 className="h-12 w-12 animate-spin" />
+              "
+              >
+                <Loading />
               </div>
-            )
-          }
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {memecoins.map(memecoin => (
-              <div key={memecoin.memecoin_address} className="bg-white shadow rounded-lg p-4 cursor-pointer" onClick={() => router.push(`/${memecoin.memecoin_address}`)}>
-                <div className="flex items-start justify-between">
-                  <div className="flex-shrink-0">
-                    <img 
-                      src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`} 
-                      alt={`${memecoin.name} logo`}
-                      className="h-28 w-28 object-cover rounded-md transition-all hover:scale-105"
-                    />
-                  </div>
-                  <div className="ml-4  mt-7 flex-1">
-                    <span className="text-md text-zinc-600 font-bold">
-                      ${memecoin.ticker} <br /> {memecoin.name}
-                    </span>
-                  </div>
-                </div>
-                <p className="mt-2 text-sm text-zinc-600">{memecoin.description}</p>
-              </div>
-            ))}
+            )}
+            <div className="mt-36 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-12">
+              {memecoins.map((memecoin) => (
+                <MemeCoinCard
+                  key={memecoin.memecoin_address}
+                  memecoin={memecoin}
+                />
+              ))}
+            </div>
           </div>
         </div>
-
-      </div>
       )}
     </div>
-  );  
+  );
 }

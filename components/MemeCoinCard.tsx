@@ -29,7 +29,7 @@ interface Memecoin {
   telegram?: string;
   website?: string;
   timestamp: Date;
-  creator: User;
+  creator?: User;
 }
 
 const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
@@ -58,7 +58,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
               <div className="flex gap-4">
                 <img
                   src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                  className="h-24 w-24 object-cover rounded-full"
+                  className="h-20 w-20 object-cover rounded-full"
                 />
                 <div>
                   <h2
@@ -70,7 +70,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
                   <p className="mt-2 text-foreground">${memecoin.ticker}</p>
                 </div>
               </div>
-              <p className="leading-5 mt-2 text-foreground/60">
+              <p className="leading-5 mt-2 text-foreground/60 text-base">
                 {memecoin.description}
               </p>
             </CardItem>
@@ -82,13 +82,15 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
                 router.push(`/profile/${memecoin.creator_address}`);
               }}
             >
-              <img
-                src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator.profilePicture}`}
-                alt={`${memecoin.creator.username}'s profile`}
-                className="w-12 h-12 rounded-full"
-              />
+              {memecoin.creator && (
+                <img
+                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator?.profilePicture}`}
+                  alt={`${memecoin.creator?.username}'s profile`}
+                  className="w-12 h-12 rounded-full"
+                />
+              )}
               <p className="mt-1 underline underline-offset-2 text-foreground">
-                {memecoin.creator.username}
+                {memecoin.creator?.username}
               </p>
             </CardItem>
           </div>

@@ -115,7 +115,7 @@ export default function MyProfilePage() {
 
   return (
     <AnimateOnRouteChange>
-      <div className="flex flex-1 pb-1 rounded-3xl mx-6">
+      <div className="flex flex-1 pb-1 rounded-3xl mx-6 mt-[1000px] sm:mt-0">
         {user && (
           <div className="w-full rounded-3xl">
             <div
@@ -130,13 +130,13 @@ export default function MyProfilePage() {
                 <Avatar className="rounded-full overflow-hidden w-56 h-56 border-4 border-black">
                   <AvatarImage
                     className="object-cover w-full h-full"
-                    src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${"user.profilePicture"}`}
+                    src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${user.profilePicture}`}
                   />
                 </Avatar>
                 <h2
                   className={`${myFont.className} text-2xl font-bold ml-6 pt-24`}
                 >
-                  {"user.username"}
+                  {user.username}
                 </h2>
               </div>
               <div className="pt-56">
@@ -191,7 +191,7 @@ export default function MyProfilePage() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mr-4">
+              <div className="mt-36 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-12">
                 {memecoins.map((memecoin, key) => (
                   <MemeCoinCard
                     key={memecoin.creator_address}
