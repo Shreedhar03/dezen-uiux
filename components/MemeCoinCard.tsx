@@ -40,7 +40,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
         <CardBody>
           <div
             key={memecoin.memecoin_address}
-            className={`${kanit.className} bg-cpurpledark text-black h-full relative p-4 rounded-xl flex flex-col justify-between gap-3 cursor-pointer`}
+            className={`${kanit.className} bg-secondary h-full relative p-4 rounded-xl flex flex-col justify-between gap-3 cursor-pointer`}
             onClick={() => router.push(`/${memecoin.memecoin_address}`)}
             style={
               {
@@ -62,14 +62,15 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
                 />
                 <div>
                   <h2
-                    className={`${theme.className} text-2xl font-bold mt-2 text-black`}
+                    className={`text-2xl font-bold mt-2 text-cpurpledark`}
+                    style={{ textShadow: "2px 2px 0 #000" }}
                   >
                     {memecoin.name}
                   </h2>
-                  <p className="mt-2 text-black">${memecoin.ticker}</p>
+                  <p className="mt-2 text-foreground">${memecoin.ticker}</p>
                 </div>
               </div>
-              <p className="leading-5 mt-2 text-slate-900">
+              <p className="leading-5 mt-2 text-foreground/60">
                 {memecoin.description}
               </p>
             </CardItem>
@@ -86,7 +87,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
                 alt={`${memecoin.creator.username}'s profile`}
                 className="w-12 h-12 rounded-full"
               />
-              <p className="mt-1 underline underline-offset-2 text-black">
+              <p className="mt-1 underline underline-offset-2 text-foreground">
                 {memecoin.creator.username}
               </p>
             </CardItem>
