@@ -12,11 +12,15 @@ export default function LoadingSkeleton(){
  } );
     return (
         <>
+        <div className="left-[50%] bottom-[50%]">
         <Image
           width={200}
           src={pedro}
           alt="logo"
           ref={glitch.ref}></Image>
-          </>
+          
+          </div>
+        </>
+          
     )
 }

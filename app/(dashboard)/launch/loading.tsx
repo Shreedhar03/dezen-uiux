@@ -1,5 +1,10 @@
 import LoadingSkeleton from "@/components/Loader";
 
 export default function Loading(){
-    return <LoadingSkeleton/>
+    return (
+        <div className="grid place-content-center h-100vh">
+            <LoadingSkeleton/>
+        </div>
+    
+)
 }
