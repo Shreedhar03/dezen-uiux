@@ -11,6 +11,7 @@ import localFont from "next/font/local";
 import TransitionLink from "@/components/TransitionLink";
 import GameButton from "@/components/ui/GameButton";
 import dezenP from "@/public/dezenP.png"
+
 const myFont = localFont({
   src: "../public/fonts/docallismeonstreet.otf",
   display: "swap",
@@ -108,6 +109,7 @@ export default function Home() {
           src={dezenP}
           alt="logo"
           ref={glitch.ref}></Image>
+          
           
           
           <TransitionLink href="/explore" label="explore" >
