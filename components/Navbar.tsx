@@ -19,10 +19,16 @@ const CurrentPage = ({ hovered, setHovered }) => {
   console.log("cleanedPathname", cleanedPathname)
   const routes: string[] = ['explore', 'profile'];
   
+  
   let otherRoute: string | null = null;
 
   if (routes.includes(result)) {
     otherRoute = routes.find(route => route !== result) || null;
+  }
+
+  if (!routes.includes(result)) {
+    result = "explore";
+    otherRoute = "profile";
   }
 
   const optionref = useRef(null);
