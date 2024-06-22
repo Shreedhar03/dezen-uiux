@@ -128,9 +128,8 @@ export default function MemecoinForm() {
           />
         </div>
 
-        <div className="absolute inset-0 w-full h-full bg-secondary z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none">
-          <Boxes />
-        </div>
+        <div className="absolute inset-0 w-full h-full bg-secondary z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none"></div>
+        <Boxes />
         <div className="mx-48 z-20 relative w-9/12">
           <div className="space-y-6 mt-10 mb-10 w-11/12">
             <div>
