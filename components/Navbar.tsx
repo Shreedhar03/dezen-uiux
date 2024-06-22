@@ -26,9 +26,9 @@ const CurrentPage = ({ hovered, setHovered }) => {
     otherRoute = routes.find(route => route !== result) || null;
   }
 
-  if (result == "launch"){
-    result = "explore" 
-    otherRoute = "profile"
+  if (!routes.includes(result)) {
+    result = "explore";
+    otherRoute = "profile";
   }
 
   const optionref = useRef(null);
