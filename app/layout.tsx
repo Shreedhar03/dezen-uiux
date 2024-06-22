@@ -8,6 +8,7 @@ import { TronProvider } from "@/components/TronProvider";
 import Header from "@/components/header";
 import { UserProvider } from "@/components/UserContext";
 import React from "react";
+import FlareCursor from "@/components/FlareCursor";
 
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
@@ -55,6 +56,7 @@ export default function RootLayout({ children, session, ...props }) {
             <TronProvider>
               <UserProvider>
                 {/* <Header /> */}
+                <FlareCursor />
                 {mounted && children}
               </UserProvider>
             </TronProvider>

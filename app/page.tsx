@@ -10,7 +10,8 @@ import { useGlitch, GlitchHandle } from "react-powerglitch";
 import localFont from "next/font/local";
 import TransitionLink from "@/components/TransitionLink";
 import GameButton from "@/components/ui/GameButton";
-import dezenP from "@/public/dezenP.png"
+import dezenP from "@/public/dezenP.png";
+import Vimeo from "@u-wave/react-vimeo";
 
 const myFont = localFont({
   src: "../public/fonts/docallismeonstreet.otf",
@@ -68,8 +69,7 @@ export default function Home() {
       "maxHeight": 0.15,
       "hueRotate": true
     },
-    
-  } );
+  });
 
   useEffect(() => {
     const fetchMemecoins = async () => {
@@ -90,36 +90,39 @@ export default function Home() {
 
   return (
     <AnimateOnRouteChange>
-      <div className="relative w-screen h-screen overflow-hidden">
-        <Image
-          src={background}
-          alt="Background Image"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
-          className="absolute top-0 left-0 w-full h-full z-0"
+      <div className="loader-container w-full h-screen fixed inset-0 flex justify-center items-center flex-col box-border relative">
+        <style jsx>{`
+          .loader-container::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            border: 6px solid #800080; /* Purple border */
+            box-shadow: inset 0 0 20px 10px rgba(128, 0, 128, 0.5); /* Purple glow */
+            z-index: 1;
+          }
+        `}</style>
+        <Vimeo
+          className="absolute z-0 w-full h-full inset-0 vimeo-style"
+          video="https://vimeo.com/769892438"
+          autoplay
+          loop
+          background
+          responsive
+          style={{ minHeight: "100vh", minWidth: "177.77vh" }}
         />
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center" >
-          {/* <h1 className={`${myFont.className} text-white text-6xl md:text-8xl lg:text-11xl font-bold mb-8`} 
-          ref={glitch.ref}>
-            DEZEN
-          </h1> */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center">
           <Image
-          width={500}
-          src={dezenP}
-          alt="logo"
-          ref={glitch.ref}></Image>
-          
-          
-          
-          <TransitionLink href="/explore" label="explore" >
+            width={500}
+            src={dezenP}
+            alt="logo"
+            ref={glitch.ref}
+          />
+          <TransitionLink href="/explore" label="explore">
             <GameButton />
           </TransitionLink>
-
-            
-          
-          
-          
         </div>
       </div>
     </AnimateOnRouteChange>

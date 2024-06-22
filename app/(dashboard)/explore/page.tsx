@@ -86,7 +86,7 @@ export default function Home() {
   }, []);
 
   return (
-    <AnimateOnRouteChange>
+    
       <div className="mt-[1500px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch m-3 w-full">
         {loading ? (
           <div className="text-center col-span-3 h-[75vh] flex items-center justify-center">
@@ -100,6 +100,6 @@ export default function Home() {
           ))
         )}
       </div>
-    </AnimateOnRouteChange>
+    
   );
 }

@@ -13,6 +13,9 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
+    boxShadow: {
+      'custom-glow': 'inset 0 0 20px 10px rgba(128, 0, 128, 0.5)', // Purple glow
+    },
     container: {
       center: true,
       padding: "2rem",

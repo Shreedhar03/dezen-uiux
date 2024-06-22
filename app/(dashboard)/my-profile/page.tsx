@@ -114,7 +114,7 @@ export default function MyProfilePage() {
   }, [myAddress]);
 
   return (
-    <AnimateOnRouteChange>
+    
       <div className="flex flex-1 pb-1 rounded-3xl mx-6 mt-[1000px] sm:mt-0">
         {user && (
           <div className="w-full rounded-3xl">
@@ -203,6 +203,6 @@ export default function MyProfilePage() {
           </div>
         )}
       </div>
-    </AnimateOnRouteChange>
+    
   );
 }

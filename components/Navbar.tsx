@@ -4,22 +4,18 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
-import disc from '@/public/disc.webp'
-import tiredmnky from '@/public/tiredmnky.png'
-import exploreMnky from '@/public/exploreMnky.jpeg'
-
-
-
+import disc from '@/public/dezenDisc.jpg';
+import tiredmnky from '@/public/tiredmnky.png';
+import exploreMnky from '@/public/exploreMnky.jpeg';
 
 const CurrentPage = ({ hovered, setHovered }) => {
   const pathname = usePathname();
   let cleanedPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
   let segments = cleanedPathname.split('/');
   let result = segments[0];
-  console.log("cleanedPathname", cleanedPathname)
+  console.log("cleanedPathname", cleanedPathname);
   const routes: string[] = ['explore', 'profile'];
-  
-  
+
   let otherRoute: string | null = null;
 
   if (routes.includes(result)) {
@@ -34,10 +30,9 @@ const CurrentPage = ({ hovered, setHovered }) => {
   const optionref = useRef(null);
   const rotateref = useRef(null);
   const [mouseDown, setMouseDown] = React.useState(0);
-  
 
   useEffect(() => {
-    if (mouseDown==1) {
+    if (mouseDown == 1) {
       gsap.to(rotateref.current, {
         rotate: 45,
         duration: 1,
@@ -51,6 +46,7 @@ const CurrentPage = ({ hovered, setHovered }) => {
       });
     }
   }, [mouseDown]);
+  
   useEffect(() => {
     if (hovered) {
       gsap.to(optionref.current, {
@@ -70,9 +66,9 @@ const CurrentPage = ({ hovered, setHovered }) => {
   }, [hovered]);
 
   return (
-    <div className='fixed' onMouseEnter={() => setHovered(true)} ref={optionref} >
+    <div className='fixed' onMouseEnter={() => setHovered(true)} ref={optionref} onMouseLeave={() => setHovered(false)}>
       <Link href='/explore'>
-        <div className='fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform -translate-x-3  border-4 border-black origin-left flex items-center justify-center'>
+        <div className='fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform -translate-x-3 border-4 border-black origin-left flex items-center justify-center'>
           <p className='text-3xl font-semibold'>{result}</p>
         </div>
       </Link>
@@ -85,13 +81,11 @@ const CurrentPage = ({ hovered, setHovered }) => {
   );
 }
 
-
 const NavSection = () => {
   return (
     <>
       <div
         className='fixed left-0 w-[50%] h-[50%] bg-slate-500 rounded-1/2 transform -translate-x-[40%] border-4 border-black'
-       
       >
       </div>
       <div className='fixed left-0 w-[20%] h-[10%] bg-green-500 transform -translate-x-10 border-4 rotate-[15deg] origin-left border-black'>
@@ -111,9 +105,9 @@ const NavSection = () => {
 const Navbar = () => {
   const [hovered, setHovered] = React.useState(false);
   const navRef = useRef(null);
+  const discRef = useRef(null);
   const pathname = usePathname();
   const cleanedPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
-  
 
   useEffect(() => {
     if (hovered) {
@@ -133,26 +127,35 @@ const Navbar = () => {
     }
   }, [hovered]);
 
-const Player = () =>{
-  const pathname = usePathname();
-  const cleanedPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
-  const routes: StaticImageData[] = [exploreMnky, tiredmnky];
-  let routeImg:StaticImageData = tiredmnky 
-  if(cleanedPathname=='explore'){
-     routeImg = routes[1]
-  }else{
-    routeImg = routes[0]
-  }
-  
+  useEffect(() => {
+    gsap.to(discRef.current, {
+      rotate: 360,
+      duration: 5,
+      ease: 'none',
+      repeat: -1,
+      transformOrigin: 'center center',
+    });
+  }, []);
 
-  return(
-    <>
-    <div className='fixed left-0 bottom-[40%] w-[10%] h-[10%] bg-orange-500 transform -translate-x-3 translate-y-2  border-4 border-black origin-left flex items-center justify-center overflow-hidden'>
-      <Image src={routeImg} alt='tiredmnky' style={{objectFit: "contain"}}></Image>
-    </div>
-    </>
-  )
-}
+  const Player = () => {
+    const pathname = usePathname();
+    const cleanedPathname = pathname.startsWith('/') ? pathname.slice(1) : pathname;
+    const routes: StaticImageData[] = [exploreMnky, tiredmnky];
+    let routeImg: StaticImageData = tiredmnky;
+    if (cleanedPathname == 'explore') {
+      routeImg = routes[1];
+    } else {
+      routeImg = routes[0];
+    }
+
+    return (
+      <>
+        <div className='fixed left-0 bottom-[40%] w-[10%] h-[10%] bg-orange-500 transform -translate-x-3 translate-y-2 border-4 border-black origin-left flex items-center justify-center overflow-hidden'>
+          <Image src={routeImg} alt='tiredmnky' style={{ objectFit: "contain" }}></Image>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -161,29 +164,17 @@ const Player = () =>{
         ref={navRef}
         className="fixed left-0 w-[18%] h-[34%] rounded-1/2 transform -translate-x-1/2 border-4 border-black"
         onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)
-        }
+        onMouseLeave={() => setHovered(false)}
       >
-        <Image 
-        src={disc}
-        alt='disc'
-        className='fixed -translate-y-2'></Image>
-        {/* {hovered && <div>
-          <div className='fixed left-0 w-[20%] h-[10%] bg-green-500 transform -translate-x-10 border-4 rotate-[15deg] origin-left border-black'>
-        <p className='fixed text-3xl font-semibold transform translate-x-[180%] translate-y-2'>
-          Explore
-        </p>
+        <Image
+          ref={discRef}
+          src={disc}
+          alt='disc'
+          className='fixed -translate-y-2 rounded-r-full rounded-l-full'
+        ></Image>
       </div>
-      <div className='fixed left-0 w-[20%] h-[10%] bg-green-500 transform -translate-x-10 border-4 -rotate-[15deg] origin-left border-black'>
-        <p className='fixed text-3xl font-semibold transform translate-x-[180%] translate-y-2'>
-          Explore
-        </p>
-      </div>
-      
-          </div>} */}
-      </div>
-      {hovered && <CurrentPage hovered={hovered} setHovered={setHovered}/>}
-      {!hovered && <Player/>}
+      {hovered && <CurrentPage hovered={hovered} setHovered={setHovered} />}
+      {!hovered && <Player />}
     </>
   );
 };
