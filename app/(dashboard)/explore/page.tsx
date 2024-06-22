@@ -7,6 +7,7 @@ import local from "next/font/local";
 import cardBg from "../../../public/card-bg.png";
 import { GlitchHandle, useGlitch } from "react-powerglitch";
 import MemeCoinCard from "@/components/MemeCoinCard";
+import LoadingSkeleton from "@/components/Loader";
 // import AnimateOnRouteChange from "../components/AnimateOnRouteChange";
 
 interface User {
@@ -89,8 +90,8 @@ export default function Home() {
       <div className="mt-[1500px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch m-3 w-full">
         {loading ? (
           <div className="text-center col-span-3 h-[75vh] flex items-center justify-center">
-            <p className={`${theme.className} text-2xl`} ref={glitch.ref}>
-              Loading
+            <p className={`${theme.className} text-2xl`} >
+              <LoadingSkeleton/>
             </p>
           </div>
         ) : (

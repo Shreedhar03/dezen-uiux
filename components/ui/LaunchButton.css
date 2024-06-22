@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Carter+One');
+
+.game-button {
+  position: relative;
+  top: 0;
+  cursor: pointer;
+  text-decoration: none !important;
+  outline: none !important;
+  font-family: 'Carter One', sans-serif;
+  font-size: 20px;
+  line-height: 1.5em;
+  letter-spacing: .1em;
+  text-shadow: 2px 2px 1px #6a0dad, -2px 2px 1px #6a0dad, 2px -2px 1px #6a0dad, -2px -2px 1px #6a0dad, 0px 2px 1px #6a0dad, 0px -2px 1px #6a0dad, 0px 4px 1px #4b0082, 2px 4px 1px #4b0082, -2px 4px 1px  #4b0082;
+  border: none;
+  margin: 15px 15px 30px;
+  background: repeating-linear-gradient( 45deg, #a64ca6, #a64ca6 5px, #9932cc 5px, #9932cc 10px);
+  border-bottom: 3px solid rgba(106, 61, 173, 0.5);
+  border-top: 3px solid rgba(255,255,255,.3);
+  color: #fff !important;
+  border-radius: 8px;
+  padding: 8px 15px 10px;
+  box-shadow: 0 6px 0 #800080, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #4b0082, 0 12px 0 5px #6a0dad, 0 15px 0 5px #4b0082, 0 15px 1px 6px rgba(0,0,0,.3);
+  animation: bounce 0.2s infinite alternate;
+}
+
+@keyframes bounce {
+  0% {
+    top: 0;
+    box-shadow: 0 6px 0 #800080, 0 8px 1px 1px rgba(0,0,0,.3), 0 10px 0 5px #4b0082, 0 12px 0 5px #6a0dad, 0 15px 0 5px #4b0082, 0 15px 1px 6px rgba(0,0,0,.3);
+  }
+  100% {
+    top: 2px;
+    box-shadow: 0 4px 0 #800080, 0 6px 1px 1px rgba(0,0,0,.3), 0 8px 0 5px #4b0082, 0 10px 0 5px #6a0dad, 0 13px 0 5px #4b0082, 0 13px 1px 6px rgba(0,0,0,.3);
+  }
+}
+
+.game-button::before {
+  content: '';
+  height: 10%;
+  position: absolute;
+  width: 40%;
+  background: #fff;
+  right: 13%;
+  top: -3%;
+  border-radius: 99px;
+}
+
+.game-button::after {
+  content: '';
+  height: 10%;
+  position: absolute;
+  width: 5%;
+  background: #fff;
+  right: 5%;
+  top: -3%;
+  border-radius: 99px;
+}
