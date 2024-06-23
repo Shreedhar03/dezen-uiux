@@ -77,6 +77,11 @@ const CurrentPage = ({ hovered, setHovered }) => {
           <p className='text-3xl font-semibold'>{otherRoute}</p>
         </div>
       </Link>
+      <Link href='/launch'>
+        <div className='fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform -translate-x-10 -translate-y-10 border-4 rotate-[-35deg] origin-left border-black flex items-center justify-center'>
+          <p className='text-3xl font-semibold'>launch</p>
+        </div>
+      </Link>
     </div>
   );
 }
@@ -170,7 +175,7 @@ const Navbar = () => {
           ref={discRef}
           src={disc}
           alt='disc'
-          className='fixed -translate-y-2 rounded-r-full rounded-l-full'
+          className='fixed -translate-y-6 rounded-r-full rounded-l-full'
         ></Image>
       </div>
       {hovered && <CurrentPage hovered={hovered} setHovered={setHovered} />}

@@ -11,6 +11,11 @@ import profileBg from "../../../../public/profileBg.svg";
 import MemeCoinCard from "@/components/MemeCoinCard";
 import Loading from "../../launch/loading";
 import localFont from "next/font/local";
+import ButtonWC from "@/components/ButtonWC";
+import Image from "next/image";
+import community from "@/public/pepe-council.gif"
+import work from "@/public/pepe-working.gif"
+import Community from "@/components/Community";
 
 const myFont = localFont({
   src: "../../../../public/fonts/Kavoon-Regular.ttf",
@@ -44,6 +49,8 @@ export default function UserProfilePage({ params }) {
   const [loading, setLoading] = useState(true);
   const address = params.address;
   const router = useRouter();
+  const [iscommunityActive, setCommunityActive] = useState(false)
+
 
   useEffect(() => {
     if (!address) return;
@@ -112,8 +119,23 @@ export default function UserProfilePage({ params }) {
               </h2>
             </div>
           </div>
-
           <div>
+            
+          </div>
+          <div className="mt-36 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 -mb-[7rem]">
+          <div className="flex gap-[5rem]">
+              <span onClick={()=>setCommunityActive(false)} > <ButtonWC type={"work"} insideImg={work} width={50} /></span>
+             <span onClick={()=>setCommunityActive(true)}> <ButtonWC type={"Community"} insideImg={community} width={120}/> </span>
+            
+              </div>
+              <div></div>
+            
+            <Image src={community} alt=";t"></Image>
+          </div>
+
+          { !iscommunityActive ? <div>
+          
+          
             {loading && (
               <div
                 className="
@@ -124,6 +146,30 @@ export default function UserProfilePage({ params }) {
               </div>
             )}
             <div className="mt-36 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-12">
+              
+              {memecoins.map((memecoin) => (
+                <MemeCoinCard
+                  key={memecoin.memecoin_address}
+                  memecoin={memecoin}
+                />
+              ))}
+            </div>
+          </div> : 
+          // <Community /> 
+          <div>
+          
+          
+            {loading && (
+              <div
+                className="
+                flex flex-1 justify-center items-center
+              "
+              >
+                <Loading />
+              </div>
+            )}
+            <div className="mt-36 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-12">
+              
               {memecoins.map((memecoin) => (
                 <MemeCoinCard
                   key={memecoin.memecoin_address}
@@ -132,6 +178,7 @@ export default function UserProfilePage({ params }) {
               ))}
             </div>
           </div>
+          }
         </div>
       )}
     </div>
