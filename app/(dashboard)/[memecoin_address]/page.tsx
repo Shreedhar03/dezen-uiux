@@ -93,10 +93,10 @@ export default function MemecoinPage({ params }) {
 
     const chartOptions = {
       layout: {
-        textColor: "white",
+        textColor: "#d3e8a0",
         background: {
           type: "solid" as ColorType.Solid,
-          color: "black",
+          color: "#1a202c",
         },
       },
     };
