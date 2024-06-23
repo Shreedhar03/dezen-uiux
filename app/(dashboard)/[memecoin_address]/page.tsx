@@ -93,10 +93,10 @@ export default function MemecoinPage({ params }) {
 
     const chartOptions = {
       layout: {
-        textColor: "black",
+        textColor: "white",
         background: {
           type: "solid" as ColorType.Solid,
-          color: "white",
+          color: "black",
         },
       },
     };
@@ -150,62 +150,71 @@ export default function MemecoinPage({ params }) {
 
   return (
     <>
-      <div className="mt-[800px] sm:mt-0 grid grid-cols-1 lg:grid-cols-2 content-center place-items-center space-y-4">
-        <section className="w-10/12">
-          <div className="flex gap-4 mb-14">
-            <button
-              onClick={() => {
-                setTradeType("buy");
-              }}
-              className={`${
-                tradeType === "buy" ? "bg-[#82b455]" : ""
-              } border-2 border-foreground rounded-xl px-16 py-6 relative`}
-              style={{
-                textShadow: "0px 3px 3px #000",
-              }}
-            >
-              <div
-                className={`z-10 ${
-                  tradeType === "buy" ? "bg-[#d3e8a0]" : "bg-secondary/80"
-                } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
-              ></div>
-              <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
-                BUY
-              </span>
-            </button>
-            <button
-              onClick={() => {
-                setTradeType("sell");
-              }}
-              className={`${
-                tradeType === "sell" ? "bg-[#82b455]" : ""
-              } border-2 border-foreground rounded-xl px-16 py-6 relative`}
-              style={{
-                textShadow: "0px 3px 3px #000",
-              }}
-            >
-              <div
-                className={`z-10 ${
-                  tradeType === "sell" ? "bg-[#d3e8a0]" : "bg-secondary/80"
-                } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
-              ></div>
-              <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
-                SELL
-              </span>
-            </button>
-          </div>
+      <div id="chart-container" className="w-10/12 h-48 mb-[250px]"></div>
 
+      <div className="mb-12">
+        <Label className="text-zinc-400 text-xs">
+          Note: the price displayed on the right side is represented in nanoTON
+          (i.e. 1 billionth fraction of TON)
+        </Label>
+      </div>
+
+      <div className="flex gap-4 mb-14">
+        <button
+          onClick={() => {
+            setTradeType("buy");
+          }}
+          className={`${
+            tradeType === "buy" ? "bg-[#82b455]" : ""
+          } border-2 border-foreground rounded-xl px-16 py-6 relative`}
+          style={{
+            textShadow: "0px 3px 3px #000",
+          }}
+        >
+          <div
+            className={`z-10 ${
+              tradeType === "buy" ? "bg-[#d3e8a0]" : "bg-secondary/80"
+            } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
+          ></div>
+          <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
+            BUY
+          </span>
+        </button>
+        <button
+          onClick={() => {
+            setTradeType("sell");
+          }}
+          className={`${
+            tradeType === "sell" ? "bg-[#82b455]" : ""
+          } border-2 border-foreground rounded-xl px-16 py-6 relative`}
+          style={{
+            textShadow: "0px 3px 3px #000",
+          }}
+        >
+          <div
+            className={`z-10 ${
+              tradeType === "sell" ? "bg-[#d3e8a0]" : "bg-secondary/80"
+            } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
+          ></div>
+          <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
+            SELL
+          </span>
+        </button>
+      </div>
+
+      <div className="mt-[800px] sm:mt-0 grid grid-cols-1 lg:grid-cols-2 mr-12 lg:mr-24">
+        <section className="w-10/12">
           {tradeType === "buy" ? (
             <>
               <div className="p-6 rounded-lg border-2 border-cpurpledark">
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <button onClick={() => setIsTronQuantity(!isTronQuantity)}>
-                    <Badge variant="secondary" className="rounded-md">
+                    <p className="rounded-md px-4 py-1 bg-cpurpledark -skew-x-6">
                       Switch to{" "}
                       {isTronQuantity ? memecoin?.name || "Memecoin" : "Ton"}
-                    </Badge>
+                    </p>
                   </button>
-                  <div className="space-y-1">
+                  <div className="space-y-3">
                     <Label htmlFor="buy-amount">Amount</Label>
                     <div className="relative flex items-center">
                       <Input id="buy-amount" autoComplete="off" />
@@ -246,14 +255,14 @@ export default function MemecoinPage({ params }) {
           ) : (
             <>
               <div className="p-6 rounded-lg border-2 border-cpurpledark">
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <button onClick={() => setIsTronQuantity(!isTronQuantity)}>
-                    <Badge variant="secondary" className="rounded-md">
+                    <p className="rounded-md px-4 py-1 bg-cpurpledark -skew-x-6">
                       Switch to{" "}
                       {isTronQuantity ? memecoin?.name || "Memecoin" : "Ton"}
-                    </Badge>
+                    </p>
                   </button>
-                  <div className="space-y-1">
+                  <div className="space-y-3">
                     <Label htmlFor="sell-amount">Amount</Label>
                     <div className="relative flex items-center">
                       <Input id="sell-amount" autoComplete="off" />
@@ -294,17 +303,34 @@ export default function MemecoinPage({ params }) {
           )}
         </section>
         {memecoin && (
-          <div className="pr-14 pt-2">
-            <div className="flex items-center justify-center space-x-24 mb-4 w-full">
+          <div className="bg-cpurpledark p-6 mt-6 rounded-xl">
+            <div className="flex items-start justify-between mb-2">
+              <div className="flex-shrink-0 bg-black rounded-xl">
+                <img
+                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
+                  alt={`${memecoin.name} logo`}
+                  className="h-36 w-36 object-cover rounded-md"
+                />
+              </div>
+              <div className="ml-4 flex-1">
+                <Label className="text-xl text-black">
+                  Ticker: ${memecoin.ticker}
+                </Label>
+                <br />
+                <Label className="text-xl text-black">
+                  Name: {memecoin.name}
+                </Label>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 w-full">
               {memecoin.twitter && (
                 <a
                   href={memecoin.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Badge variant="secondary" className="rounded-md">
-                    Twitter
-                  </Badge>
+                  <span className="underline text-black">Twitter</span>
                 </a>
               )}
               {memecoin.telegram && (
@@ -313,9 +339,7 @@ export default function MemecoinPage({ params }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Badge variant="secondary" className="rounded-md">
-                    Telegram
-                  </Badge>
+                  <span className="underline text-black">Telegram</span>
                 </a>
               )}
               {memecoin.website && (
@@ -324,36 +348,19 @@ export default function MemecoinPage({ params }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Badge variant="secondary" className="rounded-md">
-                    Website
-                  </Badge>
+                  <span className="underline text-black">Website</span>
                 </a>
               )}
             </div>
-            <div className="flex items-start justify-between mb-2">
-              <div className="flex-shrink-0">
-                <img
-                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                  alt={`${memecoin.name} logo`}
-                  className="h-36 w-36 object-cover rounded-md"
-                />
-              </div>
-              <div className="ml-4 flex-1">
-                <Label className="text-lg">Ticker: ${memecoin.ticker}</Label>
-                <br />
-                <Label className="text-lg">Name: {memecoin.name}</Label>
-              </div>
-            </div>
-            <Label className="text-sm text-zinc-400">
-              {memecoin.description}
-            </Label>
+
+            <Label className="text-black/80">{memecoin.description}</Label>
           </div>
         )}
       </div>
 
-      <div className="m-24 w-10/12">
+      <div className="my-24 w-10/12 mb-36">
         {memecoin && (
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex flex-col gap-4 mb-4">
             <div className="text-sm">
               <span className="">{memecoin.name}</span>
               <span className="">Ticker: ${memecoin.ticker}</span>
@@ -384,15 +391,6 @@ export default function MemecoinPage({ params }) {
             </div>
           </div>
         )}
-
-        <div id="chart-container" className="w-full h-[320px] mb-96"></div>
-
-        <div className="">
-          <Label className="text-zinc-400 text-xs">
-            Note: the price displayed on the right side is represented in
-            nanoTON (i.e. 1 billionth fraction of TON)
-          </Label>
-        </div>
       </div>
     </>
   );
