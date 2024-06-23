@@ -24,6 +24,7 @@ import Header from "@/components/header";
 import GameButton from "@/components/ui/GameButton";
 import LaunchButton from "@/components/ui/LaunchButton";
 
+
 interface LayoutProps {
   children: ReactNode;
 }
@@ -44,6 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="sm:hidden flex-1">{children}</div>
         <div className="fixed right-10 bottom-5 ">
           <LaunchButton />
+         
         </div>
       </main>
     </>

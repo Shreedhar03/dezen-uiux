@@ -123,14 +123,14 @@ export default function UserProfilePage({ params }) {
             
           </div>
           <div className="mt-36 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 -mb-[7rem]">
-          <div className="flex gap-[5rem]">
-              <span onClick={()=>setCommunityActive(false)} > <ButtonWC type={"work"} insideImg={work} width={50} /></span>
-             <span onClick={()=>setCommunityActive(true)}> <ButtonWC type={"Community"} insideImg={community} width={120}/> </span>
-            
-              </div>
-              <div></div>
-            
-            <Image src={community} alt=";t"></Image>
+            <div className="flex gap-[5rem]">
+                <span onClick={()=>setCommunityActive(false)} > <ButtonWC type={"work"} insideImg={work} width={50} /></span>
+              <span onClick={()=>setCommunityActive(true)}> <ButtonWC type={"Community"} insideImg={community} width={120}/> </span>
+              
+                </div>
+                <div></div>
+              
+              <Image src={community} alt=";t"></Image>
           </div>
 
           { !iscommunityActive ? <div>

@@ -19,6 +19,12 @@ import { ColorType, createChart, Time } from "lightweight-charts";
 import trade from "../../../public/TradeButton.svg";
 import buy from "../../../public/BuyButton.svg";
 import sell from "../../../public/SellButton.svg";
+import ButtonWC from "@/components/ButtonWC";
+import community from "@/public/pepe-council.gif"
+import work from "@/public/ponke-ponkesol.gif"
+import Image from "next/image";
+import Community from "@/components/Community";
+
 interface User {
   address: string;
   username: string;
@@ -63,6 +69,7 @@ export default function MemecoinPage({ params }) {
 
   const [aggregationData, setAggregationData] = useState<AggregationData[]>([]);
   const [marketcap, setMarketcap] = useState<number>(0);
+  const [iscommunityActive, setCommunityActive] = useState(false)
 
   useEffect(() => {
     if (!memecoin_address) return;
@@ -158,8 +165,18 @@ export default function MemecoinPage({ params }) {
           (i.e. 1 billionth fraction of TON)
         </Label>
       </div>
+      <div className="mt-12  grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-[2rem]">
+            <div className="flex gap-[5rem]">
+                <span onClick={()=>setCommunityActive(true)} > <ButtonWC type={"trade"} insideImg={work} width={50} /></span>
+              <span onClick={()=>setCommunityActive(false)}> <ButtonWC type={"Community"} insideImg={community} width={120}/> </span>
+              
+                </div>
+                <div></div>
+              
+              <Image src={work} width={200} alt=";t"></Image>
+          </div>
 
-      <div className="flex gap-4 mb-14">
+      {iscommunityActive && <div className="flex gap-4 mb-14">
         <button
           onClick={() => {
             setTradeType("buy");
@@ -200,9 +217,9 @@ export default function MemecoinPage({ params }) {
             SELL
           </span>
         </button>
-      </div>
+      </div>}
 
-      <div className="mt-[800px] sm:mt-0 grid grid-cols-1 lg:grid-cols-2 mr-12 lg:mr-24">
+      {iscommunityActive && <div className="mt-[800px] sm:mt-0 grid grid-cols-1 lg:grid-cols-2 mr-12 lg:mr-24">
         <section className="w-10/12">
           {tradeType === "buy" ? (
             <>
@@ -356,9 +373,9 @@ export default function MemecoinPage({ params }) {
             <Label className="text-black/80">{memecoin.description}</Label>
           </div>
         )}
-      </div>
+      </div>}
 
-      <div className="my-24 w-10/12 mb-36">
+      {iscommunityActive && <div className="my-24 w-10/12 mb-36">
         {memecoin && (
           <div className="flex flex-col gap-4 mb-4">
             <div className="text-sm">
@@ -391,7 +408,8 @@ export default function MemecoinPage({ params }) {
             </div>
           </div>
         )}
-      </div>
+      </div>}
+      {!iscommunityActive && <Community/>}
     </>
   );
 }
