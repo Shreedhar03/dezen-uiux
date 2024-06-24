@@ -26,9 +26,9 @@ import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { Boxes } from "@/components/ui/bg-boxes";
 import localFont from "next/font/local";
 import Image from "next/image";
-import penguinCoin from '@/public/crypto-coin.gif'
-import dogeCoin from '@/public/dogecoin-bitcoin.gif'
-import dogeLaugh from '@/public/kek-dog.gif'
+import penguinCoin from "../../../public/exploreMnky.jpeg";
+import dogeCoin from "@/public/dogecoin-bitcoin.gif";
+import dogeLaugh from "@/public/kek-dog.gif";
 
 const myFont = localFont({
   src: "../../../public/fonts/kanit.ttf",
@@ -113,49 +113,63 @@ export default function MemecoinForm() {
   const onSubmit = async (data: MemecoinFormValues) => {};
 
   return (
-    <>
-      <div className="h-auto relative w-10/12 overflow-hidden mt-[700px] pb-24 mb-24 sm:mt-0 py-8 bg-secondary flex flex-col items-center justify-center rounded-[100px]">
-        <div className="absolute -bottom-6 right-0 z-30 w-80 h-80">
+    <section className="flex items-center justify-center">
+      <div
+        className="h-auto relative w-[95%] lg:w-10/12 overflow-hidden mt-[1100px] sm:mt-0 pb-24 mb-24 py-4 flex flex-col items-center justify-center rounded-[100px]"
+        style={{
+          backgroundImage: 'url("splashBackground.webp")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* <div className="absolute -bottom-6 right-0 z-30 w-80 h-80">
           <Image
             src={dogeCoin}
             alt="launch"
             // mirroring the image
             style={{ transform: "scaleX(-1)" }}
           />
-        </div>
-        <div className="hidden sm:block absolute top-8 right-12 z-30 w-60 h-60">
+        </div> */}
+        <div className="hidden sm:block absolute top-12 right-8 z-30 w-52 h-52">
           <Image
-            src={penguinCoin}
+            src={dogeCoin}
             alt="launch"
+            className="rounded-full"
             // mirroring the image
             style={{ transform: "scaleX(-1)" }}
           />
         </div>
 
-        <div className="absolute inset-0 w-full h-full bg-secondary z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none"></div>
-        <Boxes />
-        <div className="mx-48 z-20 relative w-9/12">
+        {/* <div className="absolute inset-0 w-full h-full bg-[#212123] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none"></div> */}
+        {/* <Boxes /> */}
+        <div className="xl:mx-48 z-20 relative w-9/12">
           <div className="space-y-6 mt-10 mb-10 w-11/12">
             <div className="flex flex-row">
               <h2
                 className={`text-4xl text-cpurpledark`}
                 style={{ textShadow: "4px 4px 0 #000" }}
               >
-               <Image src={dogeLaugh} alt="laugh"></Image> Launch Memecoin
+                <Image
+                  src={penguinCoin}
+                  alt="laugh"
+                  className="w-40 h-40 mb-8 rounded-full"
+                  style={{ transform: "scaleX(-1)" }}
+                ></Image>{" "}
+                Launch Memecoin
               </h2>
             </div>
 
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className={`mx-6 w-full ${myFont.className}`}
+                className={`mx-6 w-full ${myFont.className} text-white`}
               >
                 <FormField
                   control={form.control}
                   name="logo"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xl">Logo</FormLabel>
+                      <FormLabel className="text-white text-xl">Logo</FormLabel>
                       <FormControl>
                         <div>
                           <div className="flex items-center space-x-2">
@@ -183,7 +197,7 @@ export default function MemecoinForm() {
                           </div>
                         </div>
                       </FormControl>
-                      <FormDescription className="text-lg">
+                      <FormDescription className="text-slate-300 text-lg">
                         The logo for your memecoin.
                       </FormDescription>
                       <FormMessage />
@@ -196,16 +210,18 @@ export default function MemecoinForm() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xl">Name</FormLabel>
+                        <FormLabel className="text-white text-xl">
+                          Name
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Memecoin Name"
-                            className="bg-secondary border-2 border-cpurplelight"
+                            className="bg-[#212123] border-2 border-cpurplelight"
                             autoComplete="off"
                             {...field}
                           />
                         </FormControl>
-                        <FormDescription className="text-lg">
+                        <FormDescription className="text-slate-300 text-lg">
                           This is the name of your memecoin.
                         </FormDescription>
                         <FormMessage />
@@ -217,16 +233,18 @@ export default function MemecoinForm() {
                     name="ticker"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xl">Ticker</FormLabel>
+                        <FormLabel className="text-white text-xl">
+                          Ticker
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Ticker Symbol"
                             autoComplete="off"
-                            className="bg-secondary border-2 border-cpurplelight"
+                            className="bg-[#212123] border-2 border-cpurplelight"
                             {...field}
                           />
                         </FormControl>
-                        <FormDescription className="text-lg">
+                        <FormDescription className="text-slate-300 text-lg">
                           The ticker symbol for your memecoin.
                         </FormDescription>
                         <FormMessage />
@@ -238,16 +256,18 @@ export default function MemecoinForm() {
                     name="description"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xl">Description</FormLabel>
+                        <FormLabel className="text-white text-xl">
+                          Description
+                        </FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="Description of the memecoin"
                             autoComplete="off"
-                            className="bg-secondary border-2 border-cpurplelight"
+                            className="bg-[#212123] border-2 border-cpurplelight"
                             {...field}
                           />
                         </FormControl>
-                        <FormDescription className="text-lg">
+                        <FormDescription className="text-slate-300 text-lg">
                           Describe what makes your memecoin unique.
                         </FormDescription>
                         <FormMessage />
@@ -263,13 +283,15 @@ export default function MemecoinForm() {
                     name="twitter"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xl">Twitter Link</FormLabel>
+                        <FormLabel className="text-white text-xl">
+                          Twitter Link
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="(optional)"
                             autoComplete="off"
                             {...field}
-                            className="bg-secondary border-2 border-cpurplelight"
+                            className="bg-[#212123] border-2 border-cpurplelight"
                           />
                         </FormControl>
                         <FormMessage />
@@ -281,13 +303,15 @@ export default function MemecoinForm() {
                     name="telegram"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xl">Telegram Link</FormLabel>
+                        <FormLabel className="text-white text-xl">
+                          Telegram Link
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="(optional)"
                             autoComplete="off"
                             {...field}
-                            className="bg-secondary border-2 border-cpurplelight"
+                            className="bg-[#212123] border-2 border-cpurplelight"
                           />
                         </FormControl>
                         <FormMessage />
@@ -299,13 +323,15 @@ export default function MemecoinForm() {
                     name="website"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xl">Website</FormLabel>
+                        <FormLabel className="text-white text-xl">
+                          Website
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="(optional)"
                             autoComplete="off"
                             {...field}
-                            className="bg-secondary border-2 border-cpurplelight"
+                            className="bg-[#212123] border-2 border-cpurplelight"
                           />
                         </FormControl>
                         <FormMessage />
@@ -316,16 +342,31 @@ export default function MemecoinForm() {
 
                 <Button
                   type="submit"
-                  className="bg-cpurpledark p-6 text-lg hover:bg-cpurpledark/85 -skew-x-3"
+                  className="bg-cpurpledark p-6 text-lg hover:bg-cpurpledark/85 -skew-x-3 flexx items-center gap-2"
                 >
                   Launch Memecoin
+                  <Image
+                    src="rocket.svg"
+                    alt="rocket"
+                    className="w-8 h-8 -skew-x-6"
+                    width={14}
+                    height={14}
+                  />
                 </Button>
+
+                <Image
+                  src={"darth.svg"}
+                  alt="darth"
+                  className="w-40 h-40 absolute bottom-0 right-0 z-30 hidden lg:block"
+                  width={40}
+                  height={40}
+                ></Image>
               </form>
             </Form>
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 }
 
