@@ -23,6 +23,7 @@ import Navbar from "@/components/Navbar";
 import Header from "@/components/header";
 import GameButton from "@/components/ui/GameButton";
 import LaunchButton from "@/components/ui/LaunchButton";
+import PlanetNavbar from "@/components/PlanetNavbar";
 
 
 interface LayoutProps {
@@ -38,7 +39,9 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       <Header />
       <main className="max-w-[95rem] mx-auto relative flex h-[80vh] items-center p-3 sm:p-12">
+        
         <Navbar />
+        
         <div className="hidden sm:block absolute top-0 right-0 w-10/12 h-full">
           {children}
         </div>
@@ -46,6 +49,9 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="fixed right-10 bottom-5 ">
           <LaunchButton />
          
+        </div>
+        <div className="fixed left-10 bottom-[5rem] block sm:hidden">
+          <PlanetNavbar/>
         </div>
       </main>
     </>

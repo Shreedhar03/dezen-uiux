@@ -1,99 +1,173 @@
 "use client"
-const Community = () => {
-    return (
-        <div className="mt-36 flex flex-col  justify-center w-screen min-h-screen text-gray-800 p-10">
-            {/* Component Start */}
-            <div className="flex flex-col flex-grow w-full max-w-xl  shadow-xl rounded-lg overflow-hidden">
-                <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs">
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                        <div>
-                            <div className="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                    </div>
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                        <div>
-                            <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                    </div>
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                        <div>
-                            <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                    </div>
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs">
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                        <div>
-                            <div className="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                    </div>
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                        <div>
-                            <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                    </div>
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                        <div>
-                            <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                    </div>
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                        <div>
-                            <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                    </div>
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs">
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                        <div>
-                            <div className="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                    </div>
-                    <div className="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-                        <div>
-                            <div className="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                                <p className="text-sm">Lorem ipsum dolor sit.</p>
-                            </div>
-                            <span className="text-xs text-gray-500 leading-none">2 min ago</span>
-                        </div>
-                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-                    </div>
-                </div>
-                
-                <div className="bg-gray-300 p-4">
-                    <input className="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type your message…" />
-                </div>
-            </div>
-        </div>
-    );
+import React, { useEffect, useState } from 'react';
+import { gsap } from 'gsap';
+
+interface Post {
+  id: number;
+  user: string;
+  content: string;
+  time: string;
+  upvotes: number;
+  downvotes: number;
+  comments: string[];
+  image?: string;
 }
+
+const Community: React.FC = () => {
+  useEffect(() => {
+    gsap.fromTo(
+      '.post',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.2 }
+    );
+  }, []);
+
+  const [posts, setPosts] = useState<Post[]>([
+    {
+      id: 1,
+      user: 'John Doe',
+      content: 'This is my first tweet!',
+      time: '2m',
+      upvotes: 10,
+      downvotes: 2,
+      comments: ['Great post!', 'Welcome to Twitter!']
+    },
+    {
+      id: 2,
+      user: 'Jane Smith',
+      content: 'Hello world!',
+      time: '10m',
+      upvotes: 20,
+      downvotes: 5,
+      comments: ['Hello Jane!', 'Nice to see you here.']
+    },
+    {
+      id: 3,
+      user: 'Alice Johnson',
+      content: 'Loving this new Twitter UI!',
+      time: '30m',
+      upvotes: 15,
+      downvotes: 3,
+      comments: ['Me too!', 'It’s really cool!']
+    }
+  ]);
+
+  const [newPostContent, setNewPostContent] = useState('');
+  const [newPostImage, setNewPostImage] = useState<File | null>(null);
+
+  const handleUpvote = (id: number) => {
+    setPosts(posts.map(post => post.id === id ? { ...post, upvotes: post.upvotes + 1 } : post));
+  };
+
+  const handleDownvote = (id: number) => {
+    setPosts(posts.map(post => post.id === id ? { ...post, downvotes: post.downvotes + 1 } : post));
+  };
+
+  const addComment = (id: number, comment: string) => {
+    setPosts(posts.map(post => post.id === id ? { ...post, comments: [...post.comments, comment] } : post));
+  };
+
+  const handleNewPost = () => {
+    if (newPostContent.trim() === '') return;
+
+    const newPost: Post = {
+      id: posts.length + 1,
+      user: 'New User', // This should be replaced with the actual user's name
+      content: newPostContent,
+      time: 'just now',
+      upvotes: 0,
+      downvotes: 0,
+      comments: [],
+      image: newPostImage ? URL.createObjectURL(newPostImage) : undefined
+    };
+
+    setPosts([newPost, ...posts]);
+    setNewPostContent('');
+    setNewPostImage(null);
+  };
+
+  return (
+    <div className="-mt-10 flex flex-col items-start w-screen min-h-screen text-gray-800 p-10 ">
+      {/* Header Start */}
+      <div className="flex flex-col w-full max-w-xl shadow-xl rounded-lg overflow-hidden">
+        <div className="bg-cpurpledark p-4">
+          <input
+            className="flex items-center h-12 w-full rounded-full px-4 text-sm border border-gray-300"
+            type="text"
+            placeholder="What's happening?"
+            value={newPostContent}
+            onChange={(e) => setNewPostContent(e.target.value)}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            className="mt-2 w-full text-sm text-gray-200"
+            onChange={(e) => setNewPostImage(e.target.files ? e.target.files[0] : null)}
+          />
+          <button
+            className="mt-2 w-full bg-purple-600 text-gray-200 rounded-full py-2"
+            onClick={handleNewPost}
+          >
+            Post
+          </button>
+        </div>
+      </div>
+      {/* Header End */}
+      
+      {/* Posts Start */}
+      <div className="flex flex-col w-full max-w-xl mt-6 space-y-4">
+        {posts.map((post) => (
+          <div key={post.id} className="post bg-[#232121] shadow-md rounded-lg p-4">
+            <div className="flex items-center space-x-3">
+              <div className="h-10 w-10 bg-gray-300 rounded-full" />
+              <div>
+                <div className="font-bold text-white ">{post.user}</div>
+                <div className="text-xs text-white">{post.time}</div>
+              </div>
+            </div>
+            <div className="mt-3 text-sm text-white">
+              {post.content}
+            </div>
+            {post.image && (
+              <div className="mt-3">
+                <img src={post.image} alt="Post" className="w-full rounded-lg" />
+              </div>
+            )}
+            <div className="mt-3 flex space-x-4">
+              <button onClick={() => handleUpvote(post.id)} className="flex items-center space-x-1 text-white hover:text-green-500">
+                <span>▲</span>
+                <span>{post.upvotes}</span>
+              </button>
+              <button onClick={() => handleDownvote(post.id)} className="flex items-center space-x-1 text-white hover:text-red-500">
+                <span>▼</span>
+                <span>{post.downvotes}</span>
+              </button>
+            </div>
+            <div className="mt-4">
+              <div className="font-semibold text-white">Comments:</div>
+              {post.comments.map((comment, index) => (
+                <div key={index} className="mt-2 text-sm text-white">
+                  {comment}
+                </div>
+              ))}
+              <input
+                className="mt-2 w-full rounded-full px-4 py-2 text-sm border border-gray-300"
+                type="text"
+                placeholder="Add a comment..."
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim() !== '') {
+                    addComment(post.id, (e.target as HTMLInputElement).value.trim());
+                    (e.target as HTMLInputElement).value = '';
+                  }
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* Posts End */}
+    </div>
+  );
+};
 
 export default Community;
