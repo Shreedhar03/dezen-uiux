@@ -86,20 +86,18 @@ export default function Home() {
   }, []);
 
   return (
-    
-      <div className="mt-[1500px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch m-3 w-full">
-        {loading ? (
-          <div className="text-center col-span-3 h-[75vh] flex items-center justify-center">
-            <p className={`${theme.className} text-2xl`} >
-              <LoadingSkeleton/>
-            </p>
-          </div>
-        ) : (
-          memecoins.map((memecoin) => (
-            <MemeCoinCard key={memecoin.memecoin_address} memecoin={memecoin} />
-          ))
-        )}
-      </div>
-    
+    <div className="mt-[1200px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-5 gap-x-6 items-stretch my-3 mx-3 md:mx-0 w-[95%]">
+      {loading ? (
+        <div className="text-center col-span-3 h-[75vh] flex items-center justify-center">
+          <p className={`${theme.className} text-2xl`}>
+            <LoadingSkeleton />
+          </p>
+        </div>
+      ) : (
+        memecoins.map((memecoin) => (
+          <MemeCoinCard key={memecoin.memecoin_address} memecoin={memecoin} />
+        ))
+      )}
+    </div>
   );
 }
