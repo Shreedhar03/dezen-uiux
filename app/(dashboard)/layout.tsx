@@ -40,7 +40,7 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
         <div className="sm:hidden flex-1">{children}</div>
 
-        <div className="fixed right-10 bottom-5z-50">
+        <div className="fixed right-10 bottom-5 z-50">
           <LaunchButton />
         </div>
 
