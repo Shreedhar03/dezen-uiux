@@ -26,9 +26,10 @@ import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { Boxes } from "@/components/ui/bg-boxes";
 import localFont from "next/font/local";
 import Image from "next/image";
-import penguinCoin from "../../../public/exploreMnky.jpeg";
+import penguinCoin from "../../../public/pepe-zip.gif";
 import dogeCoin from "@/public/dogecoin-bitcoin.gif";
 import dogeLaugh from "@/public/kek-dog.gif";
+import oig from '@/public/OIG3.jpeg'
 
 const myFont = localFont({
   src: "../../../public/fonts/kanit.ttf",
@@ -117,31 +118,20 @@ export default function MemecoinForm() {
       <div
         className="h-auto relative w-[95%] lg:w-10/12 overflow-hidden mt-[1100px] sm:mt-0 pb-24 mb-24 py-4 flex flex-col items-center justify-center rounded-[100px]"
         style={{
-          backgroundImage: 'url("splashBackground.webp")',
+          backgroundImage: 'url("OIG2.jpeg")',
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        {/* <div className="absolute -bottom-6 right-0 z-30 w-80 h-80">
-          <Image
-            src={dogeCoin}
-            alt="launch"
-            // mirroring the image
-            style={{ transform: "scaleX(-1)" }}
-          />
-        </div> */}
         <div className="hidden sm:block absolute top-12 right-8 z-30 w-52 h-52">
           <Image
             src={dogeCoin}
             alt="launch"
             className="rounded-full"
-            // mirroring the image
             style={{ transform: "scaleX(-1)" }}
           />
         </div>
 
-        {/* <div className="absolute inset-0 w-full h-full bg-[#212123] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none"></div> */}
-        {/* <Boxes /> */}
         <div className="xl:mx-48 z-20 relative w-9/12">
           <div className="space-y-6 mt-10 mb-10 w-11/12">
             <div className="flex flex-row">
@@ -150,7 +140,7 @@ export default function MemecoinForm() {
                 style={{ textShadow: "4px 4px 0 #000" }}
               >
                 <Image
-                  src={penguinCoin}
+                  src={dogeLaugh}
                   alt="laugh"
                   className="w-40 h-40 mb-8 rounded-full"
                   style={{ transform: "scaleX(-1)" }}
@@ -158,221 +148,216 @@ export default function MemecoinForm() {
                 Launch Memecoin
               </h2>
             </div>
-
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className={`mx-6 w-full ${myFont.className} text-white`}
-              >
-                <FormField
-                  control={form.control}
-                  name="logo"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white text-xl">Logo</FormLabel>
-                      <FormControl>
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <Input
-                              type="file"
-                              accept="image/*"
-                              onChange={onFileChange}
-                              ref={fileInputRef}
-                              className="hidden"
-                            />
-                            {imagePreview && (
-                              <Avatar className="w-20 h-20">
-                                <AvatarImage src={imagePreview} />
-                                <AvatarFallback>TED</AvatarFallback>
-                              </Avatar>
-                            )}
-                            <Button
-                              onClick={handleClickIcon}
-                              type="button"
-                              variant="ghost"
-                              className="rounded-full"
-                            >
-                              <PaperClipIcon width={24} />
-                            </Button>
-                          </div>
-                        </div>
-                      </FormControl>
-                      <FormDescription className="text-slate-300 text-lg">
-                        The logo for your memecoin.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <section className="grid grid-cols-1 lg:grid-cols-2 my-6 gap-8">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white text-xl">
-                          Name
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Memecoin Name"
-                            className="bg-[#212123] border-2 border-cpurplelight"
-                            autoComplete="off"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription className="text-slate-300 text-lg">
-                          This is the name of your memecoin.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="ticker"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white text-xl">
-                          Ticker
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Ticker Symbol"
-                            autoComplete="off"
-                            className="bg-[#212123] border-2 border-cpurplelight"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription className="text-slate-300 text-lg">
-                          The ticker symbol for your memecoin.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white text-xl">
-                          Description
-                        </FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Description of the memecoin"
-                            autoComplete="off"
-                            className="bg-[#212123] border-2 border-cpurplelight"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription className="text-slate-300 text-lg">
-                          Describe what makes your memecoin unique.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </section>
-
-                <Separator />
-                <section className="grid grid-cols-1 lg:grid-cols-2 my-6 gap-8">
-                  <FormField
-                    control={form.control}
-                    name="twitter"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white text-xl">
-                          Twitter Link
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="(optional)"
-                            autoComplete="off"
-                            {...field}
-                            className="bg-[#212123] border-2 border-cpurplelight"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="telegram"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white text-xl">
-                          Telegram Link
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="(optional)"
-                            autoComplete="off"
-                            {...field}
-                            className="bg-[#212123] border-2 border-cpurplelight"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="website"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white text-xl">
-                          Website
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="(optional)"
-                            autoComplete="off"
-                            {...field}
-                            className="bg-[#212123] border-2 border-cpurplelight"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </section>
-
-                <Button
-                  type="submit"
-                  className="bg-cpurpledark p-6 text-lg hover:bg-cpurpledark/85 -skew-x-3 flexx items-center gap-2"
+            
+            <div className="backdrop-blur-md rounded-[20px] p-6 bg-black/50">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className={`mx-6 w-full ${myFont.className} text-white`}
                 >
-                  Launch Memecoin
-                  <Image
-                    src="rocket.svg"
-                    alt="rocket"
-                    className="w-8 h-8 -skew-x-6"
-                    width={14}
-                    height={14}
+                  <FormField
+                    control={form.control}
+                    name="logo"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white text-xl">Logo</FormLabel>
+                        <FormControl>
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <Input
+                                type="file"
+                                accept="image/*"
+                                onChange={onFileChange}
+                                ref={fileInputRef}
+                                className="hidden"
+                              />
+                              {imagePreview && (
+                                <Avatar className="w-20 h-20">
+                                  <AvatarImage src={imagePreview} />
+                                  <AvatarFallback>TED</AvatarFallback>
+                                </Avatar>
+                              )}
+                              <Button
+                                onClick={handleClickIcon}
+                                type="button"
+                                variant="ghost"
+                                className="rounded-full"
+                              >
+                                <PaperClipIcon width={24} />
+                              </Button>
+                            </div>
+                          </div>
+                        </FormControl>
+                        <FormDescription className="text-slate-300 text-lg">
+                          The logo for your memecoin.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                </Button>
+                  <section className="grid grid-cols-1 lg:grid-cols-2 my-6 gap-8">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white text-xl">
+                            Name
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Memecoin Name"
+                              className="bg-[#212123] border-2 border-cpurplelight"
+                              autoComplete="off"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription className="text-slate-300 text-lg">
+                            This is the name of your memecoin.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="ticker"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white text-xl">
+                            Ticker
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Ticker Symbol"
+                              autoComplete="off"
+                              className="bg-[#212123] border-2 border-cpurplelight"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription className="text-slate-300 text-lg">
+                            The ticker symbol for your memecoin.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="description"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white text-xl">
+                            Description
+                          </FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Description of the memecoin"
+                              autoComplete="off"
+                              className="bg-[#212123] border-2 border-cpurplelight"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription className="text-slate-300 text-lg">
+                            Describe what makes your memecoin unique.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </section>
 
-                <Image
-                  src={"darth.svg"}
-                  alt="darth"
-                  className="w-40 h-40 absolute bottom-0 right-0 z-30 hidden lg:block"
-                  width={40}
-                  height={40}
-                ></Image>
-              </form>
-            </Form>
+                  <Separator />
+                  <section className="grid grid-cols-1 lg:grid-cols-2 my-6 gap-8">
+                    <FormField
+                      control={form.control}
+                      name="twitter"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white text-xl">
+                            Twitter Link
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="(optional)"
+                              autoComplete="off"
+                              {...field}
+                              className="bg-[#212123] border-2 border-cpurplelight"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="telegram"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white text-xl">
+                            Telegram Link
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="(optional)"
+                              autoComplete="off"
+                              {...field}
+                              className="bg-[#212123] border-2 border-cpurplelight"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="website"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white text-xl">
+                            Website
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="(optional)"
+                              autoComplete="off"
+                              {...field}
+                              className="bg-[#212123] border-2 border-cpurplelight"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </section>
+
+                  <Button
+                    type="submit"
+                    className="bg-cpurpledark p-6 text-lg hover:bg-cpurpledark/85 -skew-x-3 flex items-center gap-2"
+                  >
+                    Launch Memecoin
+                    <Image
+                      src="rocket.svg"
+                      alt="rocket"
+                      className="w-8 h-8 -skew-x-6"
+                      width={14}
+                      height={14}
+                    />
+                  </Button>
+
+                  <Image
+                    src={penguinCoin}
+                    alt="darth"
+                    className="w-40 h-40 absolute bottom-0 right-0 z-30 hidden lg:block"
+                    width={40}
+                    height={40}
+                  ></Image>
+                </form>
+              </Form>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-/*
-
-      
-
-
-*/
