@@ -46,28 +46,28 @@ export default function Home() {
   const router = useRouter();
   const pathname = usePathname();
   const glitch: GlitchHandle = useGlitch({
-    "playMode": "always",
-    "createContainers": true,
-    "hideOverflow": false,
-    "timing": {
-      "duration": 2000,
-      "easing": "ease-in-out"
+    playMode: "always",
+    createContainers: true,
+    hideOverflow: false,
+    timing: {
+      duration: 2000,
+      easing: "ease-in-out",
     },
-    "glitchTimeSpan": {
-      "start": 0.06,
-      "end": 0.7
+    glitchTimeSpan: {
+      start: 0.06,
+      end: 0.7,
     },
-    "shake": {
-      "velocity": 15,
-      "amplitudeX": 0.2,
-      "amplitudeY": 0.2
+    shake: {
+      velocity: 15,
+      amplitudeX: 0.2,
+      amplitudeY: 0.2,
     },
-    "slice": {
-      "count": 6,
-      "velocity": 15,
-      "minHeight": 0.02,
-      "maxHeight": 0.15,
-      "hueRotate": true
+    slice: {
+      count: 6,
+      velocity: 15,
+      minHeight: 0.02,
+      maxHeight: 0.15,
+      hueRotate: true,
     },
   });
 
@@ -90,7 +90,7 @@ export default function Home() {
 
   return (
     <AnimateOnRouteChange>
-      <div className="loader-container w-full h-screen fixed inset-0 flex justify-center items-center flex-col box-border relative">
+      <div className="loader-container w-full h-screen inset-0 flex justify-center items-center flex-col box-border fixed">
         <style jsx>{`
           .loader-container::before {
             content: "";
@@ -114,12 +114,7 @@ export default function Home() {
           style={{ minHeight: "100vh", minWidth: "177.77vh" }}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center">
-          <Image
-            width={500}
-            src={dezenP}
-            alt="logo"
-            ref={glitch.ref}
-          />
+          <Image width={500} src={dezenP} alt="logo" ref={glitch.ref} />
           <TransitionLink href="/explore" label="explore">
             <GameButton />
           </TransitionLink>
