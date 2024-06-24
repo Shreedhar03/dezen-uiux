@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from 'react';
 import { gsap } from 'gsap';
-import { Plus, Twitter, Facebook, Wikipedia } from 'lucide-react';
+import { Plus, Twitter, Facebook } from 'lucide-react';
 
 const MenuToggle: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -57,14 +57,14 @@ const MenuToggle: React.FC = () => {
         >
           <Facebook className="text-white" size={24} />
         </div>
-        <div
+        {/* <div
           className="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center mb-2 opacity-0"
           ref={(el) => {
             if (el) menuItemsRef.current[2] = el;
           }}
         >
           <Wikipedia className="text-white" size={24} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
