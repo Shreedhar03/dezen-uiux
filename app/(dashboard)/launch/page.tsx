@@ -25,6 +25,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { PaperClipIcon } from "@heroicons/react/24/outline";
 import { Boxes } from "@/components/ui/bg-boxes";
 import localFont from "next/font/local";
+import Image from "next/image";
+import penguinCoin from '@/public/crypto-coin.gif'
+import dogeCoin from '@/public/dogecoin-bitcoin.gif'
+import dogeLaugh from '@/public/kek-dog.gif'
 
 const myFont = localFont({
   src: "../../../public/fonts/kanit.ttf",
@@ -112,16 +116,16 @@ export default function MemecoinForm() {
     <>
       <div className="h-auto relative w-10/12 overflow-hidden mt-[700px] pb-24 mb-24 sm:mt-0 py-8 bg-secondary flex flex-col items-center justify-center rounded-[100px]">
         <div className="absolute -bottom-6 right-0 z-30 w-80 h-80">
-          <img
-            src={launch.src}
+          <Image
+            src={dogeCoin}
             alt="launch"
             // mirroring the image
             style={{ transform: "scaleX(-1)" }}
           />
         </div>
         <div className="hidden sm:block absolute top-8 right-12 z-30 w-60 h-60">
-          <img
-            src={diano.src}
+          <Image
+            src={penguinCoin}
             alt="launch"
             // mirroring the image
             style={{ transform: "scaleX(-1)" }}
@@ -132,12 +136,12 @@ export default function MemecoinForm() {
         <Boxes />
         <div className="mx-48 z-20 relative w-9/12">
           <div className="space-y-6 mt-10 mb-10 w-11/12">
-            <div>
+            <div className="flex flex-row">
               <h2
                 className={`text-4xl text-cpurpledark`}
                 style={{ textShadow: "4px 4px 0 #000" }}
               >
-                Launch Memecoin
+               <Image src={dogeLaugh} alt="laugh"></Image> Launch Memecoin
               </h2>
             </div>
 
