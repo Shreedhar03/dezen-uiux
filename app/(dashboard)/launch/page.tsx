@@ -29,7 +29,7 @@ import Image from "next/image";
 import penguinCoin from "../../../public/pepe-zip.gif";
 import dogeCoin from "@/public/dogecoin-bitcoin.gif";
 import dogeLaugh from "@/public/kek-dog.gif";
-import oig from '@/public/OIG3.jpeg'
+import oig from "@/public/OIG3.jpeg";
 
 const myFont = localFont({
   src: "../../../public/fonts/kanit.ttf",
@@ -132,7 +132,7 @@ export default function MemecoinForm() {
           />
         </div>
 
-        <div className="xl:mx-48 z-20 relative w-9/12">
+        <div className="xl:mx-48 z-20 relative w-10/12">
           <div className="space-y-6 mt-10 mb-10 w-11/12">
             <div className="flex flex-row">
               <h2
@@ -148,19 +148,21 @@ export default function MemecoinForm() {
                 Launch Memecoin
               </h2>
             </div>
-            
-            <div className="backdrop-blur-md rounded-[20px] p-6 bg-black/50">
+
+            <div className="backdrop-blur-md rounded-[20px] bg-black/50 w-full">
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className={`mx-6 w-full ${myFont.className} text-white`}
+                  className={`mx-6 w-10/12 ${myFont.className} text-white`}
                 >
                   <FormField
                     control={form.control}
                     name="logo"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-white text-xl">Logo</FormLabel>
+                        <FormLabel className="text-white text-xl">
+                          Logo
+                        </FormLabel>
                         <FormControl>
                           <div>
                             <div className="flex items-center space-x-2">
@@ -242,30 +244,30 @@ export default function MemecoinForm() {
                         </FormItem>
                       )}
                     />
-                    <FormField
-                      control={form.control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white text-xl">
-                            Description
-                          </FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Description of the memecoin"
-                              autoComplete="off"
-                              className="bg-[#212123] border-2 border-cpurplelight"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription className="text-slate-300 text-lg">
-                            Describe what makes your memecoin unique.
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                   </section>
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white text-xl">
+                          Description
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Description of the memecoin"
+                            autoComplete="off"
+                            className="bg-[#212123] border-2 border-cpurplelight"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription className="text-slate-300 text-lg">
+                          Describe what makes your memecoin unique.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
                   <Separator />
                   <section className="grid grid-cols-1 lg:grid-cols-2 my-6 gap-8">
