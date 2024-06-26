@@ -3,60 +3,57 @@ import { usePathname } from "next/navigation";
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
-import Image, { StaticImageData } from "next/image";
+import Image, {StaticImageData} from "next/image";
 import disc from "@/public/dezenDisc.jpg";
 import tiredmnky from "@/public/tiredmnky.png";
 import exploreMnky from "@/public/exploreMnky.jpeg";
 
 const CurrentPage = ({ hovered, setHovered }) => {
   const pathname = usePathname();
-  let cleanedPathname = pathname.startsWith("/") ? pathname.slice(1) : pathname;
-  let segments = cleanedPathname.split("/");
-  let result = segments[0];
+  const cleanedPathname = pathname.startsWith("/") ? pathname.slice(1) : pathname;
+  const segments = cleanedPathname.split("/");
+  const result = segments[0];
   console.log("cleanedPathname", cleanedPathname);
-  const routes: string[] = ["explore", "profile"];
+  const routes = ["explore", "profile"];
 
-  let otherRoute: string | null = null;
-
-  if (routes.includes(result)) {
-    otherRoute = routes.find((route) => route !== result) || null;
-  }
-
-  if (!routes.includes(result)) {
-    result = "explore";
-    otherRoute = "profile";
-  }
-
-  const optionref = useRef(null);
-  const rotateref = useRef(null);
+  const optionRef = useRef(null);
+  const rotateRef = useRef(null);
+  const discRef1 = useRef(null);
+  const discRef2 = useRef(null);
+  const discRef3 = useRef(null);
+  const discRef4 = useRef(null);
+  const discRef5 = useRef(null);
+  const discRef6 = useRef(null);
   const [mouseDown, setMouseDown] = React.useState(0);
 
   useEffect(() => {
-    if (mouseDown == 1) {
-      gsap.to(rotateref.current, {
+    if (mouseDown === 1) {
+      gsap.to(rotateRef.current, {
         rotate: 45,
         duration: 1,
         ease: "elastic.out(1, 0.3)",
+        transformOrigin: "left center",
       });
     } else {
-      gsap.to(rotateref.current, {
+      gsap.to(rotateRef.current, {
         rotate: 0,
         duration: 1,
         ease: "elastic.out(1, 0.3)",
+        transformOrigin: "left center",
       });
     }
   }, [mouseDown]);
 
   useEffect(() => {
     if (hovered) {
-      gsap.to(optionref.current, {
+      gsap.to(optionRef.current, {
         width: "38%",
         height: "74%",
         duration: 1,
         ease: "elastic.out(1, 0.3)",
       });
     } else {
-      gsap.to(optionref.current, {
+      gsap.to(optionRef.current, {
         width: "18%",
         height: "34%",
         duration: 1,
@@ -65,25 +62,78 @@ const CurrentPage = ({ hovered, setHovered }) => {
     }
   }, [hovered]);
 
+  useEffect(() => {
+    const rotationDuration = 15;
+    const equalAngle = 360 / 6;
+
+    gsap.set(discRef1.current, { rotate: 0 });
+    gsap.set(discRef2.current, { rotate: equalAngle });
+    gsap.set(discRef3.current, { rotate: 2 * equalAngle });
+    gsap.set(discRef4.current, { rotate: 3 * equalAngle });
+    gsap.set(discRef5.current, { rotate: 4 * equalAngle });
+    gsap.set(discRef6.current, { rotate: 5 * equalAngle });
+
+    gsap.to([discRef1.current, discRef2.current, discRef3.current, discRef4.current, discRef5.current, discRef6.current], {
+      rotate: "+=720",
+      duration: rotationDuration,
+      ease: "none",
+      repeat: -1,
+      transformOrigin: "left center",
+    });
+  }, []);
+
   return (
     <div
       className="fixed hidden lg:block"
       onMouseEnter={() => setHovered(true)}
-      ref={optionref}
+      ref={optionRef}
       onMouseLeave={() => setHovered(false)}
     >
       <Link href="/explore">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform -translate-x-3 border-4 border-black origin-left flex items-center justify-center">
-          <p className="text-3xl font-semibold">{result}</p>
+        <div
+          className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform translate-x-3 border-4  border-black origin-left flex items-center justify-center"
+          ref={discRef1}
+        >
+          <p className="text-3xl font-semibold">explore</p>
         </div>
       </Link>
       <Link href="/my-profile">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform -translate-x-10 translate-y-10 border-4 rotate-[35deg] origin-left border-black flex items-center justify-center">
-          <p className="text-3xl font-semibold">{otherRoute}</p>
+        <div
+          className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform translate-x-3 border-4  border-black flex items-center justify-center"
+          ref={discRef2}
+        >
+          <p className="text-3xl font-semibold">my-profile</p>
         </div>
       </Link>
       <Link href="/launch">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform -translate-x-10 -translate-y-10 border-4 rotate-[-35deg] origin-left border-black flex items-center justify-center">
+        <div
+          className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform translate-x-3 border-4 border-black flex items-center justify-center"
+          ref={discRef3}
+        >
+          <p className="text-3xl font-semibold">launch</p>
+        </div>
+      </Link>
+      <Link href="/explore">
+        <div
+          className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform translate-x-3 border-4  border-black origin-left flex items-center justify-center"
+          ref={discRef4}
+        >
+          <p className="text-3xl font-semibold">explore</p>
+        </div>
+      </Link>
+      <Link href="/my-profile">
+        <div
+          className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform translate-x-3 border-4  border-black flex items-center justify-center"
+          ref={discRef5}
+        >
+          <p className="text-3xl font-semibold">my-profile</p>
+        </div>
+      </Link>
+      <Link href="/launch">
+        <div
+          className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform translate-x-3 border-4 border-black flex items-center justify-center"
+          ref={discRef6}
+        >
           <p className="text-3xl font-semibold">launch</p>
         </div>
       </Link>
