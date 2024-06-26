@@ -20,8 +20,8 @@ import trade from "../../../public/TradeButton.svg";
 import buy from "../../../public/BuyButton.svg";
 import sell from "../../../public/SellButton.svg";
 import ButtonWC from "@/components/ButtonWC";
-import community from "@/public/pepe-council.gif"
-import work from "@/public/ponke-ponkesol.gif"
+import community from "@/public/pepe-council.gif";
+import work from "@/public/ponke-ponkesol.gif";
 import Image from "next/image";
 import Community from "@/components/Community";
 
@@ -69,7 +69,7 @@ export default function MemecoinPage({ params }) {
 
   const [aggregationData, setAggregationData] = useState<AggregationData[]>([]);
   const [marketcap, setMarketcap] = useState<number>(0);
-  const [iscommunityActive, setCommunityActive] = useState(false)
+  const [iscommunityActive, setCommunityActive] = useState(false);
 
   useEffect(() => {
     if (!memecoin_address) return;
@@ -157,7 +157,172 @@ export default function MemecoinPage({ params }) {
 
   return (
     <>
-      <div id="chart-container" className="w-10/12 h-48 mb-[250px]"></div>
+      <section className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:justify-items-end mt-24 pr-12">
+        <div id="chart-container" className="h-48 mb-[250px] w-full"></div>
+
+        <div className="w-10/12">
+          {
+            <div className="flex gap-4 mb-14">
+              <button
+                onClick={() => {
+                  setTradeType("buy");
+                }}
+                className={`${
+                  tradeType === "buy" ? "bg-[#82b455]" : ""
+                } border-2 border-foreground rounded-xl px-16 py-6 relative`}
+                style={{
+                  textShadow: "0px 3px 3px #000",
+                }}
+              >
+                <div
+                  className={`z-10 ${
+                    tradeType === "buy" ? "bg-[#d3e8a0]" : "bg-secondary/80"
+                  } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
+                ></div>
+                <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
+                  BUY
+                </span>
+              </button>
+              <button
+                onClick={() => {
+                  setTradeType("sell");
+                }}
+                className={`${
+                  tradeType === "sell" ? "bg-[#82b455]" : ""
+                } border-2 border-foreground rounded-xl px-16 py-6 relative`}
+                style={{
+                  textShadow: "0px 3px 3px #000",
+                }}
+              >
+                <div
+                  className={`z-10 ${
+                    tradeType === "sell" ? "bg-[#d3e8a0]" : "bg-secondary/80"
+                  } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
+                ></div>
+                <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
+                  SELL
+                </span>
+              </button>
+            </div>
+          }
+
+          {
+            <div className="mt-[800px] sm:mt-0">
+              <section className="w-full">
+                {tradeType === "buy" ? (
+                  <>
+                    <div className="p-6 rounded-lg border-2 border-cpurpledark w-full">
+                      <div className="space-y-3">
+                        <button
+                          onClick={() => setIsTronQuantity(!isTronQuantity)}
+                        >
+                          <p className="rounded-md px-4 py-1 bg-cpurpledark -skew-x-6">
+                            Switch to{" "}
+                            {isTronQuantity
+                              ? memecoin?.name || "Memecoin"
+                              : "Ton"}
+                          </p>
+                        </button>
+                        <div className="space-y-3">
+                          <Label htmlFor="buy-amount">Amount</Label>
+                          <div className="relative flex items-center">
+                            <Input id="buy-amount" autoComplete="off" />
+                            {isTronQuantity ? (
+                              <div className="absolute right-2 flex items-center space-x-1">
+                                <img
+                                  src="https://s2.coinmarketcap.com/static/img/coins/64x64/11419.png"
+                                  alt="TON Logo"
+                                  className="h-6 w-6"
+                                />
+                                <span className="text-sm font-semibold">
+                                  TON
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="absolute right-2 flex items-center space-x-1">
+                                <img
+                                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin?.logo}`}
+                                  alt="Memecoin Logo"
+                                  className="h-6 w-6 rounded-full"
+                                />
+                                <span className="text-sm font-semibold">
+                                  {memecoin?.ticker}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          <CardDescription className="pt-2">
+                            {isTronQuantity
+                              ? `${memecoinBuyAmount} ${memecoin?.ticker}`
+                              : `${sunBuyAmount / 1_000_000} TON`}
+                          </CardDescription>
+                        </div>
+                      </div>
+                      <CardFooter className="mt-10">
+                        <img src="TradeButton.svg" alt="trade" />
+                      </CardFooter>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="p-6 rounded-lg border-2 border-cpurpledark w-full">
+                      <div className="space-y-3">
+                        <button
+                          onClick={() => setIsTronQuantity(!isTronQuantity)}
+                        >
+                          <p className="rounded-md px-4 py-1 bg-cpurpledark -skew-x-6">
+                            Switch to{" "}
+                            {isTronQuantity
+                              ? memecoin?.name || "Memecoin"
+                              : "Ton"}
+                          </p>
+                        </button>
+                        <div className="space-y-3">
+                          <Label htmlFor="sell-amount">Amount</Label>
+                          <div className="relative flex items-center">
+                            <Input id="sell-amount" autoComplete="off" />
+                            {isTronQuantity ? (
+                              <div className="absolute right-2 flex items-center space-x-1">
+                                <img
+                                  src="https://s2.coinmarketcap.com/static/img/coins/64x64/11419.png"
+                                  alt="TON Logo"
+                                  className="h-6 w-6"
+                                />
+                                <span className="text-sm font-semibold">
+                                  TON
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="absolute right-2 flex items-center space-x-1">
+                                <img
+                                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin?.logo}`}
+                                  alt="Memecoin Logo"
+                                  className="h-6 w-6 rounded-full"
+                                />
+                                <span className="text-sm font-semibold">
+                                  {memecoin?.ticker}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          <CardDescription className="pt-2">
+                            {isTronQuantity
+                              ? `${memecoinSellAmount} ${memecoin?.ticker}`
+                              : `${sunSellAmount / 1_000_000} TON`}
+                          </CardDescription>
+                        </div>
+                      </div>
+                      <CardFooter className="mt-10">
+                        <img src="TradeButton.svg" alt="trade" />
+                      </CardFooter>
+                    </div>
+                  </>
+                )}
+              </section>
+            </div>
+          }
+        </div>
+      </section>
 
       <div className="mb-12">
         <Label className="text-zinc-400 text-xs">
@@ -165,251 +330,99 @@ export default function MemecoinPage({ params }) {
           (i.e. 1 billionth fraction of TON)
         </Label>
       </div>
-      <div className="mt-12  grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-[2rem]">
-            <div className="flex gap-[5rem]">
-                <span onClick={()=>setCommunityActive(true)} > <ButtonWC type={"trade"} insideImg={work} width={50} /></span>
-              <span onClick={()=>setCommunityActive(false)}> <ButtonWC type={"Community"} insideImg={community} width={120}/> </span>
-              
-                </div>
-                <div></div>
-              
-              <Image src={work} width={200} alt=";t"></Image>
+
+      {memecoin && (
+        <div className="bg-cpurpledark p-6 mt-12 rounded-xl mr-24 md:w-1/2">
+          <div className="flex items-start justify-between mb-2">
+            <div className="flex-shrink-0 bg-black rounded-xl">
+              <img
+                src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
+                alt={`${memecoin.name} logo`}
+                className="h-36 w-36 object-cover rounded-md"
+              />
+            </div>
+            <div className="ml-4 flex-1">
+              <Label className="text-xl text-black">
+                Ticker: ${memecoin.ticker}
+              </Label>
+              <br />
+              <Label className="text-xl text-black">
+                Name: {memecoin.name}
+              </Label>
+            </div>
           </div>
 
-      {iscommunityActive && <div className="flex gap-4 mb-14">
-        <button
-          onClick={() => {
-            setTradeType("buy");
-          }}
-          className={`${
-            tradeType === "buy" ? "bg-[#82b455]" : ""
-          } border-2 border-foreground rounded-xl px-16 py-6 relative`}
-          style={{
-            textShadow: "0px 3px 3px #000",
-          }}
-        >
-          <div
-            className={`z-10 ${
-              tradeType === "buy" ? "bg-[#d3e8a0]" : "bg-secondary/80"
-            } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
-          ></div>
-          <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
-            BUY
-          </span>
-        </button>
-        <button
-          onClick={() => {
-            setTradeType("sell");
-          }}
-          className={`${
-            tradeType === "sell" ? "bg-[#82b455]" : ""
-          } border-2 border-foreground rounded-xl px-16 py-6 relative`}
-          style={{
-            textShadow: "0px 3px 3px #000",
-          }}
-        >
-          <div
-            className={`z-10 ${
-              tradeType === "sell" ? "bg-[#d3e8a0]" : "bg-secondary/80"
-            } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
-          ></div>
-          <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
-            SELL
-          </span>
-        </button>
-      </div>}
-
-      {iscommunityActive && <div className="mt-[800px] sm:mt-0 grid grid-cols-1 lg:grid-cols-2 mr-12 lg:mr-24">
-        <section className="w-10/12">
-          {tradeType === "buy" ? (
-            <>
-              <div className="p-6 rounded-lg border-2 border-cpurpledark">
-                <div className="space-y-3">
-                  <button onClick={() => setIsTronQuantity(!isTronQuantity)}>
-                    <p className="rounded-md px-4 py-1 bg-cpurpledark -skew-x-6">
-                      Switch to{" "}
-                      {isTronQuantity ? memecoin?.name || "Memecoin" : "Ton"}
-                    </p>
-                  </button>
-                  <div className="space-y-3">
-                    <Label htmlFor="buy-amount">Amount</Label>
-                    <div className="relative flex items-center">
-                      <Input id="buy-amount" autoComplete="off" />
-                      {isTronQuantity ? (
-                        <div className="absolute right-2 flex items-center space-x-1">
-                          <img
-                            src="https://s2.coinmarketcap.com/static/img/coins/64x64/11419.png"
-                            alt="TON Logo"
-                            className="h-6 w-6"
-                          />
-                          <span className="text-sm font-semibold">TON</span>
-                        </div>
-                      ) : (
-                        <div className="absolute right-2 flex items-center space-x-1">
-                          <img
-                            src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin?.logo}`}
-                            alt="Memecoin Logo"
-                            className="h-6 w-6 rounded-full"
-                          />
-                          <span className="text-sm font-semibold">
-                            {memecoin?.ticker}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <CardDescription className="pt-2">
-                      {isTronQuantity
-                        ? `${memecoinBuyAmount} ${memecoin?.ticker}`
-                        : `${sunBuyAmount / 1_000_000} TON`}
-                    </CardDescription>
-                  </div>
-                </div>
-                <CardFooter className="mt-10">
-                  <img src="TradeButton.svg" alt="trade" />
-                </CardFooter>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="p-6 rounded-lg border-2 border-cpurpledark">
-                <div className="space-y-3">
-                  <button onClick={() => setIsTronQuantity(!isTronQuantity)}>
-                    <p className="rounded-md px-4 py-1 bg-cpurpledark -skew-x-6">
-                      Switch to{" "}
-                      {isTronQuantity ? memecoin?.name || "Memecoin" : "Ton"}
-                    </p>
-                  </button>
-                  <div className="space-y-3">
-                    <Label htmlFor="sell-amount">Amount</Label>
-                    <div className="relative flex items-center">
-                      <Input id="sell-amount" autoComplete="off" />
-                      {isTronQuantity ? (
-                        <div className="absolute right-2 flex items-center space-x-1">
-                          <img
-                            src="https://s2.coinmarketcap.com/static/img/coins/64x64/11419.png"
-                            alt="TON Logo"
-                            className="h-6 w-6"
-                          />
-                          <span className="text-sm font-semibold">TON</span>
-                        </div>
-                      ) : (
-                        <div className="absolute right-2 flex items-center space-x-1">
-                          <img
-                            src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin?.logo}`}
-                            alt="Memecoin Logo"
-                            className="h-6 w-6 rounded-full"
-                          />
-                          <span className="text-sm font-semibold">
-                            {memecoin?.ticker}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <CardDescription className="pt-2">
-                      {isTronQuantity
-                        ? `${memecoinSellAmount} ${memecoin?.ticker}`
-                        : `${sunSellAmount / 1_000_000} TON`}
-                    </CardDescription>
-                  </div>
-                </div>
-                <CardFooter className="mt-10">
-                  <img src="TradeButton.svg" alt="trade" />
-                </CardFooter>
-              </div>
-            </>
-          )}
-        </section>
-        {memecoin && (
-          <div className="bg-cpurpledark p-6 mt-6 rounded-xl">
-            <div className="flex items-start justify-between mb-2">
-              <div className="flex-shrink-0 bg-black rounded-xl">
-                <img
-                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                  alt={`${memecoin.name} logo`}
-                  className="h-36 w-36 object-cover rounded-md"
-                />
-              </div>
-              <div className="ml-4 flex-1">
-                <Label className="text-xl text-black">
-                  Ticker: ${memecoin.ticker}
-                </Label>
-                <br />
-                <Label className="text-xl text-black">
-                  Name: {memecoin.name}
-                </Label>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 w-full">
-              {memecoin.twitter && (
-                <a
-                  href={memecoin.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="underline text-black">Twitter</span>
-                </a>
-              )}
-              {memecoin.telegram && (
-                <a
-                  href={memecoin.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="underline text-black">Telegram</span>
-                </a>
-              )}
-              {memecoin.website && (
-                <a
-                  href={memecoin.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="underline text-black">Website</span>
-                </a>
-              )}
-            </div>
-
-            <Label className="text-black/80">{memecoin.description}</Label>
+          <div className="flex items-center gap-2 w-full">
+            {memecoin.twitter && (
+              <a
+                href={memecoin.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="underline text-black">Twitter</span>
+              </a>
+            )}
+            {memecoin.telegram && (
+              <a
+                href={memecoin.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="underline text-black">Telegram</span>
+              </a>
+            )}
+            {memecoin.website && (
+              <a
+                href={memecoin.website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="underline text-black">Website</span>
+              </a>
+            )}
           </div>
-        )}
-      </div>}
 
-      {iscommunityActive && <div className="my-24 w-10/12 mb-36">
-        {memecoin && (
-          <div className="flex flex-col gap-4 mb-4">
-            <div className="text-sm">
-              <span className="">{memecoin.name}</span>
-              <span className="">Ticker: ${memecoin.ticker}</span>
-              <span>Marketcap: ${marketcap}</span>
-            </div>
-            <div className="flex items-center">
-              <span className="text-sm ">Created by</span>
-              {memecoin.creator.profilePicture && (
-                <img
-                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator.profilePicture}`}
-                  alt={`${memecoin.creator.username}'s profile`}
-                  className="h-6 w-6 rounded-md object-cover transition-all hover:scale-105"
+          <Label className="text-black/80">{memecoin.description}</Label>
+        </div>
+      )}
+
+      {
+        <div className="my-24 w-10/12 mb-36">
+          {memecoin && (
+            <div className="flex flex-col gap-4 mb-4">
+              <div className="text-sm">
+                <span className="">{memecoin.name}</span>
+                <span className="">Ticker: ${memecoin.ticker}</span>
+                <span>Marketcap: ${marketcap}</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-sm ">Created by</span>
+                {memecoin.creator.profilePicture && (
+                  <img
+                    src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator.profilePicture}`}
+                    alt={`${memecoin.creator.username}'s profile`}
+                    className="h-6 w-6 rounded-md object-cover transition-all hover:scale-105"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      router.push(`/profile/${memecoin.creator_address}`);
+                    }}
+                  />
+                )}
+                <span
+                  className="text-sm font-semibold hover:underline"
                   onClick={(e) => {
                     e.stopPropagation();
                     router.push(`/profile/${memecoin.creator_address}`);
                   }}
-                />
-              )}
-              <span
-                className="text-sm font-semibold hover:underline"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  router.push(`/profile/${memecoin.creator_address}`);
-                }}
-              >
-                {memecoin.creator.username}
-              </span>
+                >
+                  {memecoin.creator.username}
+                </span>
+              </div>
             </div>
-          </div>
-        )}
-      </div>}
-      {!iscommunityActive && <Community/>}
+          )}
+        </div>
+      }
+      {/* {!iscommunityActive && <Community/>} */}
     </>
   );
 }

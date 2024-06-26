@@ -201,9 +201,7 @@ export default function UserProfilePage({ params }) {
                   src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${user.profilePicture}`}
                 />
               </Avatar>
-              <h2
-                className={`${myFont.className} text-2xl font-bold ml-6 pt-24`}
-              >
+              <h2 className={`text-3xl font-bold ml-6 pt-24`}>
                 {user.username}
               </h2>
             </div>
