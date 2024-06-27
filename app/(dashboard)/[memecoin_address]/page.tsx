@@ -71,7 +71,7 @@ export default function MemecoinPage({ params }) {
   const [marketcap, setMarketcap] = useState<number>(0);
   const [iscommunityActive, setCommunityActive] = useState(false);
 
-  const communityAddress = `/community/${memecoin_address}`
+  const communityAddress = `/community/${memecoin_address}`;
 
   useEffect(() => {
     if (!memecoin_address) return;
@@ -159,12 +159,14 @@ export default function MemecoinPage({ params }) {
 
   return (
     <>
-      <section className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:justify-items-end mt-24 xl:pr-12 pr-6">
-        <div id="chart-container" className="h-48 w-full mb-64 md:mb-0"></div>
-
+      <div
+        id="chart-container"
+        className="h-48 mt-[1200px] md:mt-0 w-full mb-64 md:mb-0"
+      ></div>
+      <section className="xl:pr-12 pr-6">
         <div className="w-full xl:w-10/12">
           {
-            <div className="flex gap-4 mb-14">
+            <div className="flex gap-4 md:mb-14 mt-56">
               <button
                 onClick={() => {
                   setTradeType("buy");
@@ -209,7 +211,7 @@ export default function MemecoinPage({ params }) {
           }
 
           {
-            <div className="mt-96 sm:mt-0">
+            <div className="mt-24 sm:mt-0">
               <section className="w-full">
                 {tradeType === "buy" ? (
                   <>
@@ -332,105 +334,107 @@ export default function MemecoinPage({ params }) {
           (i.e. 1 billionth fraction of TON)
         </Label>
       </div>
-{/* card */}
+      {/* card */}
       {memecoin && (
-        <div className="bg-cpurpledark p-6 mt-12 rounded-xl mr-6 xl:mr-24 md:w-1/2">
-          <div className="flex flex-col sm:flex-row items-start justify-between mb-2">
-            <div className="flex-shrink-0 bg-black rounded-xl">
-              <img
-                src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                alt={`${memecoin.name} logo`}
-                className="h-36 w-36 object-cover rounded-md"
-              />
+        <section className="flex justify-between flex-col-reverse lg:flex-row-reverse">
+          <div className="bg-cpurpledark p-6 rounded-xl lg:w-1/2 mr-12">
+            <div className="flex flex-col sm:flex-row items-start justify-between mb-2">
+              <div className="flex-shrink-0 bg-black rounded-xl">
+                <img
+                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
+                  alt={`${memecoin.name} logo`}
+                  className="h-36 w-36 object-cover rounded-md"
+                />
+              </div>
+              <div className="ml-4 flex-1">
+                <Label className="text-xl text-black">
+                  Ticker: ${memecoin.ticker}
+                </Label>
+                <br />
+                <Label className="text-xl text-black">
+                  Name: {memecoin.name}
+                </Label>
+              </div>
             </div>
-            <div className="ml-4 flex-1">
-              <Label className="text-xl text-black">
-                Ticker: ${memecoin.ticker}
-              </Label>
-              <br />
-              <Label className="text-xl text-black">
-                Name: {memecoin.name}
-              </Label>
+
+            <div className="flex items-center gap-2 w-full">
+              {memecoin.twitter && (
+                <a
+                  href={memecoin.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="underline text-black">Twitter</span>
+                </a>
+              )}
+              {memecoin.telegram && (
+                <a
+                  href={memecoin.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="underline text-black">Telegram</span>
+                </a>
+              )}
+              {memecoin.website && (
+                <a
+                  href={memecoin.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="underline text-black">Website</span>
+                </a>
+              )}
             </div>
-          </div>
 
-          <div className="flex items-center gap-2 w-full">
-            {memecoin.twitter && (
-              <a
-                href={memecoin.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="underline text-black">Twitter</span>
-              </a>
-            )}
-            {memecoin.telegram && (
-              <a
-                href={memecoin.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="underline text-black">Telegram</span>
-              </a>
-            )}
-            {memecoin.website && (
-              <a
-                href={memecoin.website}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="underline text-black">Website</span>
-              </a>
-            )}
+            <Label className="text-black/80">{memecoin.description}</Label>
           </div>
-
-          <Label className="text-black/80">{memecoin.description}</Label>
-        </div>
+          <div className="mr-48 mb-24 lg:mb-0 sm:w-8/12 lg:w-auto">
+            <Link href={communityAddress}>
+              <ButtonWC type={"Community"} insideImg={community} width={100} />
+            </Link>
+          </div>
+        </section>
       )}
 
       {
         <div className="my-24 w-10/12 mb-36">
           {memecoin && (
-            <div className="flex flex-col gap-4 mb-4">
-              <div className="text-sm">
-                <span className="">{memecoin.name}</span>
-                <span className="">Ticker: ${memecoin.ticker}</span>
-                <span>Marketcap: ${marketcap}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-sm ">Created by</span>
-                {memecoin.creator.profilePicture && (
-                  <img
-                    src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator.profilePicture}`}
-                    alt={`${memecoin.creator.username}'s profile`}
-                    className="h-6 w-6 rounded-md object-cover transition-all hover:scale-105"
+            <>
+              <div className="flex flex-col gap-4 mb-4">
+                <div className="text-sm">
+                  <span className="">{memecoin.name}</span>
+                  <span className="">Ticker: ${memecoin.ticker}</span>
+                  <span>Marketcap: ${marketcap}</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-sm ">Created by</span>
+                  {memecoin.creator.profilePicture && (
+                    <img
+                      src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator.profilePicture}`}
+                      alt={`${memecoin.creator.username}'s profile`}
+                      className="h-6 w-6 rounded-md object-cover transition-all hover:scale-105"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/profile/${memecoin.creator_address}`);
+                      }}
+                    />
+                  )}
+                  <span
+                    className="text-sm font-semibold hover:underline"
                     onClick={(e) => {
                       e.stopPropagation();
                       router.push(`/profile/${memecoin.creator_address}`);
                     }}
-                  />
-                )}
-                <span
-                  className="text-sm font-semibold hover:underline"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    router.push(`/profile/${memecoin.creator_address}`);
-                  }}
-                >
-                  {memecoin.creator.username}
-                </span>
+                  >
+                    {memecoin.creator.username}
+                  </span>
+                </div>
               </div>
-            </div>
+            </>
           )}
         </div>
       }
-      {/* Add button here */}
-      <div className="flex justify-end mr-6 xl:mr-60 -mt-96 md:-mt-96 xl:-mt-[28rem]">
-        <Link href={communityAddress}>
-          <ButtonWC type={"Community"} insideImg={community} width={100} />
-        </Link>
-      </div>
-      {/* {!iscommunityActive && <Community/>} */}
     </>
   );
 }
