@@ -1,11 +1,15 @@
-import React from "react";
+"use client"
+import React, { useEffect, useRef } from "react";
 import local from "next/font/local";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 import { useRouter } from "next/navigation";
+import { gsap } from "gsap";
+
 const kanit = local({
   src: "../public/fonts/kanit.ttf",
   display: "swap",
 });
+
 const theme = local({
   src: "../public/fonts/docallismeonstreet.otf",
   display: "swap",
@@ -34,6 +38,18 @@ interface Memecoin {
 
 const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
   const router = useRouter();
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (cardRef.current) {
+      gsap.fromTo(
+        cardRef.current,
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.8, ease: "elastic.out(1, 0.5)" }
+      );
+    }
+  }, []);
+
   return (
     <>
       <CardContainer className="h-full mx-8 shadow-md hover:shadow-cpurplelight rounded-xl">
@@ -42,16 +58,9 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
             key={memecoin.memecoin_address}
             className={`${kanit.className} bg-secondary h-full relative p-4 rounded-xl flex flex-col justify-between gap-3 cursor-pointer`}
             onClick={() => router.push(`/${memecoin.memecoin_address}`)}
-            style={
-              {
-                // backgroundImage: `url(${cardBg.src})`,
-                // backgroundSize: "cover",
-                // backgroundPosition: "center",
-              }
-            }
+            ref={cardRef}
           >
             {/* black overlay bg */}
-
             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-0 rounded-md"></div>
 
             <CardItem translateZ={50} className="z-50">

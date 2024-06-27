@@ -87,50 +87,38 @@ const CurrentPage = ({ hovered, setHovered }) => {
     >
       
       <Link href="/my-profile">
-        <div
-          className="fixed left-0 bottom-[40%] w-[20%] h-[10%]  transform  border-4 -rotate-45 origin-left  border-black flex items-center justify-center overflow-hidden"
-          
-        >
-          <Image
-            src={tiredmnky}
-            alt="tiredmnky"
-            style={{ objectFit: "contain" }}
-            className="fixed"
-          ></Image>
-          <p className="text-3xl font-semibold fixed">my-profile</p>
-          
- 
-        </div>
-      </Link>
-      <Link href="/launch">
-        <div
-          className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform  border-4 rotate-45 origin-left border-black flex items-center justify-center overflow-hidden"
-          
-        >
-          <Image
-            src={rocket}
-            alt="tiredmnky"
-            style={{ objectFit: "contain" }}
-            className="fixed"
-          ></Image>
-          <p className="text-3xl font-semibold  fixed">launch</p>
-        </div>
-      </Link>
-      <Link href="/explore">
-        <div
-          className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform  border-4  border-black origin-left flex items-center justify-center overflow-hidden"
-          
-        >
-          <Image
-            src={exploreMnky}
-            alt="tiredmnky"
-            style={{ objectFit: "contain" }}
-            className="fixed"
-          ></Image>
-          <p className="text-3xl font-semibold   fixed">explore</p>
-          
-        </div>
-      </Link>
+      <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] transform border-4 -rotate-45 origin-left border-black flex items-center justify-center overflow-hidden">
+        <Image
+          src={tiredmnky}
+          alt="tiredmnky"
+          style={{ objectFit: "contain", filter: "blur(2px)" }} 
+          className="fixed"
+        />
+        <p className="text-3xl font-semibold fixed text-white" style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}>my-profile</p>
+      </div>
+    </Link>
+    <Link href="/launch">
+      <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform border-4 rotate-45 origin-left border-black flex items-center justify-center overflow-hidden">
+        <Image
+          src={rocket}
+          alt="rocket"
+          style={{ objectFit: "contain", filter: "blur(2px)" }}
+          className="fixed"
+        />
+        <p className="text-3xl font-semibold fixed text-white" style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}>launch</p>
+      </div>
+    </Link>
+    <Link href="/explore">
+      <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform border-4 border-black origin-left flex items-center justify-center overflow-hidden">
+        <Image
+          src={exploreMnky}
+          alt="exploreMnky"
+          style={{ objectFit: "contain", filter: "blur(2px)" }}
+          className="fixed"
+        />
+        <p className="text-3xl font-semibold fixed text-white" style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}>explore</p>
+      </div>
+    </Link>
       
     </div>
   );

@@ -1,173 +1,101 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import { gsap } from 'gsap';
+import { useState } from 'react';
+import Image from 'next/image';
 
 interface Post {
-  id: number;
-  user: string;
-  content: string;
-  time: string;
-  upvotes: number;
-  downvotes: number;
-  comments: string[];
-  image?: string;
+    user: string;
+    profilePicture: string;
+    message: string;
+    likes: number;
+    dislikes: number;
+    bookmarks: number;
 }
 
-const Community: React.FC = () => {
-  useEffect(() => {
-    gsap.fromTo(
-      '.post',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.2 }
-    );
-  }, []);
+const Community = ({ posts, user }: { posts: Post[], user: string }) => {
+    const [replyingTo, setReplyingTo] = useState<number | null>(null);
+    const userPosts = posts.filter(post => post.user === user);
 
-  const [posts, setPosts] = useState<Post[]>([
-    {
-      id: 1,
-      user: 'John Doe',
-      content: 'This is my first tweet!',
-      time: '2m',
-      upvotes: 10,
-      downvotes: 2,
-      comments: ['Great post!', 'Welcome to Twitter!']
-    },
-    {
-      id: 2,
-      user: 'Jane Smith',
-      content: 'Hello world!',
-      time: '10m',
-      upvotes: 20,
-      downvotes: 5,
-      comments: ['Hello Jane!', 'Nice to see you here.']
-    },
-    {
-      id: 3,
-      user: 'Alice Johnson',
-      content: 'Loving this new Twitter UI!',
-      time: '30m',
-      upvotes: 15,
-      downvotes: 3,
-      comments: ['Me too!', 'It’s really cool!']
-    }
-  ]);
-
-  const [newPostContent, setNewPostContent] = useState('');
-  const [newPostImage, setNewPostImage] = useState<File | null>(null);
-
-  const handleUpvote = (id: number) => {
-    setPosts(posts.map(post => post.id === id ? { ...post, upvotes: post.upvotes + 1 } : post));
-  };
-
-  const handleDownvote = (id: number) => {
-    setPosts(posts.map(post => post.id === id ? { ...post, downvotes: post.downvotes + 1 } : post));
-  };
-
-  const addComment = (id: number, comment: string) => {
-    setPosts(posts.map(post => post.id === id ? { ...post, comments: [...post.comments, comment] } : post));
-  };
-
-  const handleNewPost = () => {
-    if (newPostContent.trim() === '') return;
-
-    const newPost: Post = {
-      id: posts.length + 1,
-      user: 'New User', // This should be replaced with the actual user's name
-      content: newPostContent,
-      time: 'just now',
-      upvotes: 0,
-      downvotes: 0,
-      comments: [],
-      image: newPostImage ? URL.createObjectURL(newPostImage) : undefined
+    const handleReplyToggle = (index: number) => {
+        if (replyingTo === index) {
+            setReplyingTo(null); // Hide reply bar if already open
+        } else {
+            setReplyingTo(index); // Show reply bar for selected post
+        }
     };
 
-    setPosts([newPost, ...posts]);
-    setNewPostContent('');
-    setNewPostImage(null);
-  };
+    const handleReplyPost = (index: number, replyMessage: string) => {
+        // Handle reply submission logic here
+        console.log(`Replying to post ${index} with message: ${replyMessage}`);
+        // Example: Implement your reply submission logic here
+        setReplyingTo(null); // Close reply bar after submission
+    };
 
-  return (
-    <div className="-mt-10 flex flex-col items-start w-screen min-h-screen text-gray-800 p-10 ">
-      {/* Header Start */}
-      <div className="flex flex-col w-full max-w-xl shadow-xl rounded-lg overflow-hidden">
-        <div className="bg-cpurpledark p-4">
-          <input
-            className="flex items-center h-12 w-full rounded-full px-4 text-sm border border-gray-300"
-            type="text"
-            placeholder="What's happening?"
-            value={newPostContent}
-            onChange={(e) => setNewPostContent(e.target.value)}
-          />
-          <input
-            type="file"
-            accept="image/*"
-            className="mt-2 w-full text-sm text-gray-200"
-            onChange={(e) => setNewPostImage(e.target.files ? e.target.files[0] : null)}
-          />
-          <button
-            className="mt-2 w-full bg-purple-600 text-gray-200 rounded-full py-2"
-            onClick={handleNewPost}
-          >
-            Post
-          </button>
-        </div>
-      </div>
-      {/* Header End */}
-      
-      {/* Posts Start */}
-      <div className="flex flex-col w-full max-w-xl mt-6 space-y-4">
-        {posts.map((post) => (
-          <div key={post.id} className="post bg-[#232121] shadow-md rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <div className="h-10 w-10 bg-gray-300 rounded-full" />
-              <div>
-                <div className="font-bold text-white ">{post.user}</div>
-                <div className="text-xs text-white">{post.time}</div>
-              </div>
-            </div>
-            <div className="mt-3 text-sm text-white">
-              {post.content}
-            </div>
-            {post.image && (
-              <div className="mt-3">
-                <img src={post.image} alt="Post" className="w-full rounded-lg" />
-              </div>
-            )}
-            <div className="mt-3 flex space-x-4">
-              <button onClick={() => handleUpvote(post.id)} className="flex items-center space-x-1 text-white hover:text-green-500">
-                <span>▲</span>
-                <span>{post.upvotes}</span>
-              </button>
-              <button onClick={() => handleDownvote(post.id)} className="flex items-center space-x-1 text-white hover:text-red-500">
-                <span>▼</span>
-                <span>{post.downvotes}</span>
-              </button>
-            </div>
-            <div className="mt-4">
-              <div className="font-semibold text-white">Comments:</div>
-              {post.comments.map((comment, index) => (
-                <div key={index} className="mt-2 text-sm text-white">
-                  {comment}
+    const handleLike = (index: number) => {
+        // Handle like button click
+        console.log(`Liked post ${index}`);
+        // Example: Implement your like button logic here
+    };
+
+    const handleDislike = (index: number) => {
+        // Handle dislike button click
+        console.log(`Disliked post ${index}`);
+        // Example: Implement your dislike button logic here
+    };
+
+    return (
+        <div className="min-h-screen mt-36 flex flex-col md:flex-row font-sans text-gray-200">
+            <div className="flex-1 p-5 overflow-y-auto">
+                <div className="text-3xl mb-4 font-extrabold text-purple-400">Your Posts</div>
+                <div className="space-y-8">
+                    {userPosts.map((post, index) => (
+                        <div key={index} className="relative p-4 bg-gray-800 rounded-xl shadow-lg border border-gray-700 hover:border-purple-500 transition-all duration-300">
+                            <div className="flex">
+                                <div className="flex-shrink-0">
+                                    <Image src={post.profilePicture} alt={`${post.user} profile`} width={48} height={48} className="rounded-full mr-4 border-2 border-purple-400" />
+                                </div>
+                                <div className="flex-1">
+                                    <p className="font-bold text-lg text-purple-300">{post.user}</p>
+                                    <p className="text-gray-300">{post.message}</p>
+                                    <div className="mt-4 flex space-x-2 text-purple-400">
+                                        <button className="flex items-center space-x-1 text-sm hover:text-purple-300 transition-colors duration-200" onClick={() => handleReplyToggle(index)}>
+                                            <span className="text-lg">🎤</span>
+                                            <span>Reply</span>
+                                        </button>
+                                        <button className="flex items-center space-x-1 text-sm hover:text-purple-300 transition-colors duration-200" onClick={() => handleLike(index)}>
+                                            <span className="text-lg">👍</span>
+                                            <span>{post.likes}</span>
+                                        </button>
+                                        <button className="flex items-center space-x-1 text-sm hover:text-purple-300 transition-colors duration-200" onClick={() => handleDislike(index)}>
+                                            <span className="text-lg">👎</span>
+                                            <span>{post.dislikes}</span>
+                                        </button>
+                                        <button className="flex items-center space-x-1 text-sm hover:text-purple-300 transition-colors duration-200">
+                                            <span className="text-lg">💿</span>
+                                            <span>{post.bookmarks}</span>
+                                        </button>
+                                    </div>
+                                    {replyingTo === index && (
+                                        <div className="mt-4">
+                                            <input
+                                                type="text"
+                                                placeholder="Reply..."
+                                                className="w-36 p-2 bg-gray-700 border border-gray-600 text-gray-200 rounded-lg focus:outline-none focus:border-purple-500"
+                                            />
+                                            <button
+                                                className="mt-2 bg-purple-600 text-white px-2 py-1 rounded-lg text-sm hover:bg-purple-500 transition-colors duration-200"
+                                                onClick={() => handleReplyPost(index, 'Sample reply message')}
+                                            >
+                                                Send
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-              ))}
-              <input
-                className="mt-2 w-full rounded-full px-4 py-2 text-sm border border-gray-300"
-                type="text"
-                placeholder="Add a comment..."
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim() !== '') {
-                    addComment(post.id, (e.target as HTMLInputElement).value.trim());
-                    (e.target as HTMLInputElement).value = '';
-                  }
-                }}
-              />
             </div>
-          </div>
-        ))}
-      </div>
-      {/* Posts End */}
-    </div>
-  );
+        </div>
+    );
 };
 
 export default Community;
