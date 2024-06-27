@@ -159,14 +159,15 @@ export default function MemecoinPage({ params }) {
 
   return (
     <>
+    <div className="flex flex-col md:flex-row gap-10  ">
       <div
         id="chart-container"
-        className="h-48 mt-[1200px] md:mt-0 w-full mb-64 md:mb-0"
+        className="h-48 mt-[1400px] md:mt-0 w-[60%] mb-64 md:mb-0 "
       ></div>
-      <section className="xl:pr-12 pr-6">
+      <section className="xl:pr-12 pr-6 md:w-[40%] lg:bottom-[5rem]">
         <div className="w-full xl:w-10/12">
           {
-            <div className="flex gap-4 md:mb-14 mt-56">
+            <div className="flex gap-4 md:mb-4  ">
               <button
                 onClick={() => {
                   setTradeType("buy");
@@ -327,6 +328,7 @@ export default function MemecoinPage({ params }) {
           }
         </div>
       </section>
+      </div>
 
       <div className="mb-12">
         <Label className="text-zinc-400 text-xs">

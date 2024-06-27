@@ -39,7 +39,7 @@ const PlanetNavbar = () => {
 	centerContent={<MainButton children={"menu"} />}
 	hideOrbit
 	autoClose
-	orbitRadius={60}
+	orbitRadius={80}
 	bounceOnClose
 	rotation={145}
 	// the bounce direction is minimal visible
