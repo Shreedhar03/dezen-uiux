@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +23,7 @@ import community from "@/public/pepe-council.gif";
 import work from "@/public/ponke-ponkesol.gif";
 import Image from "next/image";
 import Community from "@/components/Community";
+import Link from "next/link";
 
 interface User {
   address: string;
@@ -70,6 +70,8 @@ export default function MemecoinPage({ params }) {
   const [aggregationData, setAggregationData] = useState<AggregationData[]>([]);
   const [marketcap, setMarketcap] = useState<number>(0);
   const [iscommunityActive, setCommunityActive] = useState(false);
+
+  const communityAddress = `/community/${memecoin_address}`
 
   useEffect(() => {
     if (!memecoin_address) return;
@@ -157,10 +159,10 @@ export default function MemecoinPage({ params }) {
 
   return (
     <>
-      <section className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:justify-items-end mt-24 pr-12">
-        <div id="chart-container" className="h-48 mb-[250px] w-full"></div>
+      <section className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:justify-items-end mt-24 xl:pr-12 pr-6">
+        <div id="chart-container" className="h-48 w-full mb-64 md:mb-0"></div>
 
-        <div className="w-10/12">
+        <div className="w-full xl:w-10/12">
           {
             <div className="flex gap-4 mb-14">
               <button
@@ -169,7 +171,7 @@ export default function MemecoinPage({ params }) {
                 }}
                 className={`${
                   tradeType === "buy" ? "bg-[#82b455]" : ""
-                } border-2 border-foreground rounded-xl px-16 py-6 relative`}
+                } border-2 border-foreground rounded-xl px-8 py-3 md:px-16 md:py-6 relative`}
                 style={{
                   textShadow: "0px 3px 3px #000",
                 }}
@@ -179,7 +181,7 @@ export default function MemecoinPage({ params }) {
                     tradeType === "buy" ? "bg-[#d3e8a0]" : "bg-secondary/80"
                   } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
                 ></div>
-                <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
+                <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-lg md:text-2xl">
                   BUY
                 </span>
               </button>
@@ -189,7 +191,7 @@ export default function MemecoinPage({ params }) {
                 }}
                 className={`${
                   tradeType === "sell" ? "bg-[#82b455]" : ""
-                } border-2 border-foreground rounded-xl px-16 py-6 relative`}
+                } border-2 border-foreground rounded-xl px-8 py-3 md:px-16 md:py-6 relative`}
                 style={{
                   textShadow: "0px 3px 3px #000",
                 }}
@@ -199,7 +201,7 @@ export default function MemecoinPage({ params }) {
                     tradeType === "sell" ? "bg-[#d3e8a0]" : "bg-secondary/80"
                   } w-full h-3/5 rounded-xl absolute top-[2px] left-0`}
                 ></div>
-                <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
+                <span className="z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-lg md:text-2xl">
                   SELL
                 </span>
               </button>
@@ -207,7 +209,7 @@ export default function MemecoinPage({ params }) {
           }
 
           {
-            <div className="mt-[800px] sm:mt-0">
+            <div className="mt-96 sm:mt-0">
               <section className="w-full">
                 {tradeType === "buy" ? (
                   <>
@@ -330,10 +332,10 @@ export default function MemecoinPage({ params }) {
           (i.e. 1 billionth fraction of TON)
         </Label>
       </div>
-
+{/* card */}
       {memecoin && (
-        <div className="bg-cpurpledark p-6 mt-12 rounded-xl mr-24 md:w-1/2">
-          <div className="flex items-start justify-between mb-2">
+        <div className="bg-cpurpledark p-6 mt-12 rounded-xl mr-6 xl:mr-24 md:w-1/2">
+          <div className="flex flex-col sm:flex-row items-start justify-between mb-2">
             <div className="flex-shrink-0 bg-black rounded-xl">
               <img
                 src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
@@ -422,6 +424,12 @@ export default function MemecoinPage({ params }) {
           )}
         </div>
       }
+      {/* Add button here */}
+      <div className="flex justify-end mr-6 xl:mr-60 -mt-96 md:-mt-96 xl:-mt-[28rem]">
+        <Link href={communityAddress}>
+          <ButtonWC type={"Community"} insideImg={community} width={100} />
+        </Link>
+      </div>
       {/* {!iscommunityActive && <Community/>} */}
     </>
   );

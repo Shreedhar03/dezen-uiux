@@ -11,6 +11,8 @@ const nextConfig = {
       'i.imgur.com',
       'gateway.pinata.cloud',
       'ivory-eligible-hamster-305.mypinata.cloud',
+      'robohash.org',
+      'picsum.photos'
     ],
   },
   webpack: (config) => {
