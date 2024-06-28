@@ -29,6 +29,7 @@ const CurrentPage = ({ hovered, setHovered }) => {
   const rotateRef = useRef(null);
 
   const [mouseDown, setMouseDown] = React.useState(0);
+  const [linkHovered, setLinkHovered] = React.useState(false);
 
   useEffect(() => {
     if (mouseDown === 1) {
@@ -66,6 +67,10 @@ const CurrentPage = ({ hovered, setHovered }) => {
     }
   }, [hovered]);
 
+  const handleMouseEnter = () => {
+    setLinkHovered((prev) => !prev);
+  };
+
   return (
     <div
       className={`fixed hidden lg:block font-sans`}
@@ -74,7 +79,13 @@ const CurrentPage = ({ hovered, setHovered }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <Link href="/my-profile">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] transform border-4 -rotate-45 origin-left border-black flex items-center justify-center overflow-hidden">
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseEnter}
+          className={`${
+            !linkHovered ? "blur-0" : "blur-sm"
+          } fixed hover:blur-none hover:scale-105 scale-100 transition-all left-0 bottom-[40%] w-[20%] h-[10%] transform border-4 -rotate-45 origin-left border-black flex items-center justify-center overflow-hidden`}
+        >
           <Image
             src={tiredmnky}
             alt="tiredmnky"
@@ -93,7 +104,13 @@ const CurrentPage = ({ hovered, setHovered }) => {
         </div>
       </Link>
       <Link href="/launch">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform border-4 rotate-45 origin-left border-black flex items-center justify-center overflow-hidden">
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseEnter}
+          className={`${
+            !linkHovered ? "blur-0" : "blur-sm"
+          } hover:blur-none hover:scale-105 scale-100 transition-all fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform border-4 rotate-45 origin-left border-black flex items-center justify-center overflow-hidden`}
+        >
           <Image
             src={rocket}
             alt="rocket"
@@ -112,7 +129,13 @@ const CurrentPage = ({ hovered, setHovered }) => {
         </div>
       </Link>
       <Link href="/explore">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform border-4 border-black origin-left flex items-center justify-center overflow-hidden">
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseEnter}
+          className={`${
+            !linkHovered ? "blur-0" : "blur-sm"
+          } hover:blur-none hover:scale-105 scale-100 transition-all fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform border-4 border-black origin-left flex items-center justify-center overflow-hidden`}
+        >
           <Image
             src={exploreMnky}
             alt="exploreMnky"
