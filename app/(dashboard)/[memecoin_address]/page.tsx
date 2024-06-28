@@ -327,7 +327,7 @@ export default function MemecoinPage({ params }) {
           }
         </div>
       </section>
-      </div>
+      
 
       <div className="mb-12">
         <Label className="text-zinc-400 text-xs">

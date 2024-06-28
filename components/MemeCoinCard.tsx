@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import Image from "next/image";
 import './MemeCoinCard.css';
+import {  GlobeIcon, InstagramIcon, TwitterIcon } from "lucide-react";
+
+
 
 const kanit = local({
   src: "../public/fonts/kanit.ttf",
@@ -62,7 +65,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
   }, []);
 
   return (
-    <CardContainer className="h-full mx-4 border-4 border-white  shadow-md hover:shadow-cpurplelight rounded-xl">
+    <CardContainer className="h-[80%] mx-4 border-[6px] border-white   shadow-md hover:shadow-cpurplelight rounded-3xl">
     <CardBody>
       <div
         key={memecoin.memecoin_address}
@@ -70,14 +73,15 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
         onClick={() => router.push(`/${memecoin.memecoin_address}`)}
         ref={cardRef}
       >
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-md pointer-events-none"></div>
-        <div className="bg-slate-600 rounded px-2 py-1  text-sm text-white flex  justify-around">
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-md pointer-events-none px-3"></div>
+        <div className="card bg-purple-950 rounded px-2 py-1  text-sm text-white flex  justify-around">
               {/* Market Cap: ${memecoin.marketCap ? memecoin.marketCap.toLocaleString() : "N/A"} */}
-              <div className="bg-slate-800 p-1">Market Cap: $20</div>  
-              <div className="bg-slate-800 p-1">
+              <div className="card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 p-2">Market Cap: $20</div>  
+              <div className="card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 p-2">
                   Ticker: {memecoin.ticker}
               </div>
             </div>
+      <div></div>
       <div className="flex w-full justify-center">
         <CardItem translateZ={50} className="z-50">
           <div className="flex justify-between items-center">
@@ -92,8 +96,8 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
           </div>
         </CardItem>
         </div>
-        <div className="flex w-full justify-center h-[40%] mb-2">
-        <CardItem translateZ={50} className="z-50 flex justify-center">
+        <div className="card flex w-full justify-center h-[40%] mb-2">
+        <CardItem translateZ={50} className=" z-50 flex justify-center">
           <img
             src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
             className="w-full object-cover rounded-md border-4 border-purple-300 shadow-xl"
@@ -118,16 +122,22 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
             router.push(`/profile/${memecoin.creator_address}`);
           }}
         >
-          {memecoin.creator && (
-            <img
-              src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator?.profilePicture}`}
-              alt={`${memecoin.creator?.username}'s profile`}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-purple-300"
-            />
-          )}
-          <p className="mt-1 underline underline-offset-1 md:underline-offset-2 text-white text-xs md:text-sm">
-            {memecoin.creator?.username}
-          </p>
+          <div className="flex flex-row justify-evenly">
+            <div className="card flex flex-row justify-around gap-1 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 p-2">
+            {memecoin.creator && (
+              <img
+                src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator?.profilePicture}`}
+                alt={`${memecoin.creator?.username}'s profile`}
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-purple-300"
+              />
+            )}
+            
+            <p className={`mt-1 underline underline-offset-1 md:underline-offset-2 text-white text-xs md:text-lg ${kanit.className}`}>
+              {memecoin.creator?.username}
+            </p>
+            </div>
+            
+          </div>
         </CardItem>
       </div>
     </CardBody>
