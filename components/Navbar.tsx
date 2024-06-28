@@ -9,10 +9,18 @@ import tiredmnky from "@/public/tiredmnky.png";
 import exploreMnky from "@/public/exploreMnky.jpeg";
 import rocket from "@/public/NavRocket.jpg";
 import { useState } from "react";
+import localFont from "next/font/local";
+
+const myFont = localFont({
+  src: "../public/fonts/font.ttf",
+  display: "swap",
+});
 
 const CurrentPage = ({ hovered, setHovered }) => {
   const pathname = usePathname();
-  const cleanedPathname = pathname.startsWith("/") ? pathname.slice(1) : pathname;
+  const cleanedPathname = pathname.startsWith("/")
+    ? pathname.slice(1)
+    : pathname;
   const segments = cleanedPathname.split("/");
   const result = segments[0];
   const routes = ["explore", "profile"];
@@ -21,6 +29,7 @@ const CurrentPage = ({ hovered, setHovered }) => {
   const rotateRef = useRef(null);
 
   const [mouseDown, setMouseDown] = React.useState(0);
+  const [linkHovered, setLinkHovered] = React.useState(false);
 
   useEffect(() => {
     if (mouseDown === 1) {
@@ -58,6 +67,10 @@ const CurrentPage = ({ hovered, setHovered }) => {
     }
   }, [hovered]);
 
+  const handleMouseEnter = () => {
+    setLinkHovered((prev) => !prev);
+  };
+
   return (
     <div
       className={`fixed hidden lg:block font-sans`}
@@ -66,7 +79,13 @@ const CurrentPage = ({ hovered, setHovered }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <Link href="/my-profile">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] transform border-4 -rotate-45 origin-left border-black flex items-center justify-center overflow-hidden">
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseEnter}
+          className={`${
+            !linkHovered ? "blur-0" : "blur-sm"
+          } fixed hover:blur-none hover:scale-105 scale-100 transition-all left-0 bottom-[40%] w-[20%] h-[10%] transform border-4 -rotate-45 origin-left border-black flex items-center justify-center overflow-hidden`}
+        >
           <Image
             src={tiredmnky}
             alt="tiredmnky"
@@ -74,15 +93,24 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className="text-3xl font-semibold fixed text-white"
-            style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}
+            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            style={{
+              textShadow:
+                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+            }}
           >
             my-profile
           </p>
         </div>
       </Link>
       <Link href="/launch">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform border-4 rotate-45 origin-left border-black flex items-center justify-center overflow-hidden">
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseEnter}
+          className={`${
+            !linkHovered ? "blur-0" : "blur-sm"
+          } hover:blur-none hover:scale-105 scale-100 transition-all fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-600 transform border-4 rotate-45 origin-left border-black flex items-center justify-center overflow-hidden`}
+        >
           <Image
             src={rocket}
             alt="rocket"
@@ -90,15 +118,24 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className="text-3xl font-semibold fixed text-white"
-            style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}
+            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            style={{
+              textShadow:
+                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+            }}
           >
             launch
           </p>
         </div>
       </Link>
       <Link href="/explore">
-        <div className="fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform border-4 border-black origin-left flex items-center justify-center overflow-hidden">
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseEnter}
+          className={`${
+            !linkHovered ? "blur-0" : "blur-sm"
+          } hover:blur-none hover:scale-105 scale-100 transition-all fixed left-0 bottom-[40%] w-[20%] h-[10%] bg-zinc-800 transform border-4 border-black origin-left flex items-center justify-center overflow-hidden`}
+        >
           <Image
             src={exploreMnky}
             alt="exploreMnky"
@@ -106,8 +143,11 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className="text-3xl font-semibold fixed text-white"
-            style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}
+            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            style={{
+              textShadow:
+                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+            }}
           >
             explore
           </p>
@@ -129,10 +169,10 @@ const Navbar = () => {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -194,7 +234,9 @@ const Navbar = () => {
     <>
       <div
         ref={navRef}
-        className={`hidden lg:block fixed left-0 w-[18%] h-[34%] rounded-1/2 transform -translate-x-1/2  ${isScreenTall ? 'xl:translate-y-[4rem]' : ''}`}
+        className={`hidden lg:block fixed left-0 w-[18%] h-[34%] rounded-1/2 transform -translate-x-1/2  ${
+          isScreenTall ? "xl:translate-y-[4rem]" : ""
+        }`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
