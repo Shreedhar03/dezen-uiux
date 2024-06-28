@@ -74,7 +74,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
         ref={cardRef}
       >
         <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-md pointer-events-none px-3"></div>
-        <div className="card bg-purple-950 rounded px-2 py-1  text-sm text-white flex  justify-around">
+        <div className={`card bg-purple-950 rounded px-2 py-1  text-sm text-white -mb-8 ${kanit.className} flex  justify-around`}>
               {/* Market Cap: ${memecoin.marketCap ? memecoin.marketCap.toLocaleString() : "N/A"} */}
               <div className="card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 p-2">Market Cap: $20</div>  
               <div className="card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 p-2">
