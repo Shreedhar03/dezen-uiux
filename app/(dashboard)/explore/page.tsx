@@ -8,7 +8,9 @@ import cardBg from "../../../public/card-bg.png";
 import { GlitchHandle, useGlitch } from "react-powerglitch";
 import MemeCoinCard from "@/components/MemeCoinCard";
 import LoadingSkeleton from "@/components/Loader";
+import PokemonCard from "@/components/PokemonCard";
 // import AnimateOnRouteChange from "../components/AnimateOnRouteChange";
+
 
 interface User {
   address: string;
@@ -84,9 +86,10 @@ export default function Home() {
 
     fetchMemecoins();
   }, []);
+  
 
   return (
-    <div className="mt-[1200px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-5 gap-x-6 items-stretch my-3 mx-3 md:mx-0 w-[95%]">
+    <div className="mt-[1200px] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-3  gap-x-6 items-stretch mx-3 md:mx-0 w-[95%]">
       {loading ? (
         <div className="text-center col-span-3 h-[75vh] flex items-center justify-center">
           <p className={`${theme.className} text-2xl`}>
@@ -94,10 +97,14 @@ export default function Home() {
           </p>
         </div>
       ) : (
+        
         memecoins.map((memecoin) => (
+          <div className="">
           <MemeCoinCard key={memecoin.memecoin_address} memecoin={memecoin} />
+          </div>
         ))
       )}
+      
     </div>
   );
 }
