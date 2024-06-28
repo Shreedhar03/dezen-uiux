@@ -65,13 +65,39 @@ export default function UserProfilePage({ params }) {
   const [iscommunityActive, setCommunityActive] = useState(false);
 
   const dummyPosts: Post[] = [
-    { user: 'Alice', profilePicture: 'https://robohash.org/asna', message: 'Hello from Alice!', likes: 10, dislikes: 2, bookmarks: 5 },
-    { user: 'Alice', profilePicture: 'https://robohash.org/asna', message: 'Another post from Alice.', likes: 7, dislikes: 1, bookmarks: 3 },
-    { user: 'Bob', profilePicture: 'https://robohash.org/asacsa', message: 'Bob\'s first post.', likes: 5, dislikes: 1, bookmarks: 2 },
-    { user: 'Bob', profilePicture: 'https://robohash.org/asacsa', message: 'Bob\'s second post.', likes: 3, dislikes: 0, bookmarks: 1 },
-];
-
-
+    {
+      user: "Alice",
+      profilePicture: "https://robohash.org/asna",
+      message: "Hello from Alice!",
+      likes: 10,
+      dislikes: 2,
+      bookmarks: 5,
+    },
+    {
+      user: "Alice",
+      profilePicture: "https://robohash.org/asna",
+      message: "Another post from Alice.",
+      likes: 7,
+      dislikes: 1,
+      bookmarks: 3,
+    },
+    {
+      user: "Bob",
+      profilePicture: "https://robohash.org/asacsa",
+      message: "Bob's first post.",
+      likes: 5,
+      dislikes: 1,
+      bookmarks: 2,
+    },
+    {
+      user: "Bob",
+      profilePicture: "https://robohash.org/asacsa",
+      message: "Bob's second post.",
+      likes: 3,
+      dislikes: 0,
+      bookmarks: 1,
+    },
+  ];
 
   useEffect(() => {
     if (!address) return;
@@ -142,7 +168,7 @@ export default function UserProfilePage({ params }) {
             <UserBio />
           </div>
           <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 -mb-[7rem]">
-            <div className="flex gap-[5rem]">
+            <div className="flex gap-[3rem]">
               <span onClick={() => setCommunityActive(false)}>
                 {" "}
                 <ButtonWC type={"Created"} insideImg={coinsHeld} width={50} />
@@ -187,7 +213,6 @@ export default function UserProfilePage({ params }) {
             </div>
           ) : (
             <Community posts={dummyPosts} user="Alice" />
-            
           )}
         </div>
       )}
