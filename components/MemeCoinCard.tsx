@@ -63,7 +63,7 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
   }, []);
 
   return (
-    <CardContainer className="self-stretch mx-4 border-[6px] border-white shadow-md hover:shadow-cpurplelight rounded-3xl">
+    <CardContainer className="self-stretch h-[25rem] mx-4 border-[6px] border-white shadow-md hover:shadow-cpurplelight rounded-3xl">
       <CardBody>
         <div
           key={memecoin.memecoin_address}
@@ -105,10 +105,10 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
               />
             </CardItem>
           </div>
-          <div className="w-full border-2 border-purple-300 rounded p-2 card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700">
+          <div className="w-full border-2 border-purple-300 rounded px-2 py-3 card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700">
             <CardItem translateZ={50} className="z-50">
               <p
-                className={`leading-6 text-white text-sm md:text-base italic font-light ${kanit.className}`}
+                className={`!leading-4 text-white text-sm md:text-base italic font-light ${kanit.className} line-clamp-3`}
               >
                 {memecoin.description}
               </p>

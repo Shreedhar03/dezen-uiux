@@ -26,7 +26,8 @@ import Community from "@/components/Community";
 import Link from "next/link";
 import MemeCoinCard from "@/components/MemeCoinCard";
 import local from "next/font/local";
-import '@/components/MemeCoinCard.css'
+import "@/components/MemeCoinCard.css";
+import { Globe, Instagram, Twitter } from "lucide-react";
 
 const myFont = local({
   src: "../../../public/fonts/kanit.ttf",
@@ -313,7 +314,6 @@ export default function MemecoinPage({ params }) {
                                 />
                                 <span className="text-sm font-semibold">
                                   {memecoin?.ticker}
-                                  
                                 </span>
                               </div>
                             )}
@@ -336,7 +336,6 @@ export default function MemecoinPage({ params }) {
           }
         </div>
       </section>
-      
 
       <div className="mb-12">
         <Label className="text-zinc-400 text-xs">
@@ -347,7 +346,9 @@ export default function MemecoinPage({ params }) {
       {/* card */}
       {memecoin && (
         <section className="flex justify-between flex-col-reverse lg:flex-row-reverse">
-          <div className={`card bg-cpurpledark ${myFont.className}  text-white p-6 rounded-xl lg:w-1/2 mr-12`}>
+          <div
+            className={`card bg-cpurpledark ${myFont.className}  text-white p-6 rounded-xl lg:w-1/2 mr-12`}
+          >
             <div className="flex flex-col sm:flex-row items-start justify-between mb-2">
               <div className="card flex-shrink-0 bg-black rounded-xl">
                 <img
@@ -356,7 +357,7 @@ export default function MemecoinPage({ params }) {
                   className="h-36 w-36 object-cover rounded-md"
                 />
               </div>
-              <div className="ml-4 flex-1">
+              <div className="ml-4 flex-1 flex flex-col">
                 <Label className="text-xl text-white">
                   Ticker: ${memecoin.ticker}
                 </Label>
@@ -364,6 +365,18 @@ export default function MemecoinPage({ params }) {
                 <Label className="text-xl text-white">
                   Name: {memecoin.name}
                 </Label>
+                {/* socials */}
+                <div className="mt-4 flex items-center gap-4 card p-3 self-start rounded-2xl bg-cpurpledark">
+                  <a href="www.google.com" target="_blank">
+                    <Globe />
+                  </a>
+                  <a href="www.google.com" target="_blank">
+                    <Instagram />
+                  </a>
+                  <a href="www.google.com" target="_blank">
+                    <Image src={"x.svg"} width={24} height={24} alt="twitter" />
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -409,11 +422,10 @@ export default function MemecoinPage({ params }) {
 
       {
         <div className="my-24 w-10/12 mb-36">
-          
           {/* <MemeCoinCard  memecoin={memecoin} /> */}
           {memecoin && (
             <>
-              <div className="flex flex-col gap-4 mb-4" >
+              <div className="flex flex-col gap-4 mb-4">
                 <div className="text-sm">
                   <span className="">{memecoin.name}</span>
                   <span className="">Ticker: ${memecoin.ticker}</span>
