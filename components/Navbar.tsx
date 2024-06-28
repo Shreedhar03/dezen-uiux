@@ -9,10 +9,18 @@ import tiredmnky from "@/public/tiredmnky.png";
 import exploreMnky from "@/public/exploreMnky.jpeg";
 import rocket from "@/public/NavRocket.jpg";
 import { useState } from "react";
+import localFont from "next/font/local";
+
+const myFont = localFont({
+  src: "../public/fonts/font.ttf",
+  display: "swap",
+});
 
 const CurrentPage = ({ hovered, setHovered }) => {
   const pathname = usePathname();
-  const cleanedPathname = pathname.startsWith("/") ? pathname.slice(1) : pathname;
+  const cleanedPathname = pathname.startsWith("/")
+    ? pathname.slice(1)
+    : pathname;
   const segments = cleanedPathname.split("/");
   const result = segments[0];
   const routes = ["explore", "profile"];
@@ -74,8 +82,11 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className="text-3xl font-semibold fixed text-white"
-            style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}
+            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            style={{
+              textShadow:
+                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+            }}
           >
             my-profile
           </p>
@@ -90,8 +101,11 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className="text-3xl font-semibold fixed text-white"
-            style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}
+            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            style={{
+              textShadow:
+                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+            }}
           >
             launch
           </p>
@@ -106,8 +120,11 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className="text-3xl font-semibold fixed text-white"
-            style={{ textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" }}
+            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            style={{
+              textShadow:
+                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+            }}
           >
             explore
           </p>
@@ -129,10 +146,10 @@ const Navbar = () => {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -194,7 +211,9 @@ const Navbar = () => {
     <>
       <div
         ref={navRef}
-        className={`hidden lg:block fixed left-0 w-[18%] h-[34%] rounded-1/2 transform -translate-x-1/2  ${isScreenTall ? 'xl:translate-y-[4rem]' : ''}`}
+        className={`hidden lg:block fixed left-0 w-[18%] h-[34%] rounded-1/2 transform -translate-x-1/2  ${
+          isScreenTall ? "xl:translate-y-[4rem]" : ""
+        }`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
