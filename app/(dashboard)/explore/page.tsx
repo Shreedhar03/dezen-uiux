@@ -87,7 +87,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="mt-[1200px] h-[50%] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-3 items-stretch mx-3 md:mx-0 w-[95%]">
+    <div className="mt-[3300px] h-[50%] sm:mt-0 sm:my-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-3 items-stretch mx-3 md:mx-0 w-[95%]">
       {loading ? (
         <div className="text-center col-span-3 h-[75vh] flex items-center justify-center">
           <p className={`${theme.className} text-2xl`}>
