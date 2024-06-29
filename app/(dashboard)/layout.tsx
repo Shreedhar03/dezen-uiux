@@ -32,7 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Header />
-      <main className="max-w-[95rem] mx-auto relative flex h-[80vh] items-center p-3 sm:p-12">
+      <main className="max-w-[95rem] mx-auto relative flex h-[80vh] items-center p-1 sm:p-12">
         {!isMobile && <Navbar />}
 
         <div className="hidden sm:block absolute top-0 right-0 w-10/12 h-full">

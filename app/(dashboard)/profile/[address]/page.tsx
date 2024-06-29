@@ -145,21 +145,21 @@ export default function UserProfilePage({ params }) {
       {user && (
         <div className="w-full rounded-3xl">
           <div
-            className="relative flex items-center justify-between rounded-[6.5rem] py-36"
+            className="relative flex items-center justify-between rounded-[6.5rem] py-28 sm:py-36"
             style={{
               backgroundImage: `url(${profileBg.src})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <div className="flex items-center gap-6 pt-40 absolute -bottom-24 left-12">
-              <Avatar className="rounded-full overflow-hidden w-56 h-56 border-4 border-black">
+            <div className="flex items-center gap-6 pt-40 absolute -bottom-16 sm:-bottom-24 left-6 sm:left-12">
+              <Avatar className="!rounded-full overflow-hidden w-44 h-44 sm:w-56 sm:h-56 border-4 border-black card">
                 <AvatarImage
                   className="object-cover w-full h-full"
                   src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${user.profilePicture}`}
                 />
               </Avatar>
-              <h2 className={`text-3xl font-bold ml-6 pt-24`}>
+              <h2 className={`text-3xl font-bold -ml-6 sm:ml-6 pt-24`}>
                 {user.username}
               </h2>
             </div>
@@ -168,22 +168,34 @@ export default function UserProfilePage({ params }) {
             <UserBio />
           </div>
           <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 -mb-[7rem]">
-            <div className="flex gap-[3rem]">
-              <span onClick={() => setCommunityActive(false)}>
+            <div className="flex gap-1 sm:gap-[3rem] flex-row mr-12 sm:mr-0 lg:flex-nowrap overflow-scroll sm:overflow-visible snap-x snap-mandatory">
+              <span
+                onClick={() => setCommunityActive(false)}
+                className="snap-start snap-x mr-4"
+              >
                 {" "}
-                <ButtonWC type={"Created"} insideImg={coinsHeld} width={50} />
+                <ButtonWC type={"Created"} insideImg={""} width={50} />
               </span>
-              <span onClick={() => setCommunityActive(false)}>
+              <span
+                onClick={() => setCommunityActive(false)}
+                className="snap-start snap-x mx-4"
+              >
                 {" "}
-                <ButtonWC type={"Held"} insideImg={coinsHeld} width={50} />
+                <ButtonWC type={"Held"} insideImg={""} width={50} />
               </span>
-              <span onClick={() => setCommunityActive(true)}>
+              <span
+                onClick={() => setCommunityActive(true)}
+                className="snap-start snap-x mx-4"
+              >
                 {" "}
-                <ButtonWC type={"Posts"} insideImg={work} width={50} />
+                <ButtonWC type={"Posts"} insideImg={""} width={50} />
               </span>
-              <span onClick={() => setCommunityActive(true)}>
+              <span
+                onClick={() => setCommunityActive(true)}
+                className="snap-start snap-x mx-4"
+              >
                 {" "}
-                <ButtonWC type={"Replies"} insideImg={work} width={50} />
+                <ButtonWC type={"Replies"} insideImg={""} width={50} />
               </span>
             </div>
             <div></div>
