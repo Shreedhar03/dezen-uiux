@@ -28,8 +28,8 @@ import MemeCoinCard from "@/components/MemeCoinCard";
 import local from "next/font/local";
 import "@/components/MemeCoinCard.css";
 import { Globe, Instagram, Twitter } from "lucide-react";
-import xlogo from '@/public/xLogo.png'
-import texture from '@/public/texture15.jpg'
+import xlogo from "@/public/xLogo.png";
+import texture from "@/public/texture15.jpg";
 const myFont = local({
   src: "../../../public/fonts/kanit.ttf",
   display: "swap",
@@ -128,8 +128,7 @@ export default function MemecoinPage({ params }) {
     });
     candlestickSeries.setData(aggregationData);
 
-    chart.timeScale().applyOptions({ timeVisible: true })
-    // chart.timeScale().fitContent();
+    chart.timeScale().applyOptions({ timeVisible: true });
 
     return () => {
       chart.remove();
@@ -361,15 +360,56 @@ export default function MemecoinPage({ params }) {
           (i.e. 1 billionth fraction of TON)
         </Label>
       </div>
+
+      {
+        <div className="my-12 w-10/12">
+          {/* <MemeCoinCard  memecoin={memecoin} /> */}
+          {memecoin && (
+            <>
+              <div className="flex flex-col gap-4 mb-4">
+                <div className="text-sm">
+                  <span className="">{memecoin.name}</span>
+                  <span className="">Ticker: ${memecoin.ticker}</span>
+                  <span>Marketcap: ${marketcap}</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-sm ">Created by</span>
+                  {memecoin.creator.profilePicture && (
+                    <img
+                      src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator.profilePicture}`}
+                      alt={`${memecoin.creator.username}'s profile`}
+                      className="h-6 w-6 rounded-md object-cover transition-all hover:scale-105"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/profile/${memecoin.creator_address}`);
+                      }}
+                    />
+                  )}
+                  <span
+                    className="text-sm font-semibold hover:underline"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      router.push(`/profile/${memecoin.creator_address}`);
+                    }}
+                  >
+                    {memecoin.creator.username}
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      }
+
       {/* card */}
       {memecoin && (
-        <section className="flex justify-between flex-col-reverse lg:flex-row-reverse">
+        <section className="flex justify-between flex-col-reverse lg:flex-row-reverse mb-12">
           <div
             className={`bg-cpurpledark ${myFont.className}  text-white p-6 rounded-xl lg:w-1/2 mr-12`}
             style={{
               backgroundImage: `url(${texture.src}), linear-gradient(to right, #7b2ff7, #9b5edc, #5d3fd3, #3c00e8)`,
-              backgroundBlendMode: 'overlay',
-              filter: 'opacity(0.7)'
+              backgroundBlendMode: "overlay",
+              filter: "opacity(0.7)",
             }}
           >
             <div className="flex flex-col sm:flex-row items-start justify-between mb-2">
@@ -397,7 +437,7 @@ export default function MemecoinPage({ params }) {
                     <Instagram />
                   </a>
                   <a href="www.google.com" target="_blank">
-                    <Image src={xlogo} width={24} height={24} alt="twitter"  />
+                    <Image src={xlogo} width={24} height={24} alt="twitter" />
                   </a>
                 </div>
               </div>
@@ -435,6 +475,7 @@ export default function MemecoinPage({ params }) {
 
             <Label className="text-white/80">{memecoin.description}</Label>
           </div>
+
           <div className="mr-48 mb-24 lg:mb-0 sm:w-8/12 lg:w-auto">
             <Link href={communityAddress}>
               <ButtonWC type={"Community"} insideImg={community} width={100} />
@@ -442,54 +483,6 @@ export default function MemecoinPage({ params }) {
           </div>
         </section>
       )}
-
-      {
-        <div className="my-24 w-10/12 mb-36">
-          {/* <MemeCoinCard  memecoin={memecoin} /> */}
-          {memecoin && (
-            <>
-              <div className="flex flex-row gap-8 mb-4">
-                <div className="text-sm">
-                  <span className="">{memecoin.name}</span>
-                 
-                </div>
-                <div className="text-sm">
-                  
-                  <span className="">Ticker: ${memecoin.ticker}</span>
-                  
-                </div>
-                <div className="text-sm">
-                
-                  <span>Marketcap: ${marketcap}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="text-sm ">Created by</span>
-                  {memecoin.creator.profilePicture && (
-                    <img
-                      src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator.profilePicture}`}
-                      alt={`${memecoin.creator.username}'s profile`}
-                      className="h-6 w-6 rounded-md object-cover transition-all hover:scale-105"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(`/profile/${memecoin.creator_address}`);
-                      }}
-                    />
-                  )}
-                  <span
-                    className="text-sm font-semibold hover:underline"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      router.push(`/profile/${memecoin.creator_address}`);
-                    }}
-                  >
-                    {memecoin.creator.username}
-                  </span>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      }
     </>
   );
 }
