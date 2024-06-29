@@ -105,34 +105,31 @@ export default function MemecoinPage({ params }) {
   }, [memecoin_address]);
 
   useEffect(() => {
-    const container = document.getElementById("chart-container");
+    const container = document.getElementById('chart-container');
 
-    if (!container) return console.error("Container element not found");
+    if (!container) return console.error('Container element not found');
     if (aggregationData.length === 0) return;
 
-    const chartOptions = {
-      layout: {
-        textColor: "#d3e8a0",
-        background: {
-          type: "solid" as ColorType.Solid,
-          color: "#1a202c",
-        },
-      },
+    const chartOptions = { 
+      layout: { 
+        textColor: 'black', 
+        background: { 
+          type: 'solid' as ColorType.Solid, 
+          color: 'white' 
+        } 
+      } 
     };
 
     const chart = createChart(container, chartOptions);
 
     const candlestickSeries = chart.addCandlestickSeries({
-      upColor: "#26a69a",
-      downColor: "#ef5350",
-      borderVisible: false,
-      wickUpColor: "#26a69a",
-      wickDownColor: "#ef5350",
+      upColor: '#26a69a', downColor: '#ef5350', borderVisible: false,
+      wickUpColor: '#26a69a', wickDownColor: '#ef5350',
     });
     candlestickSeries.setData(aggregationData);
 
-    chart.timeScale().applyOptions({ timeVisible: true });
-  
+    chart.timeScale().applyOptions({ timeVisible: true })
+    // chart.timeScale().fitContent();
 
     return () => {
       chart.remove();
@@ -143,11 +140,9 @@ export default function MemecoinPage({ params }) {
     try {
       if (!memecoin) return;
       setLoading(true);
-      const response = await fetch(
-        `/api/transaction/aggregation/${memecoin._id}`
-      );
+      const response = await fetch(`/api/transaction/aggregation/${memecoin._id}`);
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       const data = await response.json();
       console.log("Aggregation data: ", data.results);
@@ -165,15 +160,37 @@ export default function MemecoinPage({ params }) {
     return () => {
       setAggregationData([]);
     };
+
   }, [memecoin]);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    handleResize(); // Call the function initially to set the initial state
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
-      <section className="xl:pr-12 pr-6 flex flex-col lg:flex-row justify-between mt-8 gap-6">
-        <div
+      <section className="xl:pr-12 pr-6 flex flex-col lg:flex-row justify-between mt-8 gap-2">
+        
+        {isMobile ? (
+          <div className="mt-[58rem]">
+            <h1>aifcnhasnciannian</h1>
+            <div id="chart-container" className="w-full h-[320px]"></div>
+          </div>
+        ):(
+          <div
           id="chart-container"
           className="md:h-[15rem] mt-[1200px] md:mt-0 lg:w-8/12 mb-64 md:mb-0 shrink-0"
         ></div>
+        ) }
+        
         <div className="w-full xl:w-10/12 shrink lg:w-4/12 mt-56 lg:mt-0">
           {
             <div className="flex gap-4 md:mb-6">
@@ -431,10 +448,18 @@ export default function MemecoinPage({ params }) {
           {/* <MemeCoinCard  memecoin={memecoin} /> */}
           {memecoin && (
             <>
-              <div className="flex flex-col gap-4 mb-4">
+              <div className="flex flex-row gap-8 mb-4">
                 <div className="text-sm">
                   <span className="">{memecoin.name}</span>
+                 
+                </div>
+                <div className="text-sm">
+                  
                   <span className="">Ticker: ${memecoin.ticker}</span>
+                  
+                </div>
+                <div className="text-sm">
+                
                   <span>Marketcap: ${marketcap}</span>
                 </div>
                 <div className="flex items-center">

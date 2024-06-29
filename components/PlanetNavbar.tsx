@@ -10,17 +10,15 @@ import exploreMnky from "@/public/exploreMnky.jpeg";
 import rocket from "@/public/NavRocket.jpg";
 
 const CircularButton = ({ children, to, navImg, angle }) => {
-  
-  
     return (
         <>
             <Link href={to}>
                 <button 
-                    className={`relative  bg-cpurpledark transform -rotate-${angle} hover:bg-blue-700 z-50 text-white font-bold py-4 px-4 rounded-full w-[8rem] h-15 overflow-hidden`}
+                    className={`relative bg-cpurpledark transform translate-y-[5rem] -rotate-${angle} hover:bg-blue-700 z-50 text-white font-bold py-4 px-4 rounded-full w-[8rem] h-15 overflow-hidden`}
                 >
                     <Image
                         src={navImg}
-                        alt="tiredmnky"
+                        alt="nav image"
                         className="absolute inset-0 object-cover w-full h-full"
                         style={{ filter: "blur(2px)" }}
                     />
@@ -28,7 +26,7 @@ const CircularButton = ({ children, to, navImg, angle }) => {
                         className={`card-name text-2xl font-semibold absolute inset-0 flex items-center justify-center text-white`}
                         style={{
                             textShadow:
-                                "2px 2px 1px #6a0dad, -2px 2px 1px #6a0dad, 2px -2px 1px #6a0dad, -2px -2px 1px #6a0dad, 0px 2px 1px #6a0dad, 0px -2px 1px #6a0dad, 0px 4px 1px #4b0082, 2px 4px 1px #4b0082, -2px 4px 1px  #4b0082",
+                                "2px 2px 1px #6a0dad, -2px 2px 1px #6a0dad, 2px -2px 1px #6a0dad, -2px -2px 1px #6a0dad, 0px 2px 1px #6a0dad, 0px -2px 1px #6a0dad, 0px 4px 1px #4b0082, 2px 4px 1px #4b0082, -2px 4px 1px #4b0082",
                         }}
                     >
                         {children}
@@ -40,35 +38,32 @@ const CircularButton = ({ children, to, navImg, angle }) => {
 };
 
 const LaunchButton = ({ children, to, navImg }) => {
-  
-  
-  return (
-      <>
-          <Link href={to}>
-              <button 
-                  className={`relative  bg-cpurpledark transform -rotate-90 hover:bg-blue-700 z-50 text-white font-bold py-4 px-4 rounded-full w-[8rem] h-15 overflow-hidden`}
-              >
-                  <Image
-                      src={navImg}
-                      alt="tiredmnky"
-                      className="absolute inset-0 object-cover w-full h-full"
-                      style={{ filter: "blur(2px)" }}
-                  />
-                  <p
-                      className={`card-name text-2xl font-semibold absolute inset-0 flex items-center justify-center text-white`}
-                      style={{
-                          textShadow:
-                              "2px 2px 1px #6a0dad, -2px 2px 1px #6a0dad, 2px -2px 1px #6a0dad, -2px -2px 1px #6a0dad, 0px 2px 1px #6a0dad, 0px -2px 1px #6a0dad, 0px 4px 1px #4b0082, 2px 4px 1px #4b0082, -2px 4px 1px  #4b0082",
-                      }}
-                  >
-                      {children}
-                  </p>
-              </button>
-          </Link>
-      </>
-  );
+    return (
+        <>
+            <Link href={to}>
+                <button 
+                    className={`relative bg-cpurpledark transform translate-y-[5rem] -rotate-90 hover:bg-blue-700 z-50 text-white font-bold py-4 px-4 rounded-full w-[8rem] h-15 overflow-hidden`}
+                >
+                    <Image
+                        src={navImg}
+                        alt="nav image"
+                        className="absolute inset-0 object-cover w-full h-full"
+                        style={{ filter: "blur(2px)" }}
+                    />
+                    <p
+                        className={`card-name text-2xl font-semibold absolute inset-0 flex items-center justify-center text-white`}
+                        style={{
+                            textShadow:
+                                "2px 2px 1px #6a0dad, -2px 2px 1px #6a0dad, 2px -2px 1px #6a0dad, -2px -2px 1px #6a0dad, 0px 2px 1px #6a0dad, 0px -2px 1px #6a0dad, 0px 4px 1px #4b0082, 2px 4px 1px #4b0082, -2px 4px 1px #4b0082",
+                        }}
+                    >
+                        {children}
+                    </p>
+                </button>
+            </Link>
+        </>
+    );
 };
-
 
 const MainButton = ({ children, onClick }) => {
     return (
@@ -84,8 +79,8 @@ const MainButton = ({ children, onClick }) => {
 };
 
 const Disc = ({ onClose }) => {
-    const discRef = useRef(null);
-  
+    const discRef = useRef(null) ;
+
     useEffect(() => {
         gsap.to(discRef.current, {
             rotate: 360,
@@ -94,7 +89,18 @@ const Disc = ({ onClose }) => {
             repeat: -1,
             transformOrigin: "center center",
         });
-    }, []);
+
+        const handleClickOutside = (event) => {
+            if (discRef.current && !discRef.current.contains(event.target)) {
+                onClose();
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [onClose]);
 
     return (
         <div className='fixed left-0 bottom-0 z-40 rounded-full transform -translate-x-1/2 translate-y-1/2'>
@@ -104,12 +110,6 @@ const Disc = ({ onClose }) => {
                 alt="disc"
                 className="rounded-r-full rounded-l-full bg-cover"
             />
-            {/* <button
-                onClick={onClose}
-                className="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 z-50"
-            >
-                X
-            </button> */}
         </div>
     );
 };
@@ -123,9 +123,9 @@ const PlanetNavbar = () => {
 
     return (
         <div>
-            <div className='relative z-50 transform -translate-x-10'>
+            <div className='relative z-50 bottom-8  '>
                 <Planet
-                    centerContent={<MainButton children={"menu"} onClick={toggleDisc} />}
+                    centerContent={showDisc ? null : <MainButton children={"menu"} onClick={toggleDisc} />}
                     hideOrbit
                     autoClose
                     orbitRadius={100}
