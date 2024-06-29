@@ -366,10 +366,18 @@ export default function MemecoinPage({ params }) {
           {/* <MemeCoinCard  memecoin={memecoin} /> */}
           {memecoin && (
             <>
-              <div className="flex flex-col gap-4 mb-4">
+              <div className="flex flex-row gap-4 mb-4">
                 <div className="text-sm">
                   <span className="">{memecoin.name}</span>
+              
+                </div>
+                <div className="text-sm">
+                  
                   <span className="">Ticker: ${memecoin.ticker}</span>
+                 
+                </div>
+                <div className="text-sm">
+                
                   <span>Marketcap: ${marketcap}</span>
                 </div>
                 <div className="flex items-center">
