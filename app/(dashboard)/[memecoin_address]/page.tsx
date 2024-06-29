@@ -28,8 +28,8 @@ import MemeCoinCard from "@/components/MemeCoinCard";
 import local from "next/font/local";
 import "@/components/MemeCoinCard.css";
 import { Globe, Instagram, Twitter } from "lucide-react";
-import xlogo from '@/public/xLogo.png'
-import texture from '@/public/texture15.jpg'
+import xlogo from "@/public/xLogo.png";
+import texture from "@/public/texture15.jpg";
 const myFont = local({
   src: "../../../public/fonts/kanit.ttf",
   display: "swap",
@@ -132,7 +132,6 @@ export default function MemecoinPage({ params }) {
     candlestickSeries.setData(aggregationData);
 
     chart.timeScale().applyOptions({ timeVisible: true });
-  
 
     return () => {
       chart.remove();
@@ -344,90 +343,9 @@ export default function MemecoinPage({ params }) {
           (i.e. 1 billionth fraction of TON)
         </Label>
       </div>
-      {/* card */}
-      {memecoin && (
-        <section className="flex justify-between flex-col-reverse lg:flex-row-reverse">
-          <div
-            className={`bg-cpurpledark ${myFont.className}  text-white p-6 rounded-xl lg:w-1/2 mr-12`}
-            style={{
-              backgroundImage: `url(${texture.src}), linear-gradient(to right, #7b2ff7, #9b5edc, #5d3fd3, #3c00e8)`,
-              backgroundBlendMode: 'overlay',
-              filter: 'opacity(0.7)'
-            }}
-          >
-            <div className="flex flex-col sm:flex-row items-start justify-between mb-2">
-              <div className="flex-shrink-0 bg-black rounded-xl">
-                <img
-                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                  alt={`${memecoin.name} logo`}
-                  className="h-36 w-36 object-cover rounded-md"
-                />
-              </div>
-              <div className="ml-4 flex-1 flex flex-col">
-                <Label className="text-xl text-white">
-                  Ticker: ${memecoin.ticker}
-                </Label>
-                <br />
-                <Label className="text-xl text-white">
-                  Name: {memecoin.name}
-                </Label>
-                {/* socials */}
-                <div className="mt-4 flex items-center gap-4 p-3 self-start rounded-2xl bg-cpurpledark">
-                  <a href="www.google.com" target="_blank">
-                    <Globe />
-                  </a>
-                  <a href="www.google.com" target="_blank">
-                    <Instagram />
-                  </a>
-                  <a href="www.google.com" target="_blank">
-                    <Image src={xlogo} width={24} height={24} alt="twitter"  />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 w-full">
-              {memecoin.twitter && (
-                <a
-                  href={memecoin.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="underline text-white">Twitter</span>
-                </a>
-              )}
-              {memecoin.telegram && (
-                <a
-                  href={memecoin.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="underline text-white">Telegram</span>
-                </a>
-              )}
-              {memecoin.website && (
-                <a
-                  href={memecoin.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="underline text-white">Website</span>
-                </a>
-              )}
-            </div>
-
-            <Label className="text-white/80">{memecoin.description}</Label>
-          </div>
-          <div className="mr-48 mb-24 lg:mb-0 sm:w-8/12 lg:w-auto">
-            <Link href={communityAddress}>
-              <ButtonWC type={"Community"} insideImg={community} width={100} />
-            </Link>
-          </div>
-        </section>
-      )}
 
       {
-        <div className="my-24 w-10/12 mb-36">
+        <div className="my-12 w-10/12">
           {/* <MemeCoinCard  memecoin={memecoin} /> */}
           {memecoin && (
             <>
@@ -465,6 +383,89 @@ export default function MemecoinPage({ params }) {
           )}
         </div>
       }
+
+      {/* card */}
+      {memecoin && (
+        <section className="flex justify-between flex-col-reverse lg:flex-row-reverse mb-12">
+          <div
+            className={`bg-cpurpledark ${myFont.className}  text-white p-6 rounded-xl lg:w-1/2 mr-12`}
+            style={{
+              backgroundImage: `url(${texture.src}), linear-gradient(to right, #7b2ff7, #9b5edc, #5d3fd3, #3c00e8)`,
+              backgroundBlendMode: "overlay",
+              filter: "opacity(0.7)",
+            }}
+          >
+            <div className="flex flex-col sm:flex-row items-start justify-between mb-2">
+              <div className="flex-shrink-0 bg-black rounded-xl">
+                <img
+                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
+                  alt={`${memecoin.name} logo`}
+                  className="h-36 w-36 object-cover rounded-md"
+                />
+              </div>
+              <div className="ml-4 flex-1 flex flex-col">
+                <Label className="text-xl text-white">
+                  Ticker: ${memecoin.ticker}
+                </Label>
+                <br />
+                <Label className="text-xl text-white">
+                  Name: {memecoin.name}
+                </Label>
+                {/* socials */}
+                <div className="mt-4 flex items-center gap-4 p-3 self-start rounded-2xl bg-cpurpledark">
+                  <a href="www.google.com" target="_blank">
+                    <Globe />
+                  </a>
+                  <a href="www.google.com" target="_blank">
+                    <Instagram />
+                  </a>
+                  <a href="www.google.com" target="_blank">
+                    <Image src={xlogo} width={24} height={24} alt="twitter" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 w-full">
+              {memecoin.twitter && (
+                <a
+                  href={memecoin.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="underline text-white">Twitter</span>
+                </a>
+              )}
+              {memecoin.telegram && (
+                <a
+                  href={memecoin.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="underline text-white">Telegram</span>
+                </a>
+              )}
+              {memecoin.website && (
+                <a
+                  href={memecoin.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="underline text-white">Website</span>
+                </a>
+              )}
+            </div>
+
+            <Label className="text-white/80">{memecoin.description}</Label>
+          </div>
+
+          <div className="mr-48 mb-24 lg:mb-0 sm:w-8/12 lg:w-auto">
+            <Link href={communityAddress}>
+              <ButtonWC type={"Community"} insideImg={community} width={100} />
+            </Link>
+          </div>
+        </section>
+      )}
     </>
   );
 }
