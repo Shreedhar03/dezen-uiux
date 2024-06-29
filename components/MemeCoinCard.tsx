@@ -4,8 +4,11 @@ import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import Image from "next/image";
-import "./MemeCoinCard.css";
-import { GlobeIcon, InstagramIcon, TwitterIcon } from "lucide-react";
+import './MemeCoinCard.css'
+import { useGlitch, GlitchHandle } from "react-powerglitch";
+import texture from '@/public/texture15.jpg';
+import xlogo from '@/public/xLogo.png'
+import { Globe, Instagram,  } from "lucide-react";
 
 const kanit = local({
   src: "../public/fonts/kanit.ttf",
@@ -46,6 +49,33 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
   const router = useRouter();
   const cardRef = useRef<HTMLDivElement>(null);
 
+  const glitch: GlitchHandle = useGlitch({
+    playMode: "hover",
+    createContainers: true,
+    hideOverflow: false,
+    timing: {
+      duration: 2050,
+      easing: "ease-in-out"
+    },
+    glitchTimeSpan: {
+      start: 0,
+      end: 0.2
+    },
+    shake: {
+      velocity: 10,
+      amplitudeX: 0.02,
+      amplitudeY: 0.02
+    },
+    slice: {
+      count: 6,
+      velocity: 10,
+      minHeight: 0.02,
+      maxHeight: 0.15,
+      hueRotate: true
+    },
+    pulse: false
+  });
+
   useEffect(() => {
     if (cardRef.current) {
       gsap.fromTo(
@@ -63,86 +93,110 @@ const MemeCoinCard = ({ memecoin }: { memecoin: Memecoin }) => {
   }, []);
 
   return (
-    <CardContainer className="self-stretch h-[25rem] mx-4 border-[6px] border-white shadow-md hover:shadow-cpurplelight rounded-3xl">
-      <CardBody>
-        <div
-          key={memecoin.memecoin_address}
-          className={`card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 h-full relative p-2 md:p-4 rounded-xl flex flex-col justify-between gap-2 md:gap-3 cursor-pointer transform hover:scale-105 transition-transform duration-500 border-10 border-gold border-opacity-50 shadow-lg`}
-          onClick={() => router.push(`/${memecoin.memecoin_address}`)}
-          ref={cardRef}
-        >
-          <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-md pointer-events-none px-3"></div>
+    <div ref={glitch.ref}>
+      <CardContainer className="self-stretch h-[30rem] mx-4 shadow-md hover:shadow-cpurplelight rounded-3xl">
+        <CardBody>
           <div
-            className={`card bg-purple-950 rounded px-2 py-1  text-sm text-white -mb-8 ${kanit.className} flex  justify-around`}
-          >
-            {/* Market Cap: ${memecoin.marketCap ? memecoin.marketCap.toLocaleString() : "N/A"} */}
-            <div className="card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 p-2">
-              Market Cap: $20
-            </div>
-            <div className="card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 p-2">
-              Ticker: {memecoin.ticker}
-            </div>
-          </div>
-          <div></div>
-          <div className="flex w-full justify-center">
-            <CardItem translateZ={50} className="z-50">
-              <div className="flex justify-between items-center">
-                <h2
-                  className={`text-lg md:text-2xl font-bold mt-1 md:mt-2 text-white text-center ${pokemon.className}`}
-                  style={{ textShadow: "1px 1px 0 #000" }}
-                >
-                  {memecoin.name}
-                </h2>
-              </div>
-            </CardItem>
-          </div>
-          <div className="card flex w-full justify-center h-[40%] mb-2">
-            <CardItem translateZ={50} className=" z-50 flex justify-center">
-              <img
-                src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
-                className="w-full object-cover rounded-md border-4 border-purple-300 shadow-xl"
-                alt={memecoin.name}
-              />
-            </CardItem>
-          </div>
-          <div className="w-full border-2 border-purple-300 rounded px-2 py-3 card bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700">
-            <CardItem translateZ={50} className="z-50">
-              <p
-                className={`!leading-4 text-white text-sm md:text-base italic font-light ${kanit.className} line-clamp-3`}
-              >
-                {memecoin.description}
-              </p>
-            </CardItem>
-          </div>
-          <CardItem
-            translateZ={50}
-            className="flex gap-1 items-center cursor-pointer z-50"
-            onClick={(e) => {
-              e.stopPropagation();
-              router.push(`/profile/${memecoin.creator_address}`);
+            key={memecoin.memecoin_address}
+            className={`bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 h-full relative p-2 md:p-4 rounded-xl flex flex-col justify-between gap-2 md:gap-3 cursor-pointer transform hover:scale-105 transition-transform duration-500 border-10 border-gold border-opacity-50 shadow-lg bg-cover bg-center`}
+            style={{
+              backgroundImage: `url(${texture.src}), linear-gradient(to right, #4e24d6, #6e02e8)`,
+              backgroundBlendMode: 'overlay',
+              filter: 'opacity(0.7)'
             }}
+            onClick={() => router.push(`/${memecoin.memecoin_address}`)}
+            ref={cardRef}
           >
-            <div className="flex flex-row justify-evenly">
-              <div className="card flex flex-row justify-around gap-1 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 p-2">
-                {memecoin.creator && (
-                  <img
-                    src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator?.profilePicture}`}
-                    alt={`${memecoin.creator?.username}'s profile`}
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-purple-300"
-                  />
-                )}
-
-                <p
-                  className={`mt-1 underline underline-offset-1 md:underline-offset-2 text-white text-xs md:text-lg ${kanit.className}`}
-                >
-                  {memecoin.creator?.username}
-                </p>
+            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 rounded-md pointer-events-none px-3"></div>
+            <div
+              className={`rounded px-2 py-1  text-sm text-white -mb-8 ${kanit.className} flex justify-between`}
+            >
+              <div className="p-2">
+                Ticker: {memecoin.ticker}
+              </div>
+              <div className="p-2">
+                Market Cap: $20
               </div>
             </div>
-          </CardItem>
-        </div>
-      </CardBody>
-    </CardContainer>
+            <div></div>
+            <div className="flex w-full justify-center">
+              <CardItem translateZ={50} className="z-50">
+                <div className="flex justify-between items-center">
+                  <h2
+                    className={`card-name text-lg md:text-2xl font-bold mt-1 md:mt-2 text-white text-center`}
+                    
+                  >
+                    {memecoin.name}
+                  </h2>
+                </div>
+              </CardItem>
+            </div>
+            <div className="flex w-full justify-center h-[40%] mb-2">
+              <CardItem translateZ={50} className="z-50 flex justify-center">
+                <img
+                  src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
+                  className="w-full object-cover rounded-md border-4 border-purple-300 shadow-xl"
+                  alt={memecoin.name}
+                />
+              </CardItem>
+            </div>
+            <div className="flex w-full justify-end align-middle">
+              Current Price : $2
+            </div>
+            <div className="w-full   bg-black/40 rounded px-2 py-3">
+              <CardItem translateZ={50} className="z-50">
+                <p
+                  className={`!leading-4 text-white  text-sm md:text-base italic font-light ${kanit.className} line-clamp-3`}
+                >
+                  {memecoin.description}
+                </p>
+              </CardItem>
+            </div>
+            <div className="flex justify-between">
+            <CardItem
+              translateZ={50}
+              className="flex gap-1 items-center cursor-pointer z-50"
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push(`/profile/${memecoin.creator_address}`);
+              }}
+            >
+              
+                <div className="flex flex-row justify-around  gap-2">
+                  {memecoin.creator && (
+                    <img
+                      src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.creator?.profilePicture}`}
+                      alt={`${memecoin.creator?.username}'s profile`}
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-purple-300"
+                    />
+                  )}
+                  <p
+                    className={`mt-1 underline underline-offset-1 md:underline-offset-2 text-white text-xs md:text-lg ${kanit.className}`}
+                  >
+                    {memecoin.creator?.username}
+                  </p>
+                </div>
+                
+              
+            </CardItem>
+            <div className="flex gap-2">
+              
+            <a href="www.google.com" target="_blank">
+                    <Globe />
+                  </a>
+                  <a href="www.google.com" target="_blank">
+                    <Instagram />
+                  </a>
+                  <a href="www.google.com" target="_blank">
+                    <Image src={xlogo} width={24} height={24} alt="twitter"  />
+                  </a>
+            </div>
+            </div>
+            
+          </div>
+        </CardBody>
+      </CardContainer>
+    </div>
   );
 };
 

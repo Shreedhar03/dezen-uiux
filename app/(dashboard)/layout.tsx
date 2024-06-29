@@ -45,8 +45,9 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
 
         {isMobile && (
-          <div className="fixed left-10 bottom-[5rem] block sm:hidden">
+          <div className="fixed z-50 left-10 bottom-[5rem] block sm:hidden">
             <PlanetNavbar />
+            {/* <Navbar/> */}
           </div>
         )}
       </main>

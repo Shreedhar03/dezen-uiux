@@ -28,7 +28,8 @@ import MemeCoinCard from "@/components/MemeCoinCard";
 import local from "next/font/local";
 import "@/components/MemeCoinCard.css";
 import { Globe, Instagram, Twitter } from "lucide-react";
-
+import xlogo from '@/public/xLogo.png'
+import texture from '@/public/texture15.jpg'
 const myFont = local({
   src: "../../../public/fonts/kanit.ttf",
   display: "swap",
@@ -131,7 +132,7 @@ export default function MemecoinPage({ params }) {
     candlestickSeries.setData(aggregationData);
 
     chart.timeScale().applyOptions({ timeVisible: true });
-    // chart.timeScale().fitContent();
+  
 
     return () => {
       chart.remove();
@@ -347,10 +348,15 @@ export default function MemecoinPage({ params }) {
       {memecoin && (
         <section className="flex justify-between flex-col-reverse lg:flex-row-reverse">
           <div
-            className={`card bg-cpurpledark ${myFont.className}  text-white p-6 rounded-xl lg:w-1/2 mr-12`}
+            className={`bg-cpurpledark ${myFont.className}  text-white p-6 rounded-xl lg:w-1/2 mr-12`}
+            style={{
+              backgroundImage: `url(${texture.src}), linear-gradient(to right, #7b2ff7, #9b5edc, #5d3fd3, #3c00e8)`,
+              backgroundBlendMode: 'overlay',
+              filter: 'opacity(0.7)'
+            }}
           >
             <div className="flex flex-col sm:flex-row items-start justify-between mb-2">
-              <div className="card flex-shrink-0 bg-black rounded-xl">
+              <div className="flex-shrink-0 bg-black rounded-xl">
                 <img
                   src={`https://ivory-eligible-hamster-305.mypinata.cloud/ipfs/${memecoin.logo}`}
                   alt={`${memecoin.name} logo`}
@@ -366,7 +372,7 @@ export default function MemecoinPage({ params }) {
                   Name: {memecoin.name}
                 </Label>
                 {/* socials */}
-                <div className="mt-4 flex items-center gap-4 card p-3 self-start rounded-2xl bg-cpurpledark">
+                <div className="mt-4 flex items-center gap-4 p-3 self-start rounded-2xl bg-cpurpledark">
                   <a href="www.google.com" target="_blank">
                     <Globe />
                   </a>
@@ -374,7 +380,7 @@ export default function MemecoinPage({ params }) {
                     <Instagram />
                   </a>
                   <a href="www.google.com" target="_blank">
-                    <Image src={"x.svg"} width={24} height={24} alt="twitter" />
+                    <Image src={xlogo} width={24} height={24} alt="twitter"  />
                   </a>
                 </div>
               </div>

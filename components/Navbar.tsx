@@ -10,10 +10,13 @@ import exploreMnky from "@/public/exploreMnky.jpeg";
 import rocket from "@/public/NavRocket.jpg";
 import { useState } from "react";
 import localFont from "next/font/local";
+import { Carter_One } from "next/font/google";
+import './Navbar.css'
 
-const myFont = localFont({
-  src: "../public/fonts/font.ttf",
-  display: "swap",
+const myFont = Carter_One({
+  subsets:['latin'],
+  weight: ['400']
+
 });
 
 const CurrentPage = ({ hovered, setHovered }) => {
@@ -93,10 +96,10 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            className={`card-name text-3xl font-semibold fixed text-white`}
             style={{
               textShadow:
-                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+                "2px 2px 1px #6a0dad, -2px 2px 1px #6a0dad, 2px -2px 1px #6a0dad, -2px -2px 1px #6a0dad, 0px 2px 1px #6a0dad, 0px -2px 1px #6a0dad, 0px 4px 1px #4b0082, 2px 4px 1px #4b0082, -2px 4px 1px  #4b0082",
             }}
           >
             my-profile
@@ -118,10 +121,10 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            className={`card-name text-3xl font-semibold fixed text-white`}
             style={{
               textShadow:
-                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+                "2px 2px 1px #6a0dad, -2px 2px 1px #6a0dad, 2px -2px 1px #6a0dad, -2px -2px 1px #6a0dad, 0px 2px 1px #6a0dad, 0px -2px 1px #6a0dad, 0px 4px 1px #4b0082, 2px 4px 1px #4b0082, -2px 4px 1px  #4b0082",
             }}
           >
             launch
@@ -143,10 +146,10 @@ const CurrentPage = ({ hovered, setHovered }) => {
             className="fixed"
           />
           <p
-            className={`${myFont.className} text-3xl font-semibold fixed text-white`}
+            className={`card-name text-3xl font-semibold fixed text-white`}
             style={{
               textShadow:
-                "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000",
+                "2px 2px 1px #6a0dad, -2px 2px 1px #6a0dad, 2px -2px 1px #6a0dad, -2px -2px 1px #6a0dad, 0px 2px 1px #6a0dad, 0px -2px 1px #6a0dad, 0px 4px 1px #4b0082, 2px 4px 1px #4b0082, -2px 4px 1px  #4b0082",
             }}
           >
             explore
@@ -219,7 +222,7 @@ const Navbar = () => {
 
     return (
       <>
-        <div className="hidden lg:flex fixed left-0 bottom-[40%] w-[10%] h-[10%] bg-orange-500 transform -translate-x-3 translate-y-2 border-4 border-black origin-left items-center justify-center overflow-hidden">
+        <div className="hidden lg:flex  fixed left-0 bottom-[40%] w-[10%] h-[10%] bg-orange-500 transform -translate-x-3 translate-y-[3.5rem] border-4 border-black origin-left items-center justify-center overflow-hidden">
           <Image
             src={routeImg}
             alt="tiredmnky"
